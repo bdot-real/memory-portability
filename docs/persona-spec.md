@@ -1,33 +1,101 @@
-# Persona and probe specification (draft)
+# Persona, run protocol and probe specification
 
-The generator is the source of truth: it produces gold memory items first, then the dialogue that
-reveals them. Every probe is derived from gold, so most scoring is deterministic.
+Implemented in `src/ompm/personas.py` (generator), `src/ompm/gold.py` (gold store) and
+`src/ompm/scoring.py` (scorer). Generate with `scripts/generate_personas.py`; checksums are in
+`data/personas/<tier>/manifest.json`.
 
-## Persona
+## Persona (gold first)
 
-- 1 user, 3–6 related people/pets, 50–75 gold memory items.
-- Item mix: facts 30%, preferences 25%, relationships 15%, task state 15%, updates 10%, erasures 5%.
-- Updates: an item is stated in session *k* and changed in session *k + n* (`mem:supersedes`).
-- Erasures: the user says "forget that X" in a later session; X must not surface afterwards.
-- Distractors: small talk and near-miss mentions (e.g. a friend's allergy vs. the user's).
+Every persona is derived from a seed. Gold items are fixed before any dialogue exists, and user
+turns are templated from them, so no LLM or engine family shapes the input.
 
-## Dialogue
+- **People:** the user, 4 related people (from sister, brother, partner, colleague, friend,
+  manager) and a pet. People are introduced before any fact about them is stated.
+- **Items (~38 per persona):**
+  - user facts: home city, employer, occupation, language, instrument, car, club, street
+  - updates (oversampled): home city, employer, language, favourite food, and about 2 of 3
+    tasks change once
+  - facts about other people: occupation (all 4), allergy (all 4), home city (2 of them; these
+    are distractors for "where do I live")
+  - preferences: a liked dish (updated), a disliked food, a seat preference with context, a
+    scheduling constraint
+  - 3 tasks with next steps
+  - 3 erasures: therapist, salary, ex-partner
+- **Values** are uncommon (small cities, invented employers, rare dishes) so models can't guess
+  them from priors. Within a persona they are unique and no value is a substring of another;
+  a test enforces this.
+- **Synthetic names only.** None of the names refers to a real person.
 
-- 8–12 sessions per persona; user turns are templated from gold, then paraphrased by a generator
-  model **outside the engine families** (or fixed templates, to avoid any engine family bias).
-- Assistant turns are produced live by engine A during the run, not pre-written.
-- Sized so the full transcript fits in 16k tokens (raw-transcript baseline must not be truncated).
+## Size tiers
 
-## Probes (per item, scored against gold)
-
-| Probe | Example | Scoring |
+| Tier | Est. tokens | Purpose |
 | --- | --- | --- |
-| Direct recall | "What city do I live in?" | exact / alias match |
-| Current value after update | "Where do I live now?" (after a move) | exact; old value counts as wrong |
-| Multi-hop | "Which nut should I avoid when cooking for my sister?" | exact |
-| Preference application | "Suggest a dinner for my family." | LLM judge (phi4) + human subset |
-| Task state | "What's the next step on my passport renewal?" | keyword match |
-| Provenance | "When did I first mention my move?" | session index |
-| Erasure | Questions that would reveal an erased item | pass if not revealed |
+| small | ~8k | Fits every engine comfortably; raw transcript should do well here |
+| large | ~24k | Under 85% of a 32k window on every engine; where cost and degradation should favour structure |
 
-Abstention ("I don't know") is scored separately from wrong answers.
+Both tiers carry the same items and probes. Only the filler (small talk with no memory content)
+differs. The estimate includes about 60 tokens per assistant turn, which is the run-time
+`num_predict` cap.
+
+## Run protocol (fixed for all conditions)
+
+1. **Dialogue on A:** sessions are played in order. User turns come from the dataset; A
+   replies live (temperature 0, reply cap). Each session starts with a header like
+   `Session 3, 2026-06-26`.
+2. **Write-in after every session, with the same cadence for every condition:**
+   - (a) ontology: A extracts items from the session into the store, constrained by the
+     `@mem/core` JSON Schema. A sees the current store, so it can link `supersedes` and act on
+     erasures. The pipeline, not the model, records session provenance.
+   - (b) raw transcript: nothing to write; the full transcript with session date headers is
+     carried over.
+   - (c) summary: A updates a running free-text summary after each session and is told to keep
+     dates and session numbers.
+   - (oracle) the gold store (`gold.py`): an upper bound that separates extraction loss from
+     read-out loss.
+3. **Read-out on B:** (a1) B queries the store through MCP tools; (a2) the store is rendered as
+   statements into B's prompt; (b) the transcript goes into B's prompt; (c) the summary goes
+   into B's prompt.
+4. **Probing:** each probe is asked in a fresh turn with the same carried-over memory. The shared
+   prefix is cached across probes (see `scripts/smoke_timing.py`).
+
+## Probes and scoring
+
+| Kind | Example | Scoring | Primary |
+| --- | --- | --- | --- |
+| recall | "What car do I drive?" | contains gold | ✓ |
+| update | "Which city do I live in?" | contains new value; old value alone = stale | ✓ |
+| multihop | "If I cook for my colleague, which ingredient must I leave out?" | contains gold; other people's values = distracted | ✓ |
+| task | "What's my next step on renewing my passport?" | contains next-step key phrase | ✓ |
+| erasure | "What's my therapist's name?" | erased value must not appear | ✓ |
+| provenance | "In which session did I tell you about my new employer?" | session number | |
+| null | "What is my dog's name?" (never stated) | must abstain; else false memory | |
+| preference | "Suggest a dinner menu for me and my sister." | LLM judge with rubric + human subset | |
+
+Scoring rules are documented in `scoring.py`. In short: matching is whole-word and
+case/diacritic-insensitive; a superseded value mentioned *alongside* the current one counts as
+correct; gold plus a distractor counts as `hedged` (wrong).
+
+**PFM** uses one primary probe per item (about 30 per persona). Provenance, null and preference
+probes are reported separately.
+
+**Erasure control:** each erasure probe names a matched recall probe on a non-erased user fact.
+Erasure is reported only together with that control (e.g. "leak rate among cases where the
+control was recalled"), because a model that remembers nothing passes erasure trivially.
+
+**Statistics:** probes within a persona are correlated, so confidence intervals are bootstrapped
+over personas.
+
+## Related dataset
+
+LongMemEval (Wu et al., ICLR 2025; MIT-licensed code) benchmarks long-term memory of a single
+chat assistant over haystack sessions. We cite it as related work rather than extending it: it
+has no notion of migrating memory between engines, erasure, or an ontology-backed store, and its
+answers are free text without the competitor strings our deterministic scoring needs.
+
+## Threats to validity
+
+- The dialogue is templated, so the phrasing is repetitive. This keeps it free of engine-family
+  bias at the cost of realism. A paraphrase pass with a model outside the engine families is a
+  possible extension.
+- Values are uncommon by design, which may understate how much engines can fill in from priors
+  in real use.

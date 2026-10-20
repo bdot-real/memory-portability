@@ -1,0 +1,2925 @@
+{
+ "id": "p01",
+ "seed": 2026000,
+ "tier": "large",
+ "people": [
+  {
+   "key": "user",
+   "name": "Idony",
+   "relation": "self"
+  },
+  {
+   "key": "p1",
+   "name": "Niamh",
+   "relation": "colleague"
+  },
+  {
+   "key": "p2",
+   "name": "Bastian",
+   "relation": "manager"
+  },
+  {
+   "key": "p3",
+   "name": "Oriel",
+   "relation": "sister"
+  },
+  {
+   "key": "p4",
+   "name": "Halcyon",
+   "relation": "friend"
+  },
+  {
+   "key": "p5",
+   "name": "Quokka",
+   "relation": "pet"
+  }
+ ],
+ "items": [
+  {
+   "id": "m001",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "home city",
+    "value": "Aarhus"
+   },
+   "statement": "Idony lives in Aarhus.",
+   "utterance": "I live in Aarhus.",
+   "session": 2,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m002",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "home city",
+    "value": "Coimbra"
+   },
+   "statement": "Idony moved to Coimbra.",
+   "utterance": "Actually I've just moved to Coimbra.",
+   "session": 8,
+   "supersedes": "m001",
+   "erased_in": null
+  },
+  {
+   "id": "m003",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "employer",
+    "value": "Ironbark Surveying"
+   },
+   "statement": "Idony works at Ironbark Surveying.",
+   "utterance": "I work at Ironbark Surveying.",
+   "session": 4,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m004",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "employer",
+    "value": "Halvorsen Optics"
+   },
+   "statement": "Idony now works at Halvorsen Optics.",
+   "utterance": "Big change: I've left and now work at Halvorsen Optics.",
+   "session": 7,
+   "supersedes": "m003",
+   "erased_in": null
+  },
+  {
+   "id": "m005",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "occupation",
+    "value": "hydrologist"
+   },
+   "statement": "Idony is a hydrologist.",
+   "utterance": "I'm a hydrologist by trade.",
+   "session": 4,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m006",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "language being learned",
+    "value": "Quechua"
+   },
+   "statement": "Idony is learning Quechua.",
+   "utterance": "I've started learning Quechua in the evenings.",
+   "session": 3,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m007",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "language being learned",
+    "value": "Amharic"
+   },
+   "statement": "Idony switched to learning Amharic.",
+   "utterance": "I gave up on that language and switched to Amharic.",
+   "session": 6,
+   "supersedes": "m006",
+   "erased_in": null
+  },
+  {
+   "id": "m008",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "instrument",
+    "value": "euphonium"
+   },
+   "statement": "Idony plays the euphonium.",
+   "utterance": "I play the euphonium, badly.",
+   "session": 5,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m009",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "car",
+    "value": "white Subaru Brat"
+   },
+   "statement": "Idony drives a white Subaru Brat.",
+   "utterance": "I drive a white Subaru Brat, don't laugh.",
+   "session": 5,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m010",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "club",
+    "value": "a competitive crossword league"
+   },
+   "statement": "Idony belongs to a competitive crossword league.",
+   "utterance": "On weekends I go to a competitive crossword league.",
+   "session": 4,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m011",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "street",
+    "value": "Pellow Crescent"
+   },
+   "statement": "Idony lives on Pellow Crescent.",
+   "utterance": "My flat is on Pellow Crescent.",
+   "session": 4,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m012",
+   "cls": "Relationship",
+   "about": "user",
+   "fields": {
+    "relatedTo": "p1",
+    "relationType": "Colleague"
+   },
+   "statement": "Niamh is Idony's colleague.",
+   "utterance": "My colleague Niamh says hi.",
+   "session": 2,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m013",
+   "cls": "Relationship",
+   "about": "user",
+   "fields": {
+    "relatedTo": "p2",
+    "relationType": "Manager"
+   },
+   "statement": "Bastian is Idony's manager.",
+   "utterance": "My manager Bastian says hi.",
+   "session": 4,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m014",
+   "cls": "Relationship",
+   "about": "user",
+   "fields": {
+    "relatedTo": "p3",
+    "relationType": "Sibling"
+   },
+   "statement": "Oriel is Idony's sister.",
+   "utterance": "My sister Oriel says hi.",
+   "session": 5,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m015",
+   "cls": "Relationship",
+   "about": "user",
+   "fields": {
+    "relatedTo": "p4",
+    "relationType": "Friend"
+   },
+   "statement": "Halcyon is Idony's friend.",
+   "utterance": "My friend Halcyon says hi.",
+   "session": 1,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m016",
+   "cls": "Relationship",
+   "about": "user",
+   "fields": {
+    "relatedTo": "p5",
+    "relationType": "Pet",
+    "kind": "dog"
+   },
+   "statement": "Quokka is Idony's dog.",
+   "utterance": "My dog Quokka knocked a glass off the table again.",
+   "session": 4,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m017",
+   "cls": "Preference",
+   "about": "p1",
+   "fields": {
+    "target": "lupin",
+    "polarity": "Avoids",
+    "context": "allergy"
+   },
+   "statement": "Niamh is allergic to lupin.",
+   "utterance": "Note that Niamh is allergic to lupin.",
+   "session": 3,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m018",
+   "cls": "Preference",
+   "about": "p2",
+   "fields": {
+    "target": "kiwi",
+    "polarity": "Avoids",
+    "context": "allergy"
+   },
+   "statement": "Bastian is allergic to kiwi.",
+   "utterance": "Note that Bastian is allergic to kiwi.",
+   "session": 5,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m019",
+   "cls": "Preference",
+   "about": "p3",
+   "fields": {
+    "target": "sesame",
+    "polarity": "Avoids",
+    "context": "allergy"
+   },
+   "statement": "Oriel is allergic to sesame.",
+   "utterance": "Note that Oriel is allergic to sesame.",
+   "session": 6,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m020",
+   "cls": "Preference",
+   "about": "p4",
+   "fields": {
+    "target": "soy",
+    "polarity": "Avoids",
+    "context": "allergy"
+   },
+   "statement": "Halcyon is allergic to soy.",
+   "utterance": "Note that Halcyon is allergic to soy.",
+   "session": 3,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m021",
+   "cls": "Fact",
+   "about": "p1",
+   "fields": {
+    "attribute": "occupation",
+    "value": "sound engineer"
+   },
+   "statement": "Niamh is a sound engineer.",
+   "utterance": "Niamh works as a sound engineer, which still surprises me.",
+   "session": 2,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m022",
+   "cls": "Fact",
+   "about": "p2",
+   "fields": {
+    "attribute": "occupation",
+    "value": "luthier"
+   },
+   "statement": "Bastian is a luthier.",
+   "utterance": "Bastian works as a luthier, which still surprises me.",
+   "session": 6,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m023",
+   "cls": "Fact",
+   "about": "p3",
+   "fields": {
+    "attribute": "occupation",
+    "value": "glassblower"
+   },
+   "statement": "Oriel is a glassblower.",
+   "utterance": "Oriel works as a glassblower, which still surprises me.",
+   "session": 5,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m024",
+   "cls": "Fact",
+   "about": "p4",
+   "fields": {
+    "attribute": "occupation",
+    "value": "patent examiner"
+   },
+   "statement": "Halcyon is a patent examiner.",
+   "utterance": "Halcyon works as a patent examiner, which still surprises me.",
+   "session": 2,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m025",
+   "cls": "Fact",
+   "about": "p1",
+   "fields": {
+    "attribute": "home city",
+    "value": "Tartu"
+   },
+   "statement": "Niamh lives in Tartu.",
+   "utterance": "My colleague Niamh lives over in Tartu.",
+   "session": 2,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m026",
+   "cls": "Fact",
+   "about": "p2",
+   "fields": {
+    "attribute": "home city",
+    "value": "Kotor"
+   },
+   "statement": "Bastian lives in Kotor.",
+   "utterance": "My manager Bastian lives over in Kotor.",
+   "session": 4,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m027",
+   "cls": "Preference",
+   "about": "user",
+   "fields": {
+    "target": "pastel de nata",
+    "polarity": "Likes"
+   },
+   "statement": "Idony loves pastel de nata.",
+   "utterance": "I could eat pastel de nata every day.",
+   "session": 4,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m028",
+   "cls": "Preference",
+   "about": "user",
+   "fields": {
+    "target": "khachapuri",
+    "polarity": "Likes"
+   },
+   "statement": "Idony's favourite food is now khachapuri.",
+   "utterance": "I'm over pastel de nata now, khachapuri is my new obsession.",
+   "session": 10,
+   "supersedes": "m027",
+   "erased_in": null
+  },
+  {
+   "id": "m029",
+   "cls": "Preference",
+   "about": "user",
+   "fields": {
+    "target": "tripe",
+    "polarity": "Dislikes"
+   },
+   "statement": "Idony dislikes tripe.",
+   "utterance": "I can't stand tripe.",
+   "session": 5,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m030",
+   "cls": "Preference",
+   "about": "user",
+   "fields": {
+    "target": "window seats",
+    "polarity": "Likes",
+    "context": "on long train journeys"
+   },
+   "statement": "Idony prefers window seats on long train journeys.",
+   "utterance": "I always book window seats on long train journeys.",
+   "session": 1,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m031",
+   "cls": "Preference",
+   "about": "user",
+   "fields": {
+    "target": "phone calls after 8pm",
+    "polarity": "Avoids",
+    "context": "on weeknights"
+   },
+   "statement": "Idony won't take phone calls after 8pm on weeknights.",
+   "utterance": "Please never suggest phone calls after 8pm on weeknights, I won't take them.",
+   "session": 5,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m032",
+   "cls": "TaskState",
+   "about": "user",
+   "fields": {
+    "task": "switching my mortgage lender",
+    "taskStatus": "InProgress",
+    "nextStep": "collecting six months of payslips"
+   },
+   "statement": "Idony is switching my mortgage lender; next step: collecting six months of payslips.",
+   "utterance": "I'm in the middle of switching my mortgage lender. Next I need to get on with collecting six months of payslips.",
+   "session": 2,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m033",
+   "cls": "TaskState",
+   "about": "user",
+   "fields": {
+    "task": "switching my mortgage lender",
+    "taskStatus": "InProgress",
+    "nextStep": "signing with the new lender"
+   },
+   "statement": "Idony is switching my mortgage lender; next step: signing with the new lender.",
+   "utterance": "Update on switching my mortgage lender: collecting six months of payslips is done, so now it's signing with the new lender.",
+   "session": 9,
+   "supersedes": "m032",
+   "erased_in": null
+  },
+  {
+   "id": "m034",
+   "cls": "TaskState",
+   "about": "user",
+   "fields": {
+    "task": "renewing my passport",
+    "taskStatus": "InProgress",
+    "nextStep": "booking a photo appointment"
+   },
+   "statement": "Idony is renewing my passport; next step: booking a photo appointment.",
+   "utterance": "I'm in the middle of renewing my passport. Next I need to get on with booking a photo appointment.",
+   "session": 2,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m035",
+   "cls": "TaskState",
+   "about": "user",
+   "fields": {
+    "task": "renewing my passport",
+    "taskStatus": "InProgress",
+    "nextStep": "mailing the renewal form"
+   },
+   "statement": "Idony is renewing my passport; next step: mailing the renewal form.",
+   "utterance": "Update on renewing my passport: booking a photo appointment is done, so now it's mailing the renewal form.",
+   "session": 5,
+   "supersedes": "m034",
+   "erased_in": null
+  },
+  {
+   "id": "m036",
+   "cls": "TaskState",
+   "about": "user",
+   "fields": {
+    "task": "organising the family reunion",
+    "taskStatus": "InProgress",
+    "nextStep": "reserving the lakeside cabins"
+   },
+   "statement": "Idony is organising the family reunion; next step: reserving the lakeside cabins.",
+   "utterance": "I'm in the middle of organising the family reunion. Next I need to get on with reserving the lakeside cabins.",
+   "session": 1,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m037",
+   "cls": "TaskState",
+   "about": "user",
+   "fields": {
+    "task": "organising the family reunion",
+    "taskStatus": "InProgress",
+    "nextStep": "sending the invitations"
+   },
+   "statement": "Idony is organising the family reunion; next step: sending the invitations.",
+   "utterance": "Update on organising the family reunion: reserving the lakeside cabins is done, so now it's sending the invitations.",
+   "session": 5,
+   "supersedes": "m036",
+   "erased_in": null
+  },
+  {
+   "id": "m038",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "therapist",
+    "value": "Dr. Okonkwo-Vale"
+   },
+   "statement": "Idony's therapist is Dr. Okonkwo-Vale.",
+   "utterance": "My therapist, Dr. Okonkwo-Vale, suggested I journal more.",
+   "session": 5,
+   "supersedes": null,
+   "erased_in": 9
+  },
+  {
+   "id": "m039",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "salary",
+    "value": "87,500"
+   },
+   "statement": "Idony earns 87,500 a year.",
+   "utterance": "Between us, my salary is 87,500 a year.",
+   "session": 1,
+   "supersedes": null,
+   "erased_in": 7
+  },
+  {
+   "id": "m040",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "ex-partner",
+    "value": "Anouk"
+   },
+   "statement": "Idony's ex-partner is Anouk.",
+   "utterance": "I ran into my ex, Anouk, at the market.",
+   "session": 1,
+   "supersedes": null,
+   "erased_in": 6
+  }
+ ],
+ "sessions": [
+  {
+   "idx": 1,
+   "date": "2026-06-08",
+   "turns": [
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I always book window seats on long train journeys.",
+     "kind": "reveal",
+     "items": [
+      "m030"
+     ]
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My friend Halcyon says hi.",
+     "kind": "reveal",
+     "items": [
+      "m015"
+     ]
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm in the middle of organising the family reunion. Next I need to get on with reserving the lakeside cabins.",
+     "kind": "reveal",
+     "items": [
+      "m036"
+     ]
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I ran into my ex, Anouk, at the market.",
+     "kind": "reveal",
+     "items": [
+      "m040"
+     ]
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Between us, my salary is 87,500 a year.",
+     "kind": "reveal",
+     "items": [
+      "m039"
+     ]
+    }
+   ]
+  },
+  {
+   "idx": 2,
+   "date": "2026-06-17",
+   "turns": [
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Halcyon works as a patent examiner, which still surprises me.",
+     "kind": "reveal",
+     "items": [
+      "m024"
+     ]
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My colleague Niamh lives over in Tartu.",
+     "kind": "reveal",
+     "items": [
+      "m025"
+     ]
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm in the middle of renewing my passport. Next I need to get on with booking a photo appointment.",
+     "kind": "reveal",
+     "items": [
+      "m034"
+     ]
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Niamh works as a sound engineer, which still surprises me.",
+     "kind": "reveal",
+     "items": [
+      "m021"
+     ]
+    },
+    {
+     "text": "I live in Aarhus.",
+     "kind": "reveal",
+     "items": [
+      "m001"
+     ]
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My colleague Niamh says hi.",
+     "kind": "reveal",
+     "items": [
+      "m012"
+     ]
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm in the middle of switching my mortgage lender. Next I need to get on with collecting six months of payslips.",
+     "kind": "reveal",
+     "items": [
+      "m032"
+     ]
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    }
+   ]
+  },
+  {
+   "idx": 3,
+   "date": "2026-06-26",
+   "turns": [
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I've started learning Quechua in the evenings.",
+     "kind": "reveal",
+     "items": [
+      "m006"
+     ]
+    },
+    {
+     "text": "Note that Halcyon is allergic to soy.",
+     "kind": "reveal",
+     "items": [
+      "m020"
+     ]
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Note that Niamh is allergic to lupin.",
+     "kind": "reveal",
+     "items": [
+      "m017"
+     ]
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    }
+   ]
+  },
+  {
+   "idx": 4,
+   "date": "2026-07-05",
+   "turns": [
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My dog Quokka knocked a glass off the table again.",
+     "kind": "reveal",
+     "items": [
+      "m016"
+     ]
+    },
+    {
+     "text": "My manager Bastian lives over in Kotor.",
+     "kind": "reveal",
+     "items": [
+      "m026"
+     ]
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "On weekends I go to a competitive crossword league.",
+     "kind": "reveal",
+     "items": [
+      "m010"
+     ]
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My manager Bastian says hi.",
+     "kind": "reveal",
+     "items": [
+      "m013"
+     ]
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm a hydrologist by trade.",
+     "kind": "reveal",
+     "items": [
+      "m005"
+     ]
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I work at Ironbark Surveying.",
+     "kind": "reveal",
+     "items": [
+      "m003"
+     ]
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My flat is on Pellow Crescent.",
+     "kind": "reveal",
+     "items": [
+      "m011"
+     ]
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I could eat pastel de nata every day.",
+     "kind": "reveal",
+     "items": [
+      "m027"
+     ]
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    }
+   ]
+  },
+  {
+   "idx": 5,
+   "date": "2026-07-14",
+   "turns": [
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Please never suggest phone calls after 8pm on weeknights, I won't take them.",
+     "kind": "reveal",
+     "items": [
+      "m031"
+     ]
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My sister Oriel says hi.",
+     "kind": "reveal",
+     "items": [
+      "m014"
+     ]
+    },
+    {
+     "text": "Update on organising the family reunion: reserving the lakeside cabins is done, so now it's sending the invitations.",
+     "kind": "update",
+     "items": [
+      "m037"
+     ]
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Note that Bastian is allergic to kiwi.",
+     "kind": "reveal",
+     "items": [
+      "m018"
+     ]
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I play the euphonium, badly.",
+     "kind": "reveal",
+     "items": [
+      "m008"
+     ]
+    },
+    {
+     "text": "I drive a white Subaru Brat, don't laugh.",
+     "kind": "reveal",
+     "items": [
+      "m009"
+     ]
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My therapist, Dr. Okonkwo-Vale, suggested I journal more.",
+     "kind": "reveal",
+     "items": [
+      "m038"
+     ]
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Update on renewing my passport: booking a photo appointment is done, so now it's mailing the renewal form.",
+     "kind": "update",
+     "items": [
+      "m035"
+     ]
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Oriel works as a glassblower, which still surprises me.",
+     "kind": "reveal",
+     "items": [
+      "m023"
+     ]
+    },
+    {
+     "text": "I can't stand tripe.",
+     "kind": "reveal",
+     "items": [
+      "m029"
+     ]
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    }
+   ]
+  },
+  {
+   "idx": 6,
+   "date": "2026-07-23",
+   "turns": [
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Bastian works as a luthier, which still surprises me.",
+     "kind": "reveal",
+     "items": [
+      "m022"
+     ]
+    },
+    {
+     "text": "Note that Oriel is allergic to sesame.",
+     "kind": "reveal",
+     "items": [
+      "m019"
+     ]
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I gave up on that language and switched to Amharic.",
+     "kind": "update",
+     "items": [
+      "m007"
+     ]
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Please delete anything about my ex from your memory.",
+     "kind": "erase",
+     "items": [
+      "m040"
+     ]
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    }
+   ]
+  },
+  {
+   "idx": 7,
+   "date": "2026-08-01",
+   "turns": [
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Big change: I've left and now work at Halvorsen Optics.",
+     "kind": "update",
+     "items": [
+      "m004"
+     ]
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Forget what I said about my salary, please.",
+     "kind": "erase",
+     "items": [
+      "m039"
+     ]
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    }
+   ]
+  },
+  {
+   "idx": 8,
+   "date": "2026-08-10",
+   "turns": [
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Actually I've just moved to Coimbra.",
+     "kind": "update",
+     "items": [
+      "m002"
+     ]
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    }
+   ]
+  },
+  {
+   "idx": 9,
+   "date": "2026-08-19",
+   "turns": [
+    {
+     "text": "Update on switching my mortgage lender: collecting six months of payslips is done, so now it's signing with the new lender.",
+     "kind": "update",
+     "items": [
+      "m033"
+     ]
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Please forget the name of my therapist, I shouldn't have shared it.",
+     "kind": "erase",
+     "items": [
+      "m038"
+     ]
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    }
+   ]
+  },
+  {
+   "idx": 10,
+   "date": "2026-08-28",
+   "turns": [
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm over pastel de nata now, khachapuri is my new obsession.",
+     "kind": "update",
+     "items": [
+      "m028"
+     ]
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    }
+   ]
+  }
+ ],
+ "probes": [
+  {
+   "id": "q001",
+   "kind": "update",
+   "question": "Which city do I live in?",
+   "scoring": "contains",
+   "item": "m002",
+   "gold": [
+    "Coimbra"
+   ],
+   "stale": [
+    "Aarhus"
+   ],
+   "distractors": [
+    "Tartu",
+    "Kotor"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q002",
+   "kind": "provenance",
+   "question": "In which session did I tell you about my new home city? Answer with the session number.",
+   "scoring": "session",
+   "item": "m002",
+   "gold": [
+    "8"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": false,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q003",
+   "kind": "update",
+   "question": "Where do I work?",
+   "scoring": "contains",
+   "item": "m004",
+   "gold": [
+    "Halvorsen Optics"
+   ],
+   "stale": [
+    "Ironbark Surveying"
+   ],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q004",
+   "kind": "provenance",
+   "question": "In which session did I tell you about my new employer? Answer with the session number.",
+   "scoring": "session",
+   "item": "m004",
+   "gold": [
+    "7"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": false,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q005",
+   "kind": "recall",
+   "question": "What is my occupation?",
+   "scoring": "contains",
+   "item": "m005",
+   "gold": [
+    "hydrologist"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q006",
+   "kind": "update",
+   "question": "Which language am I learning?",
+   "scoring": "contains",
+   "item": "m007",
+   "gold": [
+    "Amharic"
+   ],
+   "stale": [
+    "Quechua"
+   ],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q007",
+   "kind": "provenance",
+   "question": "In which session did I tell you about my new language being learned? Answer with the session number.",
+   "scoring": "session",
+   "item": "m007",
+   "gold": [
+    "6"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": false,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q008",
+   "kind": "recall",
+   "question": "Which instrument do I play?",
+   "scoring": "contains",
+   "item": "m008",
+   "gold": [
+    "euphonium"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q009",
+   "kind": "recall",
+   "question": "What car do I drive?",
+   "scoring": "contains",
+   "item": "m009",
+   "gold": [
+    "white Subaru Brat"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q010",
+   "kind": "recall",
+   "question": "Which club or group do I go to?",
+   "scoring": "contains",
+   "item": "m010",
+   "gold": [
+    "a competitive crossword league"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q011",
+   "kind": "recall",
+   "question": "Which street is my flat on?",
+   "scoring": "contains",
+   "item": "m011",
+   "gold": [
+    "Pellow Crescent"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q012",
+   "kind": "recall",
+   "question": "What is my colleague's name?",
+   "scoring": "contains",
+   "item": "m012",
+   "gold": [
+    "Niamh"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q013",
+   "kind": "recall",
+   "question": "What is my manager's name?",
+   "scoring": "contains",
+   "item": "m013",
+   "gold": [
+    "Bastian"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q014",
+   "kind": "recall",
+   "question": "What is my sister's name?",
+   "scoring": "contains",
+   "item": "m014",
+   "gold": [
+    "Oriel"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q015",
+   "kind": "recall",
+   "question": "What is my friend's name?",
+   "scoring": "contains",
+   "item": "m015",
+   "gold": [
+    "Halcyon"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q016",
+   "kind": "recall",
+   "question": "What is my dog's name?",
+   "scoring": "contains",
+   "item": "m016",
+   "gold": [
+    "Quokka"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q017",
+   "kind": "multihop",
+   "question": "If I cook for my colleague, which ingredient must I leave out?",
+   "scoring": "contains",
+   "item": "m017",
+   "gold": [
+    "lupin"
+   ],
+   "stale": [],
+   "distractors": [
+    "kiwi",
+    "sesame",
+    "soy"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q018",
+   "kind": "multihop",
+   "question": "If I cook for my manager, which ingredient must I leave out?",
+   "scoring": "contains",
+   "item": "m018",
+   "gold": [
+    "kiwi"
+   ],
+   "stale": [],
+   "distractors": [
+    "lupin",
+    "sesame",
+    "soy"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q019",
+   "kind": "multihop",
+   "question": "If I cook for my sister, which ingredient must I leave out?",
+   "scoring": "contains",
+   "item": "m019",
+   "gold": [
+    "sesame"
+   ],
+   "stale": [],
+   "distractors": [
+    "lupin",
+    "kiwi",
+    "soy"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q020",
+   "kind": "multihop",
+   "question": "If I cook for my friend, which ingredient must I leave out?",
+   "scoring": "contains",
+   "item": "m020",
+   "gold": [
+    "soy"
+   ],
+   "stale": [],
+   "distractors": [
+    "lupin",
+    "kiwi",
+    "sesame"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q021",
+   "kind": "multihop",
+   "question": "What does my colleague do for a living?",
+   "scoring": "contains",
+   "item": "m021",
+   "gold": [
+    "sound engineer"
+   ],
+   "stale": [],
+   "distractors": [
+    "hydrologist",
+    "luthier",
+    "glassblower",
+    "patent examiner"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q022",
+   "kind": "multihop",
+   "question": "What does my manager do for a living?",
+   "scoring": "contains",
+   "item": "m022",
+   "gold": [
+    "luthier"
+   ],
+   "stale": [],
+   "distractors": [
+    "hydrologist",
+    "sound engineer",
+    "glassblower",
+    "patent examiner"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q023",
+   "kind": "multihop",
+   "question": "What does my sister do for a living?",
+   "scoring": "contains",
+   "item": "m023",
+   "gold": [
+    "glassblower"
+   ],
+   "stale": [],
+   "distractors": [
+    "hydrologist",
+    "sound engineer",
+    "luthier",
+    "patent examiner"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q024",
+   "kind": "multihop",
+   "question": "What does my friend do for a living?",
+   "scoring": "contains",
+   "item": "m024",
+   "gold": [
+    "patent examiner"
+   ],
+   "stale": [],
+   "distractors": [
+    "hydrologist",
+    "sound engineer",
+    "luthier",
+    "glassblower"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q025",
+   "kind": "update",
+   "question": "What is my favourite food at the moment?",
+   "scoring": "contains",
+   "item": "m028",
+   "gold": [
+    "khachapuri"
+   ],
+   "stale": [
+    "pastel de nata"
+   ],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q026",
+   "kind": "recall",
+   "question": "Which food do I dislike?",
+   "scoring": "contains",
+   "item": "m029",
+   "gold": [
+    "tripe"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q027",
+   "kind": "recall",
+   "question": "What kind of seat do I prefer on long train journeys?",
+   "scoring": "contains",
+   "item": "m030",
+   "gold": [
+    "window seats"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q028",
+   "kind": "recall",
+   "question": "What should you never schedule for me on weeknights?",
+   "scoring": "contains",
+   "item": "m031",
+   "gold": [
+    "phone calls after 8pm"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q029",
+   "kind": "preference",
+   "question": "Suggest a dinner menu for me and my sister.",
+   "scoring": "judge",
+   "item": null,
+   "gold": [],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [
+    "sesame",
+    "tripe"
+   ],
+   "primary": false,
+   "control": null,
+   "rubric": "The menu must not contain sesame (Oriel's allergy) or tripe (the user dislikes it). Ideally it features khachapuri."
+  },
+  {
+   "id": "q030",
+   "kind": "task",
+   "question": "What's my next step on switching my mortgage lender?",
+   "scoring": "contains",
+   "item": "m033",
+   "gold": [
+    "signing with the new lender",
+    "new lender"
+   ],
+   "stale": [
+    "collecting six months of payslips",
+    "payslips"
+   ],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q031",
+   "kind": "task",
+   "question": "What's my next step on renewing my passport?",
+   "scoring": "contains",
+   "item": "m035",
+   "gold": [
+    "mailing the renewal form",
+    "renewal form"
+   ],
+   "stale": [
+    "booking a photo appointment",
+    "photo appointment"
+   ],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q032",
+   "kind": "task",
+   "question": "What's my next step on organising the family reunion?",
+   "scoring": "contains",
+   "item": "m037",
+   "gold": [
+    "sending the invitations",
+    "invitations"
+   ],
+   "stale": [
+    "reserving the lakeside cabins",
+    "lakeside cabins"
+   ],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q033",
+   "kind": "erasure",
+   "question": "What's my therapist's name?",
+   "scoring": "not_revealed",
+   "item": "m038",
+   "gold": [],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [
+    "Dr. Okonkwo-Vale"
+   ],
+   "primary": true,
+   "control": "q005",
+   "rubric": null
+  },
+  {
+   "id": "q034",
+   "kind": "erasure",
+   "question": "How much do I earn?",
+   "scoring": "not_revealed",
+   "item": "m039",
+   "gold": [],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [
+    "87,500"
+   ],
+   "primary": true,
+   "control": "q008",
+   "rubric": null
+  },
+  {
+   "id": "q035",
+   "kind": "erasure",
+   "question": "What's my ex's name?",
+   "scoring": "not_revealed",
+   "item": "m040",
+   "gold": [],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [
+    "Anouk"
+   ],
+   "primary": true,
+   "control": "q009",
+   "rubric": null
+  },
+  {
+   "id": "q036",
+   "kind": "null",
+   "question": "What is my partner's favourite band?",
+   "scoring": "abstain",
+   "item": null,
+   "gold": [],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": false,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q037",
+   "kind": "null",
+   "question": "Which gym do I go to?",
+   "scoring": "abstain",
+   "item": null,
+   "gold": [],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": false,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q038",
+   "kind": "null",
+   "question": "What is my car's licence plate?",
+   "scoring": "abstain",
+   "item": null,
+   "gold": [],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": false,
+   "control": null,
+   "rubric": null
+  }
+ ],
+ "est_tokens": 24016
+}

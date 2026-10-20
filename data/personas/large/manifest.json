@@ -1,0 +1,101 @@
+{
+ "seed": 2026,
+ "tier": "large",
+ "personas": [
+  {
+   "id": "p01",
+   "items": 40,
+   "probes": 38,
+   "est_tokens": 24016,
+   "sha256": "c4cb8799e76fc0d89a21351b5110ae623787915ed0eee1fb67bcde7c1eb0cb85"
+  },
+  {
+   "id": "p02",
+   "items": 38,
+   "probes": 38,
+   "est_tokens": 24035,
+   "sha256": "a34295569877324a2d29f6b57b1896820a47e70b13c3a6792167452f429672ea"
+  },
+  {
+   "id": "p03",
+   "items": 38,
+   "probes": 38,
+   "est_tokens": 24013,
+   "sha256": "0b063413df2b84abf631d680cef67071777074ba6a8bb3aebe649f157127b0dd"
+  },
+  {
+   "id": "p04",
+   "items": 40,
+   "probes": 38,
+   "est_tokens": 24015,
+   "sha256": "f5aedb893d70f30156d347d1e9257eb61880dc8b92405702fe99d3916e93b4fd"
+  },
+  {
+   "id": "p05",
+   "items": 40,
+   "probes": 38,
+   "est_tokens": 24080,
+   "sha256": "970d608749acb408dfacddb9679231f8953f00cef033e360316fd3279312b371"
+  },
+  {
+   "id": "p06",
+   "items": 37,
+   "probes": 38,
+   "est_tokens": 24068,
+   "sha256": "62a87751e1ec88b37ecf254832bae9e7d2fc3d6cf9e2bb9845ad99b657a145d0"
+  },
+  {
+   "id": "p07",
+   "items": 40,
+   "probes": 38,
+   "est_tokens": 24025,
+   "sha256": "705213566fb068782ad35ea52b5f96755928458085997cea3ef5ddaa0b3c3000"
+  },
+  {
+   "id": "p08",
+   "items": 39,
+   "probes": 38,
+   "est_tokens": 24067,
+   "sha256": "91117aa3cd98320a32b3eb9946fd0bd21ae9c53dca657b73501ff641e745f9b3"
+  },
+  {
+   "id": "p09",
+   "items": 40,
+   "probes": 38,
+   "est_tokens": 24050,
+   "sha256": "0c0e224a83a8a1a0964ea052abfe9efc7db8bb7c8b7d1b7d2fb11ae2f992cfb3"
+  },
+  {
+   "id": "p10",
+   "items": 40,
+   "probes": 38,
+   "est_tokens": 24001,
+   "sha256": "f7ef36aa9173aa45e9e480d8ff1bed77f7ace805531626f71b621d735bfbd0dd"
+  },
+  {
+   "id": "p11",
+   "items": 40,
+   "probes": 38,
+   "est_tokens": 24013,
+   "sha256": "f4734a173495ed2c9c76f13ea27ec94cadc69fb0e37d72d80b9a0a96a3d4f58c"
+  },
+  {
+   "id": "p12",
+   "items": 38,
+   "probes": 38,
+   "est_tokens": 24049,
+   "sha256": "cd13ec1579ea957445671ea6a03ae9ef321cce8b3c8d8d423b9eed62b2173db8"
+  }
+ ],
+ "probe_kinds": {
+  "update": 48,
+  "provenance": 36,
+  "recall": 156,
+  "multihop": 96,
+  "preference": 12,
+  "task": 36,
+  "erasure": 36,
+  "null": 36
+ },
+ "dataset_sha256": "c92b60aa9af550f043f4bf1d007c625668587ae62a186085b9897522bb57f334"
+}

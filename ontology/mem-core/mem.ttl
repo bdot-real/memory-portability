@@ -10,7 +10,7 @@
 
 # ---------------------------------------------------------------------------
 # @mem/core: a small extension of PROV-O, FOAF, DCMI Terms and OWL-Time for
-# engine-independent user and agent memory. Draft 0.1.0. The namespace is a
+# engine-independent user and agent memory. Draft 0.3.0. The namespace is a
 # placeholder until the w3id.org redirect (or registry IRI) is settled.
 # ---------------------------------------------------------------------------
 
@@ -18,7 +18,7 @@
     dcterms:title "Memory Core (@mem/core)"@en ;
     dcterms:description "Portable user and agent memory: facts, preferences, relationships and task state, with provenance, supersession, consent and erasure."@en ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
-    owl:versionInfo "0.1.0" ;
+    owl:versionInfo "0.3.0" ;
     owl:imports <http://www.w3.org/ns/prov-o> .
 
 # --- Memory items ----------------------------------------------------------
@@ -58,15 +58,43 @@ mem:Tombstone a owl:Class ;
     rdfs:label "Tombstone"@en ;
     skos:definition "A record that a memory item was erased. It keeps the item's IRI and erasure activity but none of its content."@en .
 
+
+# --- Closed-world shape: required fields per item class -------------------------
+# owl:cardinality 1 on functional properties makes each field required and single-valued in the
+# registry's generated JSON Schema, which engines use for constrained extraction.
+
+mem:Fact rdfs:subClassOf
+    [ a owl:Restriction ; owl:onProperty mem:about ; owl:cardinality "1"^^xsd:nonNegativeInteger ] ,
+    [ a owl:Restriction ; owl:onProperty mem:attribute ; owl:cardinality "1"^^xsd:nonNegativeInteger ] ,
+    [ a owl:Restriction ; owl:onProperty mem:value ; owl:cardinality "1"^^xsd:nonNegativeInteger ] ,
+    [ a owl:Restriction ; owl:onProperty mem:statement ; owl:cardinality "1"^^xsd:nonNegativeInteger ] .
+
+mem:Preference rdfs:subClassOf
+    [ a owl:Restriction ; owl:onProperty mem:about ; owl:cardinality "1"^^xsd:nonNegativeInteger ] ,
+    [ a owl:Restriction ; owl:onProperty mem:target ; owl:cardinality "1"^^xsd:nonNegativeInteger ] ,
+    [ a owl:Restriction ; owl:onProperty mem:polarity ; owl:cardinality "1"^^xsd:nonNegativeInteger ] ,
+    [ a owl:Restriction ; owl:onProperty mem:statement ; owl:cardinality "1"^^xsd:nonNegativeInteger ] .
+
+mem:Relationship rdfs:subClassOf
+    [ a owl:Restriction ; owl:onProperty mem:about ; owl:cardinality "1"^^xsd:nonNegativeInteger ] ,
+    [ a owl:Restriction ; owl:onProperty mem:relatedTo ; owl:cardinality "1"^^xsd:nonNegativeInteger ] ,
+    [ a owl:Restriction ; owl:onProperty mem:relationType ; owl:cardinality "1"^^xsd:nonNegativeInteger ] ,
+    [ a owl:Restriction ; owl:onProperty mem:statement ; owl:cardinality "1"^^xsd:nonNegativeInteger ] .
+
+mem:TaskState rdfs:subClassOf
+    [ a owl:Restriction ; owl:onProperty mem:about ; owl:cardinality "1"^^xsd:nonNegativeInteger ] ,
+    [ a owl:Restriction ; owl:onProperty mem:statement ; owl:cardinality "1"^^xsd:nonNegativeInteger ] ,
+    [ a owl:Restriction ; owl:onProperty mem:taskStatus ; owl:cardinality "1"^^xsd:nonNegativeInteger ] .
+
 # --- Common item properties --------------------------------------------------
 
-mem:about a owl:ObjectProperty ;
+mem:about a owl:ObjectProperty, owl:FunctionalProperty ;
     rdfs:domain mem:MemoryItem ;
     rdfs:range foaf:Agent ;
     rdfs:label "about"@en ;
     skos:definition "The person or agent the memory item describes."@en .
 
-mem:statement a owl:DatatypeProperty ;
+mem:statement a owl:DatatypeProperty, owl:FunctionalProperty ;
     rdfs:domain mem:MemoryItem ;
     rdfs:range xsd:string ;
     rdfs:label "statement"@en ;
@@ -79,17 +107,17 @@ mem:supersedes a owl:ObjectProperty ;
     rdfs:label "supersedes"@en ;
     skos:definition "The newer item replaces the older one; the older item is no longer current."@en .
 
-mem:validFrom a owl:DatatypeProperty ;
+mem:validFrom a owl:DatatypeProperty, owl:FunctionalProperty ;
     rdfs:domain mem:MemoryItem ;
     rdfs:range xsd:dateTime ;
     rdfs:label "valid from"@en .
 
-mem:validUntil a owl:DatatypeProperty ;
+mem:validUntil a owl:DatatypeProperty, owl:FunctionalProperty ;
     rdfs:domain mem:MemoryItem ;
     rdfs:range xsd:dateTime ;
     rdfs:label "valid until"@en .
 
-mem:confidence a owl:DatatypeProperty ;
+mem:confidence a owl:DatatypeProperty, owl:FunctionalProperty ;
     rdfs:domain mem:MemoryItem ;
     rdfs:range xsd:decimal ;
     rdfs:label "confidence"@en ;
@@ -108,30 +136,30 @@ mem:consentScope a owl:ObjectProperty ;
 
 # --- Fact ----------------------------------------------------------------------
 
-mem:attribute a owl:DatatypeProperty ;
+mem:attribute a owl:DatatypeProperty, owl:FunctionalProperty ;
     rdfs:domain mem:Fact ;
     rdfs:range xsd:string ;
     rdfs:label "attribute"@en ;
     skos:definition "The attribute being asserted, e.g. 'home city', 'employer'."@en .
 
-mem:value a owl:DatatypeProperty ;
+mem:value a owl:DatatypeProperty, owl:FunctionalProperty ;
     rdfs:domain mem:Fact ;
     rdfs:label "value"@en .
 
 # --- Preference ------------------------------------------------------------------
 
-mem:target a owl:DatatypeProperty ;
+mem:target a owl:DatatypeProperty, owl:FunctionalProperty ;
     rdfs:domain mem:Preference ;
     rdfs:range xsd:string ;
     rdfs:label "target"@en ;
     skos:definition "What the preference is about, e.g. 'window seats', 'cilantro'."@en .
 
-mem:polarity a owl:ObjectProperty ;
+mem:polarity a owl:ObjectProperty, owl:FunctionalProperty ;
     rdfs:domain mem:Preference ;
     rdfs:range skos:Concept ;
     rdfs:label "polarity"@en .
 
-mem:context a owl:DatatypeProperty ;
+mem:context a owl:DatatypeProperty, owl:FunctionalProperty ;
     rdfs:domain mem:Preference ;
     rdfs:range xsd:string ;
     rdfs:label "context"@en ;
@@ -139,29 +167,29 @@ mem:context a owl:DatatypeProperty ;
 
 # --- Relationship -------------------------------------------------------------------
 
-mem:relatedTo a owl:ObjectProperty ;
+mem:relatedTo a owl:ObjectProperty, owl:FunctionalProperty ;
     rdfs:domain mem:Relationship ;
     rdfs:label "related to"@en ;
     skos:definition "The other party: usually a foaf:Person, but left open so pets and organisations fit."@en .
 
-mem:relationType a owl:ObjectProperty ;
+mem:relationType a owl:ObjectProperty, owl:FunctionalProperty ;
     rdfs:domain mem:Relationship ;
     rdfs:range skos:Concept ;
     rdfs:label "relation type"@en .
 
 # --- Task state ---------------------------------------------------------------------
 
-mem:taskStatus a owl:ObjectProperty ;
+mem:taskStatus a owl:ObjectProperty, owl:FunctionalProperty ;
     rdfs:domain mem:TaskState ;
     rdfs:range skos:Concept ;
     rdfs:label "task status"@en .
 
-mem:nextStep a owl:DatatypeProperty ;
+mem:nextStep a owl:DatatypeProperty, owl:FunctionalProperty ;
     rdfs:domain mem:TaskState ;
     rdfs:range xsd:string ;
     rdfs:label "next step"@en .
 
-mem:dueBy a owl:DatatypeProperty ;
+mem:dueBy a owl:DatatypeProperty, owl:FunctionalProperty ;
     rdfs:domain mem:TaskState ;
     rdfs:range xsd:dateTime ;
     rdfs:label "due by"@en .
@@ -178,7 +206,7 @@ mem:Utterance a owl:Class ;
     rdfs:label "Utterance"@en ;
     skos:definition "A single turn in a session; memory items are derived from utterances (prov:wasDerivedFrom)."@en .
 
-mem:inSession a owl:ObjectProperty ;
+mem:inSession a owl:ObjectProperty, owl:FunctionalProperty ;
     rdfs:subPropertyOf prov:wasGeneratedBy ;
     rdfs:domain mem:Utterance ;
     rdfs:range mem:Session ;
@@ -194,7 +222,7 @@ mem:Erasure a owl:Class ;
     rdfs:label "Erasure"@en ;
     skos:definition "The subject-requested removal of a memory item, leaving a tombstone (GDPR Art. 17)."@en .
 
-mem:erasedItem a owl:ObjectProperty ;
+mem:erasedItem a owl:ObjectProperty, owl:FunctionalProperty ;
     rdfs:domain mem:Tombstone ;
     rdfs:label "erased item"@en ;
     skos:definition "IRI of the erased memory item. The tombstone keeps only this IRI and the erasure time."@en .

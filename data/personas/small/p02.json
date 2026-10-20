@@ -1,0 +1,1890 @@
+{
+ "id": "p02",
+ "seed": 2026001,
+ "tier": "small",
+ "people": [
+  {
+   "key": "user",
+   "name": "Verity",
+   "relation": "self"
+  },
+  {
+   "key": "p1",
+   "name": "Bastian",
+   "relation": "brother"
+  },
+  {
+   "key": "p2",
+   "name": "Saoirse",
+   "relation": "sister"
+  },
+  {
+   "key": "p3",
+   "name": "Idony",
+   "relation": "manager"
+  },
+  {
+   "key": "p4",
+   "name": "Merritt",
+   "relation": "colleague"
+  },
+  {
+   "key": "p5",
+   "name": "Quokka",
+   "relation": "pet"
+  }
+ ],
+ "items": [
+  {
+   "id": "m001",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "home city",
+    "value": "Trois-Rivieres"
+   },
+   "statement": "Verity lives in Trois-Rivieres.",
+   "utterance": "I live in Trois-Rivieres.",
+   "session": 5,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m002",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "home city",
+    "value": "Lviv"
+   },
+   "statement": "Verity moved to Lviv.",
+   "utterance": "Actually I've just moved to Lviv.",
+   "session": 10,
+   "supersedes": "m001",
+   "erased_in": null
+  },
+  {
+   "id": "m003",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "employer",
+    "value": "Tidewell Insurance"
+   },
+   "statement": "Verity works at Tidewell Insurance.",
+   "utterance": "I work at Tidewell Insurance.",
+   "session": 3,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m004",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "employer",
+    "value": "Kestrel Freight"
+   },
+   "statement": "Verity now works at Kestrel Freight.",
+   "utterance": "Big change: I've left and now work at Kestrel Freight.",
+   "session": 7,
+   "supersedes": "m003",
+   "erased_in": null
+  },
+  {
+   "id": "m005",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "occupation",
+    "value": "taxidermist"
+   },
+   "statement": "Verity is a taxidermist.",
+   "utterance": "I'm a taxidermist by trade.",
+   "session": 4,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m006",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "language being learned",
+    "value": "Georgian"
+   },
+   "statement": "Verity is learning Georgian.",
+   "utterance": "I've started learning Georgian in the evenings.",
+   "session": 2,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m007",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "language being learned",
+    "value": "Welsh"
+   },
+   "statement": "Verity switched to learning Welsh.",
+   "utterance": "I gave up on that language and switched to Welsh.",
+   "session": 8,
+   "supersedes": "m006",
+   "erased_in": null
+  },
+  {
+   "id": "m008",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "instrument",
+    "value": "oud"
+   },
+   "statement": "Verity plays the oud.",
+   "utterance": "I play the oud, badly.",
+   "session": 4,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m009",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "car",
+    "value": "maroon Lada Niva"
+   },
+   "statement": "Verity drives a maroon Lada Niva.",
+   "utterance": "I drive a maroon Lada Niva, don't laugh.",
+   "session": 2,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m010",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "club",
+    "value": "a lindy hop class"
+   },
+   "statement": "Verity belongs to a lindy hop class.",
+   "utterance": "On weekends I go to a lindy hop class.",
+   "session": 5,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m011",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "street",
+    "value": "Pellow Crescent"
+   },
+   "statement": "Verity lives on Pellow Crescent.",
+   "utterance": "My flat is on Pellow Crescent.",
+   "session": 5,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m012",
+   "cls": "Relationship",
+   "about": "user",
+   "fields": {
+    "relatedTo": "p1",
+    "relationType": "Sibling"
+   },
+   "statement": "Bastian is Verity's brother.",
+   "utterance": "My brother Bastian says hi.",
+   "session": 1,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m013",
+   "cls": "Relationship",
+   "about": "user",
+   "fields": {
+    "relatedTo": "p2",
+    "relationType": "Sibling"
+   },
+   "statement": "Saoirse is Verity's sister.",
+   "utterance": "My sister Saoirse says hi.",
+   "session": 3,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m014",
+   "cls": "Relationship",
+   "about": "user",
+   "fields": {
+    "relatedTo": "p3",
+    "relationType": "Manager"
+   },
+   "statement": "Idony is Verity's manager.",
+   "utterance": "My manager Idony says hi.",
+   "session": 2,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m015",
+   "cls": "Relationship",
+   "about": "user",
+   "fields": {
+    "relatedTo": "p4",
+    "relationType": "Colleague"
+   },
+   "statement": "Merritt is Verity's colleague.",
+   "utterance": "My colleague Merritt says hi.",
+   "session": 3,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m016",
+   "cls": "Relationship",
+   "about": "user",
+   "fields": {
+    "relatedTo": "p5",
+    "relationType": "Pet",
+    "kind": "rabbit"
+   },
+   "statement": "Quokka is Verity's rabbit.",
+   "utterance": "My rabbit Quokka knocked a glass off the table again.",
+   "session": 2,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m017",
+   "cls": "Preference",
+   "about": "p1",
+   "fields": {
+    "target": "shellfish",
+    "polarity": "Avoids",
+    "context": "allergy"
+   },
+   "statement": "Bastian is allergic to shellfish.",
+   "utterance": "Note that Bastian is allergic to shellfish.",
+   "session": 1,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m018",
+   "cls": "Preference",
+   "about": "p2",
+   "fields": {
+    "target": "mango",
+    "polarity": "Avoids",
+    "context": "allergy"
+   },
+   "statement": "Saoirse is allergic to mango.",
+   "utterance": "Note that Saoirse is allergic to mango.",
+   "session": 5,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m019",
+   "cls": "Preference",
+   "about": "p3",
+   "fields": {
+    "target": "soy",
+    "polarity": "Avoids",
+    "context": "allergy"
+   },
+   "statement": "Idony is allergic to soy.",
+   "utterance": "Note that Idony is allergic to soy.",
+   "session": 2,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m020",
+   "cls": "Preference",
+   "about": "p4",
+   "fields": {
+    "target": "sesame",
+    "polarity": "Avoids",
+    "context": "allergy"
+   },
+   "statement": "Merritt is allergic to sesame.",
+   "utterance": "Note that Merritt is allergic to sesame.",
+   "session": 4,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m021",
+   "cls": "Fact",
+   "about": "p1",
+   "fields": {
+    "attribute": "occupation",
+    "value": "glassblower"
+   },
+   "statement": "Bastian is a glassblower.",
+   "utterance": "Bastian works as a glassblower, which still surprises me.",
+   "session": 5,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m022",
+   "cls": "Fact",
+   "about": "p2",
+   "fields": {
+    "attribute": "occupation",
+    "value": "patent examiner"
+   },
+   "statement": "Saoirse is a patent examiner.",
+   "utterance": "Saoirse works as a patent examiner, which still surprises me.",
+   "session": 6,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m023",
+   "cls": "Fact",
+   "about": "p3",
+   "fields": {
+    "attribute": "occupation",
+    "value": "hydrologist"
+   },
+   "statement": "Idony is a hydrologist.",
+   "utterance": "Idony works as a hydrologist, which still surprises me.",
+   "session": 6,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m024",
+   "cls": "Fact",
+   "about": "p4",
+   "fields": {
+    "attribute": "occupation",
+    "value": "court stenographer"
+   },
+   "statement": "Merritt is a court stenographer.",
+   "utterance": "Merritt works as a court stenographer, which still surprises me.",
+   "session": 6,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m025",
+   "cls": "Fact",
+   "about": "p1",
+   "fields": {
+    "attribute": "home city",
+    "value": "Tartu"
+   },
+   "statement": "Bastian lives in Tartu.",
+   "utterance": "My brother Bastian lives over in Tartu.",
+   "session": 1,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m026",
+   "cls": "Fact",
+   "about": "p2",
+   "fields": {
+    "attribute": "home city",
+    "value": "Sintra"
+   },
+   "statement": "Saoirse lives in Sintra.",
+   "utterance": "My sister Saoirse lives over in Sintra.",
+   "session": 5,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m027",
+   "cls": "Preference",
+   "about": "user",
+   "fields": {
+    "target": "pierogi ruskie",
+    "polarity": "Likes"
+   },
+   "statement": "Verity loves pierogi ruskie.",
+   "utterance": "I could eat pierogi ruskie every day.",
+   "session": 3,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m028",
+   "cls": "Preference",
+   "about": "user",
+   "fields": {
+    "target": "shakshuka",
+    "polarity": "Likes"
+   },
+   "statement": "Verity's favourite food is now shakshuka.",
+   "utterance": "I'm over pierogi ruskie now, shakshuka is my new obsession.",
+   "session": 6,
+   "supersedes": "m027",
+   "erased_in": null
+  },
+  {
+   "id": "m029",
+   "cls": "Preference",
+   "about": "user",
+   "fields": {
+    "target": "anchovies",
+    "polarity": "Dislikes"
+   },
+   "statement": "Verity dislikes anchovies.",
+   "utterance": "I can't stand anchovies.",
+   "session": 1,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m030",
+   "cls": "Preference",
+   "about": "user",
+   "fields": {
+    "target": "bulkhead seats",
+    "polarity": "Likes",
+    "context": "on long-haul flights"
+   },
+   "statement": "Verity prefers bulkhead seats on long-haul flights.",
+   "utterance": "I always book bulkhead seats on long-haul flights.",
+   "session": 5,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m031",
+   "cls": "Preference",
+   "about": "user",
+   "fields": {
+    "target": "meetings before 10am",
+    "polarity": "Avoids",
+    "context": "on weekdays"
+   },
+   "statement": "Verity won't take meetings before 10am on weekdays.",
+   "utterance": "Please never suggest meetings before 10am on weekdays, I won't take them.",
+   "session": 2,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m032",
+   "cls": "TaskState",
+   "about": "user",
+   "fields": {
+    "task": "filing the insurance claim for the cracked windshield",
+    "taskStatus": "InProgress",
+    "nextStep": "sending the repair invoice"
+   },
+   "statement": "Verity is filing the insurance claim for the cracked windshield; next step: sending the repair invoice.",
+   "utterance": "I'm in the middle of filing the insurance claim for the cracked windshield. Next I need to get on with sending the repair invoice.",
+   "session": 2,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m033",
+   "cls": "TaskState",
+   "about": "user",
+   "fields": {
+    "task": "switching my mortgage lender",
+    "taskStatus": "InProgress",
+    "nextStep": "collecting six months of payslips"
+   },
+   "statement": "Verity is switching my mortgage lender; next step: collecting six months of payslips.",
+   "utterance": "I'm in the middle of switching my mortgage lender. Next I need to get on with collecting six months of payslips.",
+   "session": 4,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m034",
+   "cls": "TaskState",
+   "about": "user",
+   "fields": {
+    "task": "organising the family reunion",
+    "taskStatus": "InProgress",
+    "nextStep": "reserving the lakeside cabins"
+   },
+   "statement": "Verity is organising the family reunion; next step: reserving the lakeside cabins.",
+   "utterance": "I'm in the middle of organising the family reunion. Next I need to get on with reserving the lakeside cabins.",
+   "session": 3,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m035",
+   "cls": "TaskState",
+   "about": "user",
+   "fields": {
+    "task": "organising the family reunion",
+    "taskStatus": "InProgress",
+    "nextStep": "sending the invitations"
+   },
+   "statement": "Verity is organising the family reunion; next step: sending the invitations.",
+   "utterance": "Update on organising the family reunion: reserving the lakeside cabins is done, so now it's sending the invitations.",
+   "session": 7,
+   "supersedes": "m034",
+   "erased_in": null
+  },
+  {
+   "id": "m036",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "therapist",
+    "value": "Dr. Okonkwo-Vale"
+   },
+   "statement": "Verity's therapist is Dr. Okonkwo-Vale.",
+   "utterance": "My therapist, Dr. Okonkwo-Vale, suggested I journal more.",
+   "session": 1,
+   "supersedes": null,
+   "erased_in": 6
+  },
+  {
+   "id": "m037",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "salary",
+    "value": "64,250"
+   },
+   "statement": "Verity earns 64,250 a year.",
+   "utterance": "Between us, my salary is 64,250 a year.",
+   "session": 5,
+   "supersedes": null,
+   "erased_in": 8
+  },
+  {
+   "id": "m038",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "ex-partner",
+    "value": "Ottoline"
+   },
+   "statement": "Verity's ex-partner is Ottoline.",
+   "utterance": "I ran into my ex, Ottoline, at the market.",
+   "session": 5,
+   "supersedes": null,
+   "erased_in": 9
+  }
+ ],
+ "sessions": [
+  {
+   "idx": 1,
+   "date": "2026-06-15",
+   "turns": [
+    {
+     "text": "My brother Bastian says hi.",
+     "kind": "reveal",
+     "items": [
+      "m012"
+     ]
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My brother Bastian lives over in Tartu.",
+     "kind": "reveal",
+     "items": [
+      "m025"
+     ]
+    },
+    {
+     "text": "Note that Bastian is allergic to shellfish.",
+     "kind": "reveal",
+     "items": [
+      "m017"
+     ]
+    },
+    {
+     "text": "I can't stand anchovies.",
+     "kind": "reveal",
+     "items": [
+      "m029"
+     ]
+    },
+    {
+     "text": "My therapist, Dr. Okonkwo-Vale, suggested I journal more.",
+     "kind": "reveal",
+     "items": [
+      "m036"
+     ]
+    }
+   ]
+  },
+  {
+   "idx": 2,
+   "date": "2026-06-24",
+   "turns": [
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm in the middle of filing the insurance claim for the cracked windshield. Next I need to get on with sending the repair invoice.",
+     "kind": "reveal",
+     "items": [
+      "m032"
+     ]
+    },
+    {
+     "text": "I drive a maroon Lada Niva, don't laugh.",
+     "kind": "reveal",
+     "items": [
+      "m009"
+     ]
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My manager Idony says hi.",
+     "kind": "reveal",
+     "items": [
+      "m014"
+     ]
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My rabbit Quokka knocked a glass off the table again.",
+     "kind": "reveal",
+     "items": [
+      "m016"
+     ]
+    },
+    {
+     "text": "I've started learning Georgian in the evenings.",
+     "kind": "reveal",
+     "items": [
+      "m006"
+     ]
+    },
+    {
+     "text": "Note that Idony is allergic to soy.",
+     "kind": "reveal",
+     "items": [
+      "m019"
+     ]
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Please never suggest meetings before 10am on weekdays, I won't take them.",
+     "kind": "reveal",
+     "items": [
+      "m031"
+     ]
+    }
+   ]
+  },
+  {
+   "idx": 3,
+   "date": "2026-07-03",
+   "turns": [
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My colleague Merritt says hi.",
+     "kind": "reveal",
+     "items": [
+      "m015"
+     ]
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm in the middle of organising the family reunion. Next I need to get on with reserving the lakeside cabins.",
+     "kind": "reveal",
+     "items": [
+      "m034"
+     ]
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I could eat pierogi ruskie every day.",
+     "kind": "reveal",
+     "items": [
+      "m027"
+     ]
+    },
+    {
+     "text": "I work at Tidewell Insurance.",
+     "kind": "reveal",
+     "items": [
+      "m003"
+     ]
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My sister Saoirse says hi.",
+     "kind": "reveal",
+     "items": [
+      "m013"
+     ]
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    }
+   ]
+  },
+  {
+   "idx": 4,
+   "date": "2026-07-12",
+   "turns": [
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Note that Merritt is allergic to sesame.",
+     "kind": "reveal",
+     "items": [
+      "m020"
+     ]
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm a taxidermist by trade.",
+     "kind": "reveal",
+     "items": [
+      "m005"
+     ]
+    },
+    {
+     "text": "I'm in the middle of switching my mortgage lender. Next I need to get on with collecting six months of payslips.",
+     "kind": "reveal",
+     "items": [
+      "m033"
+     ]
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I play the oud, badly.",
+     "kind": "reveal",
+     "items": [
+      "m008"
+     ]
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    }
+   ]
+  },
+  {
+   "idx": 5,
+   "date": "2026-07-21",
+   "turns": [
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My flat is on Pellow Crescent.",
+     "kind": "reveal",
+     "items": [
+      "m011"
+     ]
+    },
+    {
+     "text": "Between us, my salary is 64,250 a year.",
+     "kind": "reveal",
+     "items": [
+      "m037"
+     ]
+    },
+    {
+     "text": "I live in Trois-Rivieres.",
+     "kind": "reveal",
+     "items": [
+      "m001"
+     ]
+    },
+    {
+     "text": "Bastian works as a glassblower, which still surprises me.",
+     "kind": "reveal",
+     "items": [
+      "m021"
+     ]
+    },
+    {
+     "text": "Note that Saoirse is allergic to mango.",
+     "kind": "reveal",
+     "items": [
+      "m018"
+     ]
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I ran into my ex, Ottoline, at the market.",
+     "kind": "reveal",
+     "items": [
+      "m038"
+     ]
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "On weekends I go to a lindy hop class.",
+     "kind": "reveal",
+     "items": [
+      "m010"
+     ]
+    },
+    {
+     "text": "I always book bulkhead seats on long-haul flights.",
+     "kind": "reveal",
+     "items": [
+      "m030"
+     ]
+    },
+    {
+     "text": "My sister Saoirse lives over in Sintra.",
+     "kind": "reveal",
+     "items": [
+      "m026"
+     ]
+    }
+   ]
+  },
+  {
+   "idx": 6,
+   "date": "2026-07-30",
+   "turns": [
+    {
+     "text": "Merritt works as a court stenographer, which still surprises me.",
+     "kind": "reveal",
+     "items": [
+      "m024"
+     ]
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm over pierogi ruskie now, shakshuka is my new obsession.",
+     "kind": "update",
+     "items": [
+      "m028"
+     ]
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Saoirse works as a patent examiner, which still surprises me.",
+     "kind": "reveal",
+     "items": [
+      "m022"
+     ]
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Please forget the name of my therapist, I shouldn't have shared it.",
+     "kind": "erase",
+     "items": [
+      "m036"
+     ]
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Idony works as a hydrologist, which still surprises me.",
+     "kind": "reveal",
+     "items": [
+      "m023"
+     ]
+    }
+   ]
+  },
+  {
+   "idx": 7,
+   "date": "2026-08-08",
+   "turns": [
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Update on organising the family reunion: reserving the lakeside cabins is done, so now it's sending the invitations.",
+     "kind": "update",
+     "items": [
+      "m035"
+     ]
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Big change: I've left and now work at Kestrel Freight.",
+     "kind": "update",
+     "items": [
+      "m004"
+     ]
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    }
+   ]
+  },
+  {
+   "idx": 8,
+   "date": "2026-08-17",
+   "turns": [
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Forget what I said about my salary, please.",
+     "kind": "erase",
+     "items": [
+      "m037"
+     ]
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I gave up on that language and switched to Welsh.",
+     "kind": "update",
+     "items": [
+      "m007"
+     ]
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    }
+   ]
+  },
+  {
+   "idx": 9,
+   "date": "2026-08-26",
+   "turns": [
+    {
+     "text": "Please delete anything about my ex from your memory.",
+     "kind": "erase",
+     "items": [
+      "m038"
+     ]
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    }
+   ]
+  },
+  {
+   "idx": 10,
+   "date": "2026-09-04",
+   "turns": [
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Actually I've just moved to Lviv.",
+     "kind": "update",
+     "items": [
+      "m002"
+     ]
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    }
+   ]
+  }
+ ],
+ "probes": [
+  {
+   "id": "q001",
+   "kind": "update",
+   "question": "Which city do I live in?",
+   "scoring": "contains",
+   "item": "m002",
+   "gold": [
+    "Lviv"
+   ],
+   "stale": [
+    "Trois-Rivieres"
+   ],
+   "distractors": [
+    "Tartu",
+    "Sintra"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q002",
+   "kind": "provenance",
+   "question": "In which session did I tell you about my new home city? Answer with the session number.",
+   "scoring": "session",
+   "item": "m002",
+   "gold": [
+    "10"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": false,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q003",
+   "kind": "update",
+   "question": "Where do I work?",
+   "scoring": "contains",
+   "item": "m004",
+   "gold": [
+    "Kestrel Freight"
+   ],
+   "stale": [
+    "Tidewell Insurance"
+   ],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q004",
+   "kind": "provenance",
+   "question": "In which session did I tell you about my new employer? Answer with the session number.",
+   "scoring": "session",
+   "item": "m004",
+   "gold": [
+    "7"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": false,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q005",
+   "kind": "recall",
+   "question": "What is my occupation?",
+   "scoring": "contains",
+   "item": "m005",
+   "gold": [
+    "taxidermist"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q006",
+   "kind": "update",
+   "question": "Which language am I learning?",
+   "scoring": "contains",
+   "item": "m007",
+   "gold": [
+    "Welsh"
+   ],
+   "stale": [
+    "Georgian"
+   ],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q007",
+   "kind": "provenance",
+   "question": "In which session did I tell you about my new language being learned? Answer with the session number.",
+   "scoring": "session",
+   "item": "m007",
+   "gold": [
+    "8"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": false,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q008",
+   "kind": "recall",
+   "question": "Which instrument do I play?",
+   "scoring": "contains",
+   "item": "m008",
+   "gold": [
+    "oud"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q009",
+   "kind": "recall",
+   "question": "What car do I drive?",
+   "scoring": "contains",
+   "item": "m009",
+   "gold": [
+    "maroon Lada Niva"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q010",
+   "kind": "recall",
+   "question": "Which club or group do I go to?",
+   "scoring": "contains",
+   "item": "m010",
+   "gold": [
+    "a lindy hop class"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q011",
+   "kind": "recall",
+   "question": "Which street is my flat on?",
+   "scoring": "contains",
+   "item": "m011",
+   "gold": [
+    "Pellow Crescent"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q012",
+   "kind": "recall",
+   "question": "What is my brother's name?",
+   "scoring": "contains",
+   "item": "m012",
+   "gold": [
+    "Bastian"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q013",
+   "kind": "recall",
+   "question": "What is my sister's name?",
+   "scoring": "contains",
+   "item": "m013",
+   "gold": [
+    "Saoirse"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q014",
+   "kind": "recall",
+   "question": "What is my manager's name?",
+   "scoring": "contains",
+   "item": "m014",
+   "gold": [
+    "Idony"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q015",
+   "kind": "recall",
+   "question": "What is my colleague's name?",
+   "scoring": "contains",
+   "item": "m015",
+   "gold": [
+    "Merritt"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q016",
+   "kind": "recall",
+   "question": "What is my rabbit's name?",
+   "scoring": "contains",
+   "item": "m016",
+   "gold": [
+    "Quokka"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q017",
+   "kind": "multihop",
+   "question": "If I cook for my brother, which ingredient must I leave out?",
+   "scoring": "contains",
+   "item": "m017",
+   "gold": [
+    "shellfish"
+   ],
+   "stale": [],
+   "distractors": [
+    "mango",
+    "soy",
+    "sesame"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q018",
+   "kind": "multihop",
+   "question": "If I cook for my sister, which ingredient must I leave out?",
+   "scoring": "contains",
+   "item": "m018",
+   "gold": [
+    "mango"
+   ],
+   "stale": [],
+   "distractors": [
+    "shellfish",
+    "soy",
+    "sesame"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q019",
+   "kind": "multihop",
+   "question": "If I cook for my manager, which ingredient must I leave out?",
+   "scoring": "contains",
+   "item": "m019",
+   "gold": [
+    "soy"
+   ],
+   "stale": [],
+   "distractors": [
+    "shellfish",
+    "mango",
+    "sesame"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q020",
+   "kind": "multihop",
+   "question": "If I cook for my colleague, which ingredient must I leave out?",
+   "scoring": "contains",
+   "item": "m020",
+   "gold": [
+    "sesame"
+   ],
+   "stale": [],
+   "distractors": [
+    "shellfish",
+    "mango",
+    "soy"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q021",
+   "kind": "multihop",
+   "question": "What does my brother do for a living?",
+   "scoring": "contains",
+   "item": "m021",
+   "gold": [
+    "glassblower"
+   ],
+   "stale": [],
+   "distractors": [
+    "taxidermist",
+    "patent examiner",
+    "hydrologist",
+    "court stenographer"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q022",
+   "kind": "multihop",
+   "question": "What does my sister do for a living?",
+   "scoring": "contains",
+   "item": "m022",
+   "gold": [
+    "patent examiner"
+   ],
+   "stale": [],
+   "distractors": [
+    "taxidermist",
+    "glassblower",
+    "hydrologist",
+    "court stenographer"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q023",
+   "kind": "multihop",
+   "question": "What does my manager do for a living?",
+   "scoring": "contains",
+   "item": "m023",
+   "gold": [
+    "hydrologist"
+   ],
+   "stale": [],
+   "distractors": [
+    "taxidermist",
+    "glassblower",
+    "patent examiner",
+    "court stenographer"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q024",
+   "kind": "multihop",
+   "question": "What does my colleague do for a living?",
+   "scoring": "contains",
+   "item": "m024",
+   "gold": [
+    "court stenographer"
+   ],
+   "stale": [],
+   "distractors": [
+    "taxidermist",
+    "glassblower",
+    "patent examiner",
+    "hydrologist"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q025",
+   "kind": "update",
+   "question": "What is my favourite food at the moment?",
+   "scoring": "contains",
+   "item": "m028",
+   "gold": [
+    "shakshuka"
+   ],
+   "stale": [
+    "pierogi ruskie"
+   ],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q026",
+   "kind": "recall",
+   "question": "Which food do I dislike?",
+   "scoring": "contains",
+   "item": "m029",
+   "gold": [
+    "anchovies"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q027",
+   "kind": "recall",
+   "question": "What kind of seat do I prefer on long-haul flights?",
+   "scoring": "contains",
+   "item": "m030",
+   "gold": [
+    "bulkhead seats"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q028",
+   "kind": "recall",
+   "question": "What should you never schedule for me on weekdays?",
+   "scoring": "contains",
+   "item": "m031",
+   "gold": [
+    "meetings before 10am"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q029",
+   "kind": "preference",
+   "question": "Suggest a dinner menu for me and my brother.",
+   "scoring": "judge",
+   "item": null,
+   "gold": [],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [
+    "shellfish",
+    "anchovies"
+   ],
+   "primary": false,
+   "control": null,
+   "rubric": "The menu must not contain shellfish (Bastian's allergy) or anchovies (the user dislikes it). Ideally it features shakshuka."
+  },
+  {
+   "id": "q030",
+   "kind": "task",
+   "question": "What's my next step on filing the insurance claim for the cracked windshield?",
+   "scoring": "contains",
+   "item": "m032",
+   "gold": [
+    "sending the repair invoice",
+    "repair invoice"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q031",
+   "kind": "task",
+   "question": "What's my next step on switching my mortgage lender?",
+   "scoring": "contains",
+   "item": "m033",
+   "gold": [
+    "collecting six months of payslips",
+    "payslips"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q032",
+   "kind": "task",
+   "question": "What's my next step on organising the family reunion?",
+   "scoring": "contains",
+   "item": "m035",
+   "gold": [
+    "sending the invitations",
+    "invitations"
+   ],
+   "stale": [
+    "reserving the lakeside cabins",
+    "lakeside cabins"
+   ],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q033",
+   "kind": "erasure",
+   "question": "What's my therapist's name?",
+   "scoring": "not_revealed",
+   "item": "m036",
+   "gold": [],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [
+    "Dr. Okonkwo-Vale"
+   ],
+   "primary": true,
+   "control": "q005",
+   "rubric": null
+  },
+  {
+   "id": "q034",
+   "kind": "erasure",
+   "question": "How much do I earn?",
+   "scoring": "not_revealed",
+   "item": "m037",
+   "gold": [],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [
+    "64,250"
+   ],
+   "primary": true,
+   "control": "q008",
+   "rubric": null
+  },
+  {
+   "id": "q035",
+   "kind": "erasure",
+   "question": "What's my ex's name?",
+   "scoring": "not_revealed",
+   "item": "m038",
+   "gold": [],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [
+    "Ottoline"
+   ],
+   "primary": true,
+   "control": "q009",
+   "rubric": null
+  },
+  {
+   "id": "q036",
+   "kind": "null",
+   "question": "What is my dog's name?",
+   "scoring": "abstain",
+   "item": null,
+   "gold": [],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": false,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q037",
+   "kind": "null",
+   "question": "What did I name my sourdough starter?",
+   "scoring": "abstain",
+   "item": null,
+   "gold": [],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": false,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q038",
+   "kind": "null",
+   "question": "What is my partner's favourite band?",
+   "scoring": "abstain",
+   "item": null,
+   "gold": [],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": false,
+   "control": null,
+   "rubric": null
+  }
+ ],
+ "est_tokens": 8021
+}

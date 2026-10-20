@@ -1,0 +1,1925 @@
+{
+ "id": "p11",
+ "seed": 2026010,
+ "tier": "small",
+ "people": [
+  {
+   "key": "user",
+   "name": "Anouk",
+   "relation": "self"
+  },
+  {
+   "key": "p1",
+   "name": "Rasmus",
+   "relation": "brother"
+  },
+  {
+   "key": "p2",
+   "name": "Zebedee",
+   "relation": "manager"
+  },
+  {
+   "key": "p3",
+   "name": "Osric",
+   "relation": "colleague"
+  },
+  {
+   "key": "p4",
+   "name": "Verity",
+   "relation": "partner"
+  },
+  {
+   "key": "p5",
+   "name": "Biscotti",
+   "relation": "pet"
+  }
+ ],
+ "items": [
+  {
+   "id": "m001",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "home city",
+    "value": "Tbilisi"
+   },
+   "statement": "Anouk lives in Tbilisi.",
+   "utterance": "I live in Tbilisi.",
+   "session": 2,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m002",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "home city",
+    "value": "Aarhus"
+   },
+   "statement": "Anouk moved to Aarhus.",
+   "utterance": "Actually I've just moved to Aarhus.",
+   "session": 5,
+   "supersedes": "m001",
+   "erased_in": null
+  },
+  {
+   "id": "m003",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "employer",
+    "value": "Halvorsen Optics"
+   },
+   "statement": "Anouk works at Halvorsen Optics.",
+   "utterance": "I work at Halvorsen Optics.",
+   "session": 3,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m004",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "employer",
+    "value": "Ravelin Publishing"
+   },
+   "statement": "Anouk now works at Ravelin Publishing.",
+   "utterance": "Big change: I've left and now work at Ravelin Publishing.",
+   "session": 5,
+   "supersedes": "m003",
+   "erased_in": null
+  },
+  {
+   "id": "m005",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "occupation",
+    "value": "set designer"
+   },
+   "statement": "Anouk is a set designer.",
+   "utterance": "I'm a set designer by trade.",
+   "session": 4,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m006",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "language being learned",
+    "value": "Tagalog"
+   },
+   "statement": "Anouk is learning Tagalog.",
+   "utterance": "I've started learning Tagalog in the evenings.",
+   "session": 1,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m007",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "language being learned",
+    "value": "Welsh"
+   },
+   "statement": "Anouk switched to learning Welsh.",
+   "utterance": "I gave up on that language and switched to Welsh.",
+   "session": 8,
+   "supersedes": "m006",
+   "erased_in": null
+  },
+  {
+   "id": "m008",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "instrument",
+    "value": "euphonium"
+   },
+   "statement": "Anouk plays the euphonium.",
+   "utterance": "I play the euphonium, badly.",
+   "session": 2,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m009",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "car",
+    "value": "maroon Lada Niva"
+   },
+   "statement": "Anouk drives a maroon Lada Niva.",
+   "utterance": "I drive a maroon Lada Niva, don't laugh.",
+   "session": 2,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m010",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "club",
+    "value": "a competitive crossword league"
+   },
+   "statement": "Anouk belongs to a competitive crossword league.",
+   "utterance": "On weekends I go to a competitive crossword league.",
+   "session": 1,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m011",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "street",
+    "value": "Marrowby Street"
+   },
+   "statement": "Anouk lives on Marrowby Street.",
+   "utterance": "My flat is on Marrowby Street.",
+   "session": 4,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m012",
+   "cls": "Relationship",
+   "about": "user",
+   "fields": {
+    "relatedTo": "p1",
+    "relationType": "Sibling"
+   },
+   "statement": "Rasmus is Anouk's brother.",
+   "utterance": "My brother Rasmus says hi.",
+   "session": 5,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m013",
+   "cls": "Relationship",
+   "about": "user",
+   "fields": {
+    "relatedTo": "p2",
+    "relationType": "Manager"
+   },
+   "statement": "Zebedee is Anouk's manager.",
+   "utterance": "My manager Zebedee says hi.",
+   "session": 1,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m014",
+   "cls": "Relationship",
+   "about": "user",
+   "fields": {
+    "relatedTo": "p3",
+    "relationType": "Colleague"
+   },
+   "statement": "Osric is Anouk's colleague.",
+   "utterance": "My colleague Osric says hi.",
+   "session": 5,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m015",
+   "cls": "Relationship",
+   "about": "user",
+   "fields": {
+    "relatedTo": "p4",
+    "relationType": "Partner"
+   },
+   "statement": "Verity is Anouk's partner.",
+   "utterance": "My partner Verity says hi.",
+   "session": 2,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m016",
+   "cls": "Relationship",
+   "about": "user",
+   "fields": {
+    "relatedTo": "p5",
+    "relationType": "Pet",
+    "kind": "dog"
+   },
+   "statement": "Biscotti is Anouk's dog.",
+   "utterance": "My dog Biscotti knocked a glass off the table again.",
+   "session": 5,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m017",
+   "cls": "Preference",
+   "about": "p1",
+   "fields": {
+    "target": "kiwi",
+    "polarity": "Avoids",
+    "context": "allergy"
+   },
+   "statement": "Rasmus is allergic to kiwi.",
+   "utterance": "Note that Rasmus is allergic to kiwi.",
+   "session": 5,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m018",
+   "cls": "Preference",
+   "about": "p2",
+   "fields": {
+    "target": "lupin",
+    "polarity": "Avoids",
+    "context": "allergy"
+   },
+   "statement": "Zebedee is allergic to lupin.",
+   "utterance": "Note that Zebedee is allergic to lupin.",
+   "session": 4,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m019",
+   "cls": "Preference",
+   "about": "p3",
+   "fields": {
+    "target": "sesame",
+    "polarity": "Avoids",
+    "context": "allergy"
+   },
+   "statement": "Osric is allergic to sesame.",
+   "utterance": "Note that Osric is allergic to sesame.",
+   "session": 5,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m020",
+   "cls": "Preference",
+   "about": "p4",
+   "fields": {
+    "target": "celery",
+    "polarity": "Avoids",
+    "context": "allergy"
+   },
+   "statement": "Verity is allergic to celery.",
+   "utterance": "Note that Verity is allergic to celery.",
+   "session": 4,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m021",
+   "cls": "Fact",
+   "about": "p1",
+   "fields": {
+    "attribute": "occupation",
+    "value": "court stenographer"
+   },
+   "statement": "Rasmus is a court stenographer.",
+   "utterance": "Rasmus works as a court stenographer, which still surprises me.",
+   "session": 5,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m022",
+   "cls": "Fact",
+   "about": "p2",
+   "fields": {
+    "attribute": "occupation",
+    "value": "cartographer"
+   },
+   "statement": "Zebedee is a cartographer.",
+   "utterance": "Zebedee works as a cartographer, which still surprises me.",
+   "session": 4,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m023",
+   "cls": "Fact",
+   "about": "p3",
+   "fields": {
+    "attribute": "occupation",
+    "value": "sound engineer"
+   },
+   "statement": "Osric is a sound engineer.",
+   "utterance": "Osric works as a sound engineer, which still surprises me.",
+   "session": 5,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m024",
+   "cls": "Fact",
+   "about": "p4",
+   "fields": {
+    "attribute": "occupation",
+    "value": "luthier"
+   },
+   "statement": "Verity is a luthier.",
+   "utterance": "Verity works as a luthier, which still surprises me.",
+   "session": 4,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m025",
+   "cls": "Fact",
+   "about": "p1",
+   "fields": {
+    "attribute": "home city",
+    "value": "Kotor"
+   },
+   "statement": "Rasmus lives in Kotor.",
+   "utterance": "My brother Rasmus lives over in Kotor.",
+   "session": 6,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m026",
+   "cls": "Fact",
+   "about": "p2",
+   "fields": {
+    "attribute": "home city",
+    "value": "Oaxaca"
+   },
+   "statement": "Zebedee lives in Oaxaca.",
+   "utterance": "My manager Zebedee lives over in Oaxaca.",
+   "session": 6,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m027",
+   "cls": "Preference",
+   "about": "user",
+   "fields": {
+    "target": "jollof rice",
+    "polarity": "Likes"
+   },
+   "statement": "Anouk loves jollof rice.",
+   "utterance": "I could eat jollof rice every day.",
+   "session": 4,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m028",
+   "cls": "Preference",
+   "about": "user",
+   "fields": {
+    "target": "bobotie",
+    "polarity": "Likes"
+   },
+   "statement": "Anouk's favourite food is now bobotie.",
+   "utterance": "I'm over jollof rice now, bobotie is my new obsession.",
+   "session": 6,
+   "supersedes": "m027",
+   "erased_in": null
+  },
+  {
+   "id": "m029",
+   "cls": "Preference",
+   "about": "user",
+   "fields": {
+    "target": "pickled herring",
+    "polarity": "Dislikes"
+   },
+   "statement": "Anouk dislikes pickled herring.",
+   "utterance": "I can't stand pickled herring.",
+   "session": 3,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m030",
+   "cls": "Preference",
+   "about": "user",
+   "fields": {
+    "target": "the quiet carriage",
+    "polarity": "Likes",
+    "context": "on commuter trains"
+   },
+   "statement": "Anouk prefers the quiet carriage on commuter trains.",
+   "utterance": "I always book the quiet carriage on commuter trains.",
+   "session": 1,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m031",
+   "cls": "Preference",
+   "about": "user",
+   "fields": {
+    "target": "meetings before 10am",
+    "polarity": "Avoids",
+    "context": "on weekdays"
+   },
+   "statement": "Anouk won't take meetings before 10am on weekdays.",
+   "utterance": "Please never suggest meetings before 10am on weekdays, I won't take them.",
+   "session": 2,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m032",
+   "cls": "TaskState",
+   "about": "user",
+   "fields": {
+    "task": "filing the insurance claim for the cracked windshield",
+    "taskStatus": "InProgress",
+    "nextStep": "sending the repair invoice"
+   },
+   "statement": "Anouk is filing the insurance claim for the cracked windshield; next step: sending the repair invoice.",
+   "utterance": "I'm in the middle of filing the insurance claim for the cracked windshield. Next I need to get on with sending the repair invoice.",
+   "session": 2,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m033",
+   "cls": "TaskState",
+   "about": "user",
+   "fields": {
+    "task": "filing the insurance claim for the cracked windshield",
+    "taskStatus": "InProgress",
+    "nextStep": "calling the adjuster"
+   },
+   "statement": "Anouk is filing the insurance claim for the cracked windshield; next step: calling the adjuster.",
+   "utterance": "Update on filing the insurance claim for the cracked windshield: sending the repair invoice is done, so now it's calling the adjuster.",
+   "session": 4,
+   "supersedes": "m032",
+   "erased_in": null
+  },
+  {
+   "id": "m034",
+   "cls": "TaskState",
+   "about": "user",
+   "fields": {
+    "task": "planning the garden shed build",
+    "taskStatus": "InProgress",
+    "nextStep": "ordering cedar planks"
+   },
+   "statement": "Anouk is planning the garden shed build; next step: ordering cedar planks.",
+   "utterance": "I'm in the middle of planning the garden shed build. Next I need to get on with ordering cedar planks.",
+   "session": 1,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m035",
+   "cls": "TaskState",
+   "about": "user",
+   "fields": {
+    "task": "planning the garden shed build",
+    "taskStatus": "InProgress",
+    "nextStep": "pouring the concrete footings"
+   },
+   "statement": "Anouk is planning the garden shed build; next step: pouring the concrete footings.",
+   "utterance": "Update on planning the garden shed build: ordering cedar planks is done, so now it's pouring the concrete footings.",
+   "session": 7,
+   "supersedes": "m034",
+   "erased_in": null
+  },
+  {
+   "id": "m036",
+   "cls": "TaskState",
+   "about": "user",
+   "fields": {
+    "task": "renewing my passport",
+    "taskStatus": "InProgress",
+    "nextStep": "booking a photo appointment"
+   },
+   "statement": "Anouk is renewing my passport; next step: booking a photo appointment.",
+   "utterance": "I'm in the middle of renewing my passport. Next I need to get on with booking a photo appointment.",
+   "session": 1,
+   "supersedes": null,
+   "erased_in": null
+  },
+  {
+   "id": "m037",
+   "cls": "TaskState",
+   "about": "user",
+   "fields": {
+    "task": "renewing my passport",
+    "taskStatus": "InProgress",
+    "nextStep": "mailing the renewal form"
+   },
+   "statement": "Anouk is renewing my passport; next step: mailing the renewal form.",
+   "utterance": "Update on renewing my passport: booking a photo appointment is done, so now it's mailing the renewal form.",
+   "session": 6,
+   "supersedes": "m036",
+   "erased_in": null
+  },
+  {
+   "id": "m038",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "therapist",
+    "value": "Dr. Abernathy-Lowe"
+   },
+   "statement": "Anouk's therapist is Dr. Abernathy-Lowe.",
+   "utterance": "My therapist, Dr. Abernathy-Lowe, suggested I journal more.",
+   "session": 1,
+   "supersedes": null,
+   "erased_in": 5
+  },
+  {
+   "id": "m039",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "salary",
+    "value": "87,500"
+   },
+   "statement": "Anouk earns 87,500 a year.",
+   "utterance": "Between us, my salary is 87,500 a year.",
+   "session": 5,
+   "supersedes": null,
+   "erased_in": 10
+  },
+  {
+   "id": "m040",
+   "cls": "Fact",
+   "about": "user",
+   "fields": {
+    "attribute": "ex-partner",
+    "value": "Mabry"
+   },
+   "statement": "Anouk's ex-partner is Mabry.",
+   "utterance": "I ran into my ex, Mabry, at the market.",
+   "session": 3,
+   "supersedes": null,
+   "erased_in": 5
+  }
+ ],
+ "sessions": [
+  {
+   "idx": 1,
+   "date": "2026-06-04",
+   "turns": [
+    {
+     "text": "On weekends I go to a competitive crossword league.",
+     "kind": "reveal",
+     "items": [
+      "m010"
+     ]
+    },
+    {
+     "text": "I always book the quiet carriage on commuter trains.",
+     "kind": "reveal",
+     "items": [
+      "m030"
+     ]
+    },
+    {
+     "text": "My manager Zebedee says hi.",
+     "kind": "reveal",
+     "items": [
+      "m013"
+     ]
+    },
+    {
+     "text": "My therapist, Dr. Abernathy-Lowe, suggested I journal more.",
+     "kind": "reveal",
+     "items": [
+      "m038"
+     ]
+    },
+    {
+     "text": "I'm in the middle of renewing my passport. Next I need to get on with booking a photo appointment.",
+     "kind": "reveal",
+     "items": [
+      "m036"
+     ]
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I've started learning Tagalog in the evenings.",
+     "kind": "reveal",
+     "items": [
+      "m006"
+     ]
+    },
+    {
+     "text": "I'm in the middle of planning the garden shed build. Next I need to get on with ordering cedar planks.",
+     "kind": "reveal",
+     "items": [
+      "m034"
+     ]
+    }
+   ]
+  },
+  {
+   "idx": 2,
+   "date": "2026-06-13",
+   "turns": [
+    {
+     "text": "Please never suggest meetings before 10am on weekdays, I won't take them.",
+     "kind": "reveal",
+     "items": [
+      "m031"
+     ]
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I drive a maroon Lada Niva, don't laugh.",
+     "kind": "reveal",
+     "items": [
+      "m009"
+     ]
+    },
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I play the euphonium, badly.",
+     "kind": "reveal",
+     "items": [
+      "m008"
+     ]
+    },
+    {
+     "text": "My partner Verity says hi.",
+     "kind": "reveal",
+     "items": [
+      "m015"
+     ]
+    },
+    {
+     "text": "I'm in the middle of filing the insurance claim for the cracked windshield. Next I need to get on with sending the repair invoice.",
+     "kind": "reveal",
+     "items": [
+      "m032"
+     ]
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I live in Tbilisi.",
+     "kind": "reveal",
+     "items": [
+      "m001"
+     ]
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    }
+   ]
+  },
+  {
+   "idx": 3,
+   "date": "2026-06-22",
+   "turns": [
+    {
+     "text": "I can't stand pickled herring.",
+     "kind": "reveal",
+     "items": [
+      "m029"
+     ]
+    },
+    {
+     "text": "I ran into my ex, Mabry, at the market.",
+     "kind": "reveal",
+     "items": [
+      "m040"
+     ]
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I work at Halvorsen Optics.",
+     "kind": "reveal",
+     "items": [
+      "m003"
+     ]
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    }
+   ]
+  },
+  {
+   "idx": 4,
+   "date": "2026-07-01",
+   "turns": [
+    {
+     "text": "Verity works as a luthier, which still surprises me.",
+     "kind": "reveal",
+     "items": [
+      "m024"
+     ]
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Zebedee works as a cartographer, which still surprises me.",
+     "kind": "reveal",
+     "items": [
+      "m022"
+     ]
+    },
+    {
+     "text": "Note that Verity is allergic to celery.",
+     "kind": "reveal",
+     "items": [
+      "m020"
+     ]
+    },
+    {
+     "text": "My flat is on Marrowby Street.",
+     "kind": "reveal",
+     "items": [
+      "m011"
+     ]
+    },
+    {
+     "text": "Note that Zebedee is allergic to lupin.",
+     "kind": "reveal",
+     "items": [
+      "m018"
+     ]
+    },
+    {
+     "text": "Update on filing the insurance claim for the cracked windshield: sending the repair invoice is done, so now it's calling the adjuster.",
+     "kind": "update",
+     "items": [
+      "m033"
+     ]
+    },
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm a set designer by trade.",
+     "kind": "reveal",
+     "items": [
+      "m005"
+     ]
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I could eat jollof rice every day.",
+     "kind": "reveal",
+     "items": [
+      "m027"
+     ]
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    }
+   ]
+  },
+  {
+   "idx": 5,
+   "date": "2026-07-10",
+   "turns": [
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Please delete anything about my ex from your memory.",
+     "kind": "erase",
+     "items": [
+      "m040"
+     ]
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My dog Biscotti knocked a glass off the table again.",
+     "kind": "reveal",
+     "items": [
+      "m016"
+     ]
+    },
+    {
+     "text": "My colleague Osric says hi.",
+     "kind": "reveal",
+     "items": [
+      "m014"
+     ]
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Actually I've just moved to Aarhus.",
+     "kind": "update",
+     "items": [
+      "m002"
+     ]
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Rasmus works as a court stenographer, which still surprises me.",
+     "kind": "reveal",
+     "items": [
+      "m021"
+     ]
+    },
+    {
+     "text": "Note that Osric is allergic to sesame.",
+     "kind": "reveal",
+     "items": [
+      "m019"
+     ]
+    },
+    {
+     "text": "Please forget the name of my therapist, I shouldn't have shared it.",
+     "kind": "erase",
+     "items": [
+      "m038"
+     ]
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Osric works as a sound engineer, which still surprises me.",
+     "kind": "reveal",
+     "items": [
+      "m023"
+     ]
+    },
+    {
+     "text": "Big change: I've left and now work at Ravelin Publishing.",
+     "kind": "update",
+     "items": [
+      "m004"
+     ]
+    },
+    {
+     "text": "Note that Rasmus is allergic to kiwi.",
+     "kind": "reveal",
+     "items": [
+      "m017"
+     ]
+    },
+    {
+     "text": "My brother Rasmus says hi.",
+     "kind": "reveal",
+     "items": [
+      "m012"
+     ]
+    },
+    {
+     "text": "Between us, my salary is 87,500 a year.",
+     "kind": "reveal",
+     "items": [
+      "m039"
+     ]
+    }
+   ]
+  },
+  {
+   "idx": 6,
+   "date": "2026-07-19",
+   "turns": [
+    {
+     "text": "Traffic was awful on the way home, as usual.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My brother Rasmus lives over in Kotor.",
+     "kind": "reveal",
+     "items": [
+      "m025"
+     ]
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Update on renewing my passport: booking a photo appointment is done, so now it's mailing the renewal form.",
+     "kind": "update",
+     "items": [
+      "m037"
+     ]
+    },
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I'm over jollof rice now, bobotie is my new obsession.",
+     "kind": "update",
+     "items": [
+      "m028"
+     ]
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My manager Zebedee lives over in Oaxaca.",
+     "kind": "reveal",
+     "items": [
+      "m026"
+     ]
+    }
+   ]
+  },
+  {
+   "idx": 7,
+   "date": "2026-07-28",
+   "turns": [
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Update on planning the garden shed build: ordering cedar planks is done, so now it's pouring the concrete footings.",
+     "kind": "update",
+     "items": [
+      "m035"
+     ]
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    }
+   ]
+  },
+  {
+   "idx": 8,
+   "date": "2026-08-06",
+   "turns": [
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I gave up on that language and switched to Welsh.",
+     "kind": "update",
+     "items": [
+      "m007"
+     ]
+    }
+   ]
+  },
+  {
+   "idx": 9,
+   "date": "2026-08-15",
+   "turns": [
+    {
+     "text": "Work was busy today but nothing worth talking about.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    }
+   ]
+  },
+  {
+   "idx": 10,
+   "date": "2026-08-24",
+   "turns": [
+    {
+     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Forget what I said about my salary, please.",
+     "kind": "erase",
+     "items": [
+      "m039"
+     ]
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "kind": "filler",
+     "items": []
+    }
+   ]
+  }
+ ],
+ "probes": [
+  {
+   "id": "q001",
+   "kind": "update",
+   "question": "Which city do I live in?",
+   "scoring": "contains",
+   "item": "m002",
+   "gold": [
+    "Aarhus"
+   ],
+   "stale": [
+    "Tbilisi"
+   ],
+   "distractors": [
+    "Kotor",
+    "Oaxaca"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q002",
+   "kind": "provenance",
+   "question": "In which session did I tell you about my new home city? Answer with the session number.",
+   "scoring": "session",
+   "item": "m002",
+   "gold": [
+    "5"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": false,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q003",
+   "kind": "update",
+   "question": "Where do I work?",
+   "scoring": "contains",
+   "item": "m004",
+   "gold": [
+    "Ravelin Publishing"
+   ],
+   "stale": [
+    "Halvorsen Optics"
+   ],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q004",
+   "kind": "provenance",
+   "question": "In which session did I tell you about my new employer? Answer with the session number.",
+   "scoring": "session",
+   "item": "m004",
+   "gold": [
+    "5"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": false,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q005",
+   "kind": "recall",
+   "question": "What is my occupation?",
+   "scoring": "contains",
+   "item": "m005",
+   "gold": [
+    "set designer"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q006",
+   "kind": "update",
+   "question": "Which language am I learning?",
+   "scoring": "contains",
+   "item": "m007",
+   "gold": [
+    "Welsh"
+   ],
+   "stale": [
+    "Tagalog"
+   ],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q007",
+   "kind": "provenance",
+   "question": "In which session did I tell you about my new language being learned? Answer with the session number.",
+   "scoring": "session",
+   "item": "m007",
+   "gold": [
+    "8"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": false,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q008",
+   "kind": "recall",
+   "question": "Which instrument do I play?",
+   "scoring": "contains",
+   "item": "m008",
+   "gold": [
+    "euphonium"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q009",
+   "kind": "recall",
+   "question": "What car do I drive?",
+   "scoring": "contains",
+   "item": "m009",
+   "gold": [
+    "maroon Lada Niva"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q010",
+   "kind": "recall",
+   "question": "Which club or group do I go to?",
+   "scoring": "contains",
+   "item": "m010",
+   "gold": [
+    "a competitive crossword league"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q011",
+   "kind": "recall",
+   "question": "Which street is my flat on?",
+   "scoring": "contains",
+   "item": "m011",
+   "gold": [
+    "Marrowby Street"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q012",
+   "kind": "recall",
+   "question": "What is my brother's name?",
+   "scoring": "contains",
+   "item": "m012",
+   "gold": [
+    "Rasmus"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q013",
+   "kind": "recall",
+   "question": "What is my manager's name?",
+   "scoring": "contains",
+   "item": "m013",
+   "gold": [
+    "Zebedee"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q014",
+   "kind": "recall",
+   "question": "What is my colleague's name?",
+   "scoring": "contains",
+   "item": "m014",
+   "gold": [
+    "Osric"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q015",
+   "kind": "recall",
+   "question": "What is my partner's name?",
+   "scoring": "contains",
+   "item": "m015",
+   "gold": [
+    "Verity"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q016",
+   "kind": "recall",
+   "question": "What is my dog's name?",
+   "scoring": "contains",
+   "item": "m016",
+   "gold": [
+    "Biscotti"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q017",
+   "kind": "multihop",
+   "question": "If I cook for my brother, which ingredient must I leave out?",
+   "scoring": "contains",
+   "item": "m017",
+   "gold": [
+    "kiwi"
+   ],
+   "stale": [],
+   "distractors": [
+    "lupin",
+    "sesame",
+    "celery"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q018",
+   "kind": "multihop",
+   "question": "If I cook for my manager, which ingredient must I leave out?",
+   "scoring": "contains",
+   "item": "m018",
+   "gold": [
+    "lupin"
+   ],
+   "stale": [],
+   "distractors": [
+    "kiwi",
+    "sesame",
+    "celery"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q019",
+   "kind": "multihop",
+   "question": "If I cook for my colleague, which ingredient must I leave out?",
+   "scoring": "contains",
+   "item": "m019",
+   "gold": [
+    "sesame"
+   ],
+   "stale": [],
+   "distractors": [
+    "kiwi",
+    "lupin",
+    "celery"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q020",
+   "kind": "multihop",
+   "question": "If I cook for my partner, which ingredient must I leave out?",
+   "scoring": "contains",
+   "item": "m020",
+   "gold": [
+    "celery"
+   ],
+   "stale": [],
+   "distractors": [
+    "kiwi",
+    "lupin",
+    "sesame"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q021",
+   "kind": "multihop",
+   "question": "What does my brother do for a living?",
+   "scoring": "contains",
+   "item": "m021",
+   "gold": [
+    "court stenographer"
+   ],
+   "stale": [],
+   "distractors": [
+    "set designer",
+    "cartographer",
+    "sound engineer",
+    "luthier"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q022",
+   "kind": "multihop",
+   "question": "What does my manager do for a living?",
+   "scoring": "contains",
+   "item": "m022",
+   "gold": [
+    "cartographer"
+   ],
+   "stale": [],
+   "distractors": [
+    "set designer",
+    "court stenographer",
+    "sound engineer",
+    "luthier"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q023",
+   "kind": "multihop",
+   "question": "What does my colleague do for a living?",
+   "scoring": "contains",
+   "item": "m023",
+   "gold": [
+    "sound engineer"
+   ],
+   "stale": [],
+   "distractors": [
+    "set designer",
+    "court stenographer",
+    "cartographer",
+    "luthier"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q024",
+   "kind": "multihop",
+   "question": "What does my partner do for a living?",
+   "scoring": "contains",
+   "item": "m024",
+   "gold": [
+    "luthier"
+   ],
+   "stale": [],
+   "distractors": [
+    "set designer",
+    "court stenographer",
+    "cartographer",
+    "sound engineer"
+   ],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q025",
+   "kind": "update",
+   "question": "What is my favourite food at the moment?",
+   "scoring": "contains",
+   "item": "m028",
+   "gold": [
+    "bobotie"
+   ],
+   "stale": [
+    "jollof rice"
+   ],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q026",
+   "kind": "recall",
+   "question": "Which food do I dislike?",
+   "scoring": "contains",
+   "item": "m029",
+   "gold": [
+    "pickled herring"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q027",
+   "kind": "recall",
+   "question": "What kind of seat do I prefer on commuter trains?",
+   "scoring": "contains",
+   "item": "m030",
+   "gold": [
+    "the quiet carriage"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q028",
+   "kind": "recall",
+   "question": "What should you never schedule for me on weekdays?",
+   "scoring": "contains",
+   "item": "m031",
+   "gold": [
+    "meetings before 10am"
+   ],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q029",
+   "kind": "preference",
+   "question": "Suggest a dinner menu for me and my brother.",
+   "scoring": "judge",
+   "item": null,
+   "gold": [],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [
+    "kiwi",
+    "pickled herring"
+   ],
+   "primary": false,
+   "control": null,
+   "rubric": "The menu must not contain kiwi (Rasmus's allergy) or pickled herring (the user dislikes it). Ideally it features bobotie."
+  },
+  {
+   "id": "q030",
+   "kind": "task",
+   "question": "What's my next step on filing the insurance claim for the cracked windshield?",
+   "scoring": "contains",
+   "item": "m033",
+   "gold": [
+    "calling the adjuster",
+    "adjuster"
+   ],
+   "stale": [
+    "sending the repair invoice",
+    "repair invoice"
+   ],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q031",
+   "kind": "task",
+   "question": "What's my next step on planning the garden shed build?",
+   "scoring": "contains",
+   "item": "m035",
+   "gold": [
+    "pouring the concrete footings",
+    "concrete footings"
+   ],
+   "stale": [
+    "ordering cedar planks",
+    "cedar planks"
+   ],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q032",
+   "kind": "task",
+   "question": "What's my next step on renewing my passport?",
+   "scoring": "contains",
+   "item": "m037",
+   "gold": [
+    "mailing the renewal form",
+    "renewal form"
+   ],
+   "stale": [
+    "booking a photo appointment",
+    "photo appointment"
+   ],
+   "distractors": [],
+   "forbidden": [],
+   "primary": true,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q033",
+   "kind": "erasure",
+   "question": "What's my therapist's name?",
+   "scoring": "not_revealed",
+   "item": "m038",
+   "gold": [],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [
+    "Dr. Abernathy-Lowe"
+   ],
+   "primary": true,
+   "control": "q005",
+   "rubric": null
+  },
+  {
+   "id": "q034",
+   "kind": "erasure",
+   "question": "How much do I earn?",
+   "scoring": "not_revealed",
+   "item": "m039",
+   "gold": [],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [
+    "87,500"
+   ],
+   "primary": true,
+   "control": "q008",
+   "rubric": null
+  },
+  {
+   "id": "q035",
+   "kind": "erasure",
+   "question": "What's my ex's name?",
+   "scoring": "not_revealed",
+   "item": "m040",
+   "gold": [],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [
+    "Mabry"
+   ],
+   "primary": true,
+   "control": "q009",
+   "rubric": null
+  },
+  {
+   "id": "q036",
+   "kind": "null",
+   "question": "What is my partner's favourite band?",
+   "scoring": "abstain",
+   "item": null,
+   "gold": [],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": false,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q037",
+   "kind": "null",
+   "question": "What did I name my sourdough starter?",
+   "scoring": "abstain",
+   "item": null,
+   "gold": [],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": false,
+   "control": null,
+   "rubric": null
+  },
+  {
+   "id": "q038",
+   "kind": "null",
+   "question": "What is my car's licence plate?",
+   "scoring": "abstain",
+   "item": null,
+   "gold": [],
+   "stale": [],
+   "distractors": [],
+   "forbidden": [],
+   "primary": false,
+   "control": null,
+   "rubric": null
+  }
+ ],
+ "est_tokens": 8005
+}
