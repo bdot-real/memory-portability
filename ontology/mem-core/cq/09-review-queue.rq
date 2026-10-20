@@ -1,0 +1,8 @@
+# CQ9: Which items need review: low extractor confidence, expired validity, or tasks past due?
+PREFIX mem: <https://w3id.org/ompm/mem#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT DISTINCT ?item WHERE {
+  { ?item mem:confidence ?c FILTER (?c < 0.92) }
+  UNION { ?item mem:validUntil ?u FILTER (?u < "2026-10-01T00:00:00Z"^^xsd:dateTime) }
+  UNION { ?item a mem:TaskState ; mem:dueBy ?d FILTER (?d < "2026-12-01T00:00:00Z"^^xsd:dateTime) }
+}

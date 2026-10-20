@@ -1,0 +1,9 @@
+# CQ7: Who is the user related to, and how? (basis for multi-hop probes)
+PREFIX mem: <https://w3id.org/ompm/mem#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?name ?relation WHERE {
+  ?r a mem:Relationship ; mem:about ?user ; mem:relatedTo ?other ; mem:relationType ?type .
+  ?other foaf:name ?name .
+  ?type skos:prefLabel ?relation .
+}

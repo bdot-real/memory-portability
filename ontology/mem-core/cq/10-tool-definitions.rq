@@ -1,0 +1,3 @@
+# CQ10: Which tools has the user's agent been given, in engine-neutral form?
+PREFIX mem: <https://w3id.org/ompm/mem#>
+SELECT ?tool ?statement WHERE { ?tool a mem:ToolDefinition ; mem:statement ?statement }

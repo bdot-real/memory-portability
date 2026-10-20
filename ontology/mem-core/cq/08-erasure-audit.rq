@@ -1,0 +1,7 @@
+# CQ8: Which items were erased, and when? (verifiable erasure, GDPR Art. 17)
+PREFIX mem: <https://w3id.org/ompm/mem#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+SELECT ?item ?at WHERE {
+  ?t a mem:Tombstone ; mem:erasedItem ?item ; prov:wasInvalidatedBy ?e .
+  ?e a mem:Erasure ; prov:atTime ?at .
+}

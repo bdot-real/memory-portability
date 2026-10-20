@@ -1,0 +1,11 @@
+# CQ6: Which portable memory items may be sent to any engine, and which engine session produced them?
+PREFIX mem: <https://w3id.org/ompm/mem#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?item ?statement ?engine WHERE {
+  ?item a ?cls ; mem:statement ?statement ; mem:portability mem:Portable ;
+        mem:consentScope <https://example.org/p1/AnyEngine> .
+  ?cls rdfs:subClassOf* mem:MemoryItem .
+  OPTIONAL { ?item prov:wasDerivedFrom ?u . ?u a mem:Utterance ; mem:inSession ?s .
+             ?s a mem:Session ; prov:wasAssociatedWith ?engine . ?engine a mem:Engine }
+}
