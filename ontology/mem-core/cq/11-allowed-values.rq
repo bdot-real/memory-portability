@@ -1,0 +1,11 @@
+# CQ11: Which values may each concept-valued property take? (closed enumerations; the engine
+# adapter uses this to constrain extraction)
+PREFIX mem: <https://w3id.org/ompm/mem#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?property ?value WHERE {
+  VALUES ?class { mem:Polarity mem:RelationType mem:TaskStatus }
+  ?property rdfs:range ?class .
+  ?class owl:equivalentClass/owl:oneOf/rdf:rest*/rdf:first ?value .
+}
