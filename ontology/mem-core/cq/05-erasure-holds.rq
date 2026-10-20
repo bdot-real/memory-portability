@@ -1,0 +1,6 @@
+# CQ5: Erasure check. Must return no rows: no erased item may still carry content.
+PREFIX mem: <https://w3id.org/ompm/mem#>
+SELECT ?item ?p ?o WHERE {
+  ?t a mem:Tombstone ; mem:erasedItem ?item .
+  ?item ?p ?o .
+}

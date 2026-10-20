@@ -1,0 +1,7 @@
+# CQ1: What are the user's current preferences (not superseded, not erased)?
+PREFIX mem: <https://w3id.org/ompm/mem#>
+SELECT ?item ?target ?polarity ?context WHERE {
+  ?item a mem:Preference ; mem:about ?user ; mem:target ?target ; mem:polarity ?polarity .
+  OPTIONAL { ?item mem:context ?context }
+  FILTER NOT EXISTS { ?newer mem:supersedes ?item }
+}

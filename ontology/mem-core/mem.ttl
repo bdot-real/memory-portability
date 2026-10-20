@@ -1,0 +1,237 @@
+@prefix mem:     <https://w3id.org/ompm/mem#> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix time:    <http://www.w3.org/2006/time#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+# ---------------------------------------------------------------------------
+# @mem/core: a small extension of PROV-O, FOAF, DCMI Terms and OWL-Time for
+# engine-independent user and agent memory. Draft 0.1.0. The namespace is a
+# placeholder until the w3id.org redirect (or registry IRI) is settled.
+# ---------------------------------------------------------------------------
+
+<https://w3id.org/ompm/mem> a owl:Ontology ;
+    dcterms:title "Memory Core (@mem/core)"@en ;
+    dcterms:description "Portable user and agent memory: facts, preferences, relationships and task state, with provenance, supersession, consent and erasure."@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:versionInfo "0.1.0" ;
+    owl:imports <http://www.w3.org/ns/prov-o> .
+
+# --- Memory items ----------------------------------------------------------
+
+mem:MemoryItem a owl:Class ;
+    rdfs:subClassOf prov:Entity ;
+    rdfs:label "Memory item"@en ;
+    skos:definition "A unit of remembered information about a user or their world that an engine may use in later sessions."@en .
+
+mem:Fact a owl:Class ;
+    rdfs:subClassOf mem:MemoryItem ;
+    rdfs:label "Fact"@en ;
+    skos:definition "A memory item asserting an attribute value of a subject, e.g. a user's home city."@en .
+
+mem:Preference a owl:Class ;
+    rdfs:subClassOf mem:MemoryItem ;
+    rdfs:label "Preference"@en ;
+    skos:definition "A memory item recording a subject's liking or aversion toward a target, optionally within a context."@en .
+
+mem:Relationship a owl:Class ;
+    rdfs:subClassOf mem:MemoryItem ;
+    rdfs:label "Relationship"@en ;
+    skos:definition "A memory item linking the subject to another person by a typed relation."@en .
+
+mem:TaskState a owl:Class ;
+    rdfs:subClassOf mem:MemoryItem ;
+    rdfs:label "Task state"@en ;
+    skos:definition "A memory item recording an ongoing task, its status and next step."@en .
+
+mem:ToolDefinition a owl:Class ;
+    rdfs:subClassOf mem:MemoryItem ;
+    rdfs:label "Tool definition"@en ;
+    skos:definition "A memory item describing a tool the agent was given, independent of any engine's calling convention."@en .
+
+mem:Tombstone a owl:Class ;
+    rdfs:subClassOf prov:Entity ;
+    rdfs:label "Tombstone"@en ;
+    skos:definition "A record that a memory item was erased. It keeps the item's IRI and erasure activity but none of its content."@en .
+
+# --- Common item properties --------------------------------------------------
+
+mem:about a owl:ObjectProperty ;
+    rdfs:domain mem:MemoryItem ;
+    rdfs:range foaf:Agent ;
+    rdfs:label "about"@en ;
+    skos:definition "The person or agent the memory item describes."@en .
+
+mem:statement a owl:DatatypeProperty ;
+    rdfs:domain mem:MemoryItem ;
+    rdfs:range xsd:string ;
+    rdfs:label "statement"@en ;
+    skos:definition "A self-contained natural-language rendering of the item, used when an engine reads memory as text."@en .
+
+mem:supersedes a owl:ObjectProperty ;
+    rdfs:subPropertyOf prov:wasRevisionOf ;
+    rdfs:domain mem:MemoryItem ;
+    rdfs:range mem:MemoryItem ;
+    rdfs:label "supersedes"@en ;
+    skos:definition "The newer item replaces the older one; the older item is no longer current."@en .
+
+mem:validFrom a owl:DatatypeProperty ;
+    rdfs:domain mem:MemoryItem ;
+    rdfs:range xsd:dateTime ;
+    rdfs:label "valid from"@en .
+
+mem:validUntil a owl:DatatypeProperty ;
+    rdfs:domain mem:MemoryItem ;
+    rdfs:range xsd:dateTime ;
+    rdfs:label "valid until"@en .
+
+mem:confidence a owl:DatatypeProperty ;
+    rdfs:domain mem:MemoryItem ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "confidence"@en ;
+    skos:definition "Extractor confidence in [0,1] that the item is stated, not inferred."@en .
+
+mem:portability a owl:ObjectProperty ;
+    rdfs:range skos:Concept ;
+    rdfs:label "portability class"@en ;
+    skos:definition "Where the item sits in the portability taxonomy (mem:PortabilityScheme)."@en .
+
+mem:consentScope a owl:ObjectProperty ;
+    rdfs:domain mem:MemoryItem ;
+    rdfs:range skos:Concept ;
+    rdfs:label "consent scope"@en ;
+    skos:definition "Which engines or purposes the subject has allowed this item to be shared with."@en .
+
+# --- Fact ----------------------------------------------------------------------
+
+mem:attribute a owl:DatatypeProperty ;
+    rdfs:domain mem:Fact ;
+    rdfs:range xsd:string ;
+    rdfs:label "attribute"@en ;
+    skos:definition "The attribute being asserted, e.g. 'home city', 'employer'."@en .
+
+mem:value a owl:DatatypeProperty ;
+    rdfs:domain mem:Fact ;
+    rdfs:label "value"@en .
+
+# --- Preference ------------------------------------------------------------------
+
+mem:target a owl:DatatypeProperty ;
+    rdfs:domain mem:Preference ;
+    rdfs:range xsd:string ;
+    rdfs:label "target"@en ;
+    skos:definition "What the preference is about, e.g. 'window seats', 'cilantro'."@en .
+
+mem:polarity a owl:ObjectProperty ;
+    rdfs:domain mem:Preference ;
+    rdfs:range skos:Concept ;
+    rdfs:label "polarity"@en .
+
+mem:context a owl:DatatypeProperty ;
+    rdfs:domain mem:Preference ;
+    rdfs:range xsd:string ;
+    rdfs:label "context"@en ;
+    skos:definition "When the preference applies, e.g. 'on long-haul flights'."@en .
+
+# --- Relationship -------------------------------------------------------------------
+
+mem:relatedTo a owl:ObjectProperty ;
+    rdfs:domain mem:Relationship ;
+    rdfs:label "related to"@en ;
+    skos:definition "The other party: usually a foaf:Person, but left open so pets and organisations fit."@en .
+
+mem:relationType a owl:ObjectProperty ;
+    rdfs:domain mem:Relationship ;
+    rdfs:range skos:Concept ;
+    rdfs:label "relation type"@en .
+
+# --- Task state ---------------------------------------------------------------------
+
+mem:taskStatus a owl:ObjectProperty ;
+    rdfs:domain mem:TaskState ;
+    rdfs:range skos:Concept ;
+    rdfs:label "task status"@en .
+
+mem:nextStep a owl:DatatypeProperty ;
+    rdfs:domain mem:TaskState ;
+    rdfs:range xsd:string ;
+    rdfs:label "next step"@en .
+
+mem:dueBy a owl:DatatypeProperty ;
+    rdfs:domain mem:TaskState ;
+    rdfs:range xsd:dateTime ;
+    rdfs:label "due by"@en .
+
+# --- Provenance: sessions, utterances, engines, erasure ------------------------------
+
+mem:Session a owl:Class ;
+    rdfs:subClassOf prov:Activity ;
+    rdfs:label "Session"@en ;
+    skos:definition "One conversation between a user and an engine."@en .
+
+mem:Utterance a owl:Class ;
+    rdfs:subClassOf prov:Entity ;
+    rdfs:label "Utterance"@en ;
+    skos:definition "A single turn in a session; memory items are derived from utterances (prov:wasDerivedFrom)."@en .
+
+mem:inSession a owl:ObjectProperty ;
+    rdfs:subPropertyOf prov:wasGeneratedBy ;
+    rdfs:domain mem:Utterance ;
+    rdfs:range mem:Session ;
+    rdfs:label "in session"@en .
+
+mem:Engine a owl:Class ;
+    rdfs:subClassOf prov:SoftwareAgent ;
+    rdfs:label "Engine"@en ;
+    skos:definition "An LLM engine at a pinned model version that reads or writes memory."@en .
+
+mem:Erasure a owl:Class ;
+    rdfs:subClassOf prov:Invalidation ;
+    rdfs:label "Erasure"@en ;
+    skos:definition "The subject-requested removal of a memory item, leaving a tombstone (GDPR Art. 17)."@en .
+
+mem:erasedItem a owl:ObjectProperty ;
+    rdfs:domain mem:Tombstone ;
+    rdfs:label "erased item"@en ;
+    skos:definition "IRI of the erased memory item. The tombstone keeps only this IRI and the erasure time."@en .
+
+# --- Concept schemes -------------------------------------------------------------------
+
+mem:PortabilityScheme a skos:ConceptScheme ;
+    skos:prefLabel "Memory portability classes"@en .
+
+mem:Portable a skos:Concept ; skos:inScheme mem:PortabilityScheme ;
+    skos:prefLabel "portable"@en ;
+    skos:definition "Survives transfer as symbolic data: facts, preferences, task state, tool definitions, provenance."@en .
+mem:PortableWithRegeneration a skos:Concept ; skos:inScheme mem:PortabilityScheme ;
+    skos:prefLabel "portable with regeneration"@en ;
+    skos:definition "Must be recomputed on the target engine from portable sources: embeddings, RAG indexes."@en .
+mem:NonPortable a skos:Concept ; skos:inScheme mem:PortabilityScheme ;
+    skos:prefLabel "non-portable"@en ;
+    skos:definition "Model-internal: weights, fine-tunes, implicit behaviour."@en .
+
+mem:PolarityScheme a skos:ConceptScheme ; skos:prefLabel "Preference polarity"@en .
+mem:Likes    a skos:Concept ; skos:inScheme mem:PolarityScheme ; skos:prefLabel "likes"@en .
+mem:Dislikes a skos:Concept ; skos:inScheme mem:PolarityScheme ; skos:prefLabel "dislikes"@en .
+mem:Avoids   a skos:Concept ; skos:inScheme mem:PolarityScheme ; skos:prefLabel "must avoid"@en ;
+    skos:definition "A hard constraint, e.g. an allergy or dietary rule."@en .
+
+mem:TaskStatusScheme a skos:ConceptScheme ; skos:prefLabel "Task status"@en .
+mem:Open       a skos:Concept ; skos:inScheme mem:TaskStatusScheme ; skos:prefLabel "open"@en .
+mem:InProgress a skos:Concept ; skos:inScheme mem:TaskStatusScheme ; skos:prefLabel "in progress"@en .
+mem:Blocked    a skos:Concept ; skos:inScheme mem:TaskStatusScheme ; skos:prefLabel "blocked"@en .
+mem:Done       a skos:Concept ; skos:inScheme mem:TaskStatusScheme ; skos:prefLabel "done"@en .
+
+mem:RelationScheme a skos:ConceptScheme ; skos:prefLabel "Relation types"@en .
+mem:Partner   a skos:Concept ; skos:inScheme mem:RelationScheme ; skos:prefLabel "partner"@en .
+mem:Child     a skos:Concept ; skos:inScheme mem:RelationScheme ; skos:prefLabel "child"@en .
+mem:Parent    a skos:Concept ; skos:inScheme mem:RelationScheme ; skos:prefLabel "parent"@en .
+mem:Sibling   a skos:Concept ; skos:inScheme mem:RelationScheme ; skos:prefLabel "sibling"@en .
+mem:Friend    a skos:Concept ; skos:inScheme mem:RelationScheme ; skos:prefLabel "friend"@en .
+mem:Colleague a skos:Concept ; skos:inScheme mem:RelationScheme ; skos:prefLabel "colleague"@en .
+mem:Manager   a skos:Concept ; skos:inScheme mem:RelationScheme ; skos:prefLabel "manager"@en .
+mem:Pet       a skos:Concept ; skos:inScheme mem:RelationScheme ; skos:prefLabel "pet"@en .

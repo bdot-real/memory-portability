@@ -1,0 +1,8 @@
+# CQ3: Where did the user say this? (item -> utterance -> session -> engine)
+PREFIX mem: <https://w3id.org/ompm/mem#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+SELECT ?item ?utterance ?session ?engine WHERE {
+  ?item prov:wasDerivedFrom ?utterance .
+  ?utterance mem:inSession ?session .
+  OPTIONAL { ?session prov:wasAssociatedWith ?engine }
+}

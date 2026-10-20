@@ -1,0 +1,8 @@
+# CQ4: Which tasks are still open or blocked, and what is the next step?
+PREFIX mem: <https://w3id.org/ompm/mem#>
+SELECT ?task ?statement ?status ?next WHERE {
+  ?task a mem:TaskState ; mem:statement ?statement ; mem:taskStatus ?status .
+  OPTIONAL { ?task mem:nextStep ?next }
+  FILTER (?status IN (mem:Open, mem:InProgress, mem:Blocked))
+  FILTER NOT EXISTS { ?newer mem:supersedes ?task }
+}

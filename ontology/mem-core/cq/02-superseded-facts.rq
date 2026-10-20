@@ -1,0 +1,6 @@
+# CQ2: Which facts were updated, and what replaced them?
+PREFIX mem: <https://w3id.org/ompm/mem#>
+SELECT ?attribute ?old ?new WHERE {
+  ?n a mem:Fact ; mem:supersedes ?o ; mem:attribute ?attribute ; mem:value ?new .
+  ?o mem:value ?old .
+}

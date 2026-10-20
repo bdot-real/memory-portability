@@ -1,0 +1,23 @@
+@prefix mem:  <https://w3id.org/ompm/mem#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex:   <https://example.org/p1/> .
+
+ex:user a foaf:Person ; foaf:name "Dana" .
+ex:ingrid a foaf:Person ; foaf:name "Ingrid" .
+ex:s1 a mem:Session ; prov:wasAssociatedWith ex:llama .
+ex:llama a mem:Engine ; foaf:name "llama3.1:8b" .
+ex:u12 a mem:Utterance ; mem:inSession ex:s1 .
+
+ex:m1 a mem:Fact ; mem:about ex:user ; mem:attribute "home city" ; mem:value "Montreal" ;
+  mem:statement "Dana lives in Montreal." ; prov:wasDerivedFrom ex:u12 .
+ex:m2 a mem:Fact ; mem:about ex:user ; mem:attribute "home city" ; mem:value "Quebec City" ;
+  mem:statement "Dana moved to Quebec City." ; mem:supersedes ex:m1 .
+ex:m3 a mem:Preference ; mem:about ex:user ; mem:target "walnuts" ; mem:polarity mem:Avoids ;
+  mem:statement "Dana's household must avoid walnuts (Ingrid's allergy)." .
+ex:m4 a mem:Relationship ; mem:about ex:user ; mem:relatedTo ex:ingrid ; mem:relationType mem:Sibling ;
+  mem:statement "Ingrid is Dana's sister." .
+ex:m5 a mem:TaskState ; mem:about ex:user ; mem:taskStatus mem:Blocked ;
+  mem:statement "Renewing Dana's passport." ; mem:nextStep "Get new photos taken." .
+ex:t1 a mem:Tombstone ; mem:erasedItem ex:m6 .
