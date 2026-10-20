@@ -35,7 +35,9 @@ def main() -> None:
     envelope = extraction_envelope(package)
     prompt = (
         "You maintain a memory store about the user (Dana). From the conversation excerpt, "
-        "extract every new or changed memory item. Write a self-contained statement for each. "
+        "extract every new or changed memory item. Write each statement in the third person, "
+        "naming people rather than using pronouns (use they/them if a pronoun is unavoidable), "
+        "so it makes sense on its own. Facts about another person are about that person. "
         "If an item replaces an existing one, list the old id in supersedes.\n\n"
         f"Fields:\n{field_guide(package)}\n\n{KNOWN}\n\nExcerpt:\n{SNIPPET}\n\nReturn JSON only."
     )
