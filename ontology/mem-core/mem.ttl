@@ -111,12 +111,14 @@ mem:supersedes a owl:ObjectProperty ;
 mem:validFrom a owl:DatatypeProperty, owl:FunctionalProperty ;
     rdfs:domain mem:MemoryItem ;
     rdfs:range xsd:dateTime ;
-    rdfs:label "valid from"@en .
+    rdfs:label "valid from"@en ;
+    skos:definition "When the item became true, or was first stated."@en .
 
 mem:validUntil a owl:DatatypeProperty, owl:FunctionalProperty ;
     rdfs:domain mem:MemoryItem ;
     rdfs:range xsd:dateTime ;
-    rdfs:label "valid until"@en .
+    rdfs:label "valid until"@en ;
+    skos:definition "When the item stopped being true."@en .
 
 mem:confidence a owl:DatatypeProperty, owl:FunctionalProperty ;
     rdfs:domain mem:MemoryItem ;
@@ -125,6 +127,7 @@ mem:confidence a owl:DatatypeProperty, owl:FunctionalProperty ;
     skos:definition "Extractor confidence in [0,1] that the item is stated, not inferred."@en .
 
 mem:portability a owl:ObjectProperty ;
+    rdfs:domain mem:MemoryItem ;
     rdfs:range skos:Concept ;
     rdfs:label "portability class"@en ;
     skos:definition "Where the item sits in the portability taxonomy (mem:PortabilityScheme)."@en .
@@ -145,7 +148,8 @@ mem:attribute a owl:DatatypeProperty, owl:FunctionalProperty ;
 
 mem:value a owl:DatatypeProperty, owl:FunctionalProperty ;
     rdfs:domain mem:Fact ;
-    rdfs:label "value"@en .
+    rdfs:label "value"@en ;
+    skos:definition "The value of the attribute, as the user stated it, e.g. 'Quebec City'."@en .
 
 # --- Preference ------------------------------------------------------------------
 
@@ -158,7 +162,8 @@ mem:target a owl:DatatypeProperty, owl:FunctionalProperty ;
 mem:polarity a owl:ObjectProperty, owl:FunctionalProperty ;
     rdfs:domain mem:Preference ;
     rdfs:range skos:Concept ;
-    rdfs:label "polarity"@en .
+    rdfs:label "polarity"@en ;
+    skos:definition "Whether the subject likes the target, dislikes it, or must avoid it (a hard constraint such as an allergy)."@en .
 
 mem:context a owl:DatatypeProperty, owl:FunctionalProperty ;
     rdfs:domain mem:Preference ;
@@ -176,14 +181,16 @@ mem:relatedTo a owl:ObjectProperty, owl:FunctionalProperty ;
 mem:relationType a owl:ObjectProperty, owl:FunctionalProperty ;
     rdfs:domain mem:Relationship ;
     rdfs:range skos:Concept ;
-    rdfs:label "relation type"@en .
+    rdfs:label "relation type"@en ;
+    skos:definition "How the other party relates to the subject, e.g. sibling, colleague, pet."@en .
 
 # --- Task state ---------------------------------------------------------------------
 
 mem:taskStatus a owl:ObjectProperty, owl:FunctionalProperty ;
     rdfs:domain mem:TaskState ;
     rdfs:range skos:Concept ;
-    rdfs:label "task status"@en .
+    rdfs:label "task status"@en ;
+    skos:definition "Where the task stands: open, in progress, blocked or done."@en .
 
 mem:task a owl:DatatypeProperty, owl:FunctionalProperty ;
     rdfs:domain mem:TaskState ;
@@ -194,12 +201,14 @@ mem:task a owl:DatatypeProperty, owl:FunctionalProperty ;
 mem:nextStep a owl:DatatypeProperty, owl:FunctionalProperty ;
     rdfs:domain mem:TaskState ;
     rdfs:range xsd:string ;
-    rdfs:label "next step"@en .
+    rdfs:label "next step"@en ;
+    skos:definition "The next concrete action the subject plans to take on the task."@en .
 
 mem:dueBy a owl:DatatypeProperty, owl:FunctionalProperty ;
     rdfs:domain mem:TaskState ;
     rdfs:range xsd:dateTime ;
-    rdfs:label "due by"@en .
+    rdfs:label "due by"@en ;
+    skos:definition "The deadline for the task, if one was given."@en .
 
 # --- Provenance: sessions, utterances, engines, erasure ------------------------------
 
@@ -217,7 +226,8 @@ mem:inSession a owl:ObjectProperty, owl:FunctionalProperty ;
     rdfs:subPropertyOf prov:wasGeneratedBy ;
     rdfs:domain mem:Utterance ;
     rdfs:range mem:Session ;
-    rdfs:label "in session"@en .
+    rdfs:label "in session"@en ;
+    skos:definition "The session in which the utterance was made."@en .
 
 mem:Engine a owl:Class ;
     rdfs:subClassOf prov:SoftwareAgent ;
