@@ -26,8 +26,7 @@ def replay(p) -> MemoryStore:
                 if t.kind == "erase":
                     st.erase(base(p) + iid, s.date)
                 else:
-                    # Validation against the registry schema is enabled once 0.3.0 is pinned.
-                    st.add_item(gold_canonical(it, p), it.cls, s.idx, s.date, validate=False)
+                    st.add_item(gold_canonical(it, p), it.cls, s.idx, s.date)
     return st
 
 

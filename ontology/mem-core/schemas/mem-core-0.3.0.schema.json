@@ -1,0 +1,620 @@
+{
+  "$defs": {
+    "Engine": {
+      "additionalProperties": false,
+      "description": "An LLM engine at a pinned model version that reads or writes memory.",
+      "properties": {
+        "@id": {
+          "description": "IRI of this instance",
+          "format": "uri",
+          "type": "string"
+        }
+      },
+      "required": [
+        "@id"
+      ],
+      "title": "Engine",
+      "type": "object",
+      "x-iri": "https://w3id.org/ompm/mem#Engine"
+    },
+    "Erasure": {
+      "additionalProperties": false,
+      "description": "The subject-requested removal of a memory item, leaving a tombstone (GDPR Art. 17).",
+      "properties": {
+        "@id": {
+          "description": "IRI of this instance",
+          "format": "uri",
+          "type": "string"
+        }
+      },
+      "required": [
+        "@id"
+      ],
+      "title": "Erasure",
+      "type": "object",
+      "x-iri": "https://w3id.org/ompm/mem#Erasure"
+    },
+    "Fact": {
+      "additionalProperties": false,
+      "description": "A memory item asserting an attribute value of a subject, e.g. a user's home city.",
+      "properties": {
+        "@id": {
+          "description": "IRI of this instance",
+          "format": "uri",
+          "type": "string"
+        },
+        "about": {
+          "description": "about: The person or agent the memory item describes.",
+          "format": "uri",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#about"
+        },
+        "attribute": {
+          "description": "attribute: The attribute being asserted, e.g. 'home city', 'employer'.",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#attribute"
+        },
+        "confidence": {
+          "description": "confidence: Extractor confidence in [0,1] that the item is stated, not inferred.",
+          "type": "number",
+          "x-iri": "https://w3id.org/ompm/mem#confidence"
+        },
+        "consentScope": {
+          "description": "consent scope: Which engines or purposes the subject has allowed this item to be shared with.",
+          "items": {
+            "format": "uri",
+            "type": "string"
+          },
+          "type": "array",
+          "x-iri": "https://w3id.org/ompm/mem#consentScope"
+        },
+        "portability": {
+          "description": "portability class: Where the item sits in the portability taxonomy (mem:PortabilityScheme).",
+          "items": {
+            "format": "uri",
+            "type": "string"
+          },
+          "type": "array",
+          "x-iri": "https://w3id.org/ompm/mem#portability"
+        },
+        "statement": {
+          "description": "statement: A self-contained natural-language rendering of the item, used when an engine reads memory as text.",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#statement"
+        },
+        "supersedes": {
+          "description": "supersedes: The newer item replaces the older one; the older item is no longer current.",
+          "items": {
+            "description": "IRI of a MemoryItem",
+            "format": "uri",
+            "type": "string"
+          },
+          "type": "array",
+          "x-iri": "https://w3id.org/ompm/mem#supersedes"
+        },
+        "validFrom": {
+          "description": "valid from: When the item became true, or was first stated.",
+          "format": "date-time",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#validFrom"
+        },
+        "validUntil": {
+          "description": "valid until: When the item stopped being true.",
+          "format": "date-time",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#validUntil"
+        },
+        "value": {
+          "description": "value: The value of the attribute, as the user stated it, e.g. 'Quebec City'.",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#value"
+        }
+      },
+      "required": [
+        "@id",
+        "about",
+        "attribute",
+        "statement",
+        "value"
+      ],
+      "title": "Fact",
+      "type": "object",
+      "x-iri": "https://w3id.org/ompm/mem#Fact"
+    },
+    "MemoryItem": {
+      "additionalProperties": false,
+      "description": "A unit of remembered information about a user or their world that an engine may use in later sessions.",
+      "properties": {
+        "@id": {
+          "description": "IRI of this instance",
+          "format": "uri",
+          "type": "string"
+        },
+        "about": {
+          "description": "about: The person or agent the memory item describes.",
+          "format": "uri",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#about"
+        },
+        "confidence": {
+          "description": "confidence: Extractor confidence in [0,1] that the item is stated, not inferred.",
+          "type": "number",
+          "x-iri": "https://w3id.org/ompm/mem#confidence"
+        },
+        "consentScope": {
+          "description": "consent scope: Which engines or purposes the subject has allowed this item to be shared with.",
+          "items": {
+            "format": "uri",
+            "type": "string"
+          },
+          "type": "array",
+          "x-iri": "https://w3id.org/ompm/mem#consentScope"
+        },
+        "portability": {
+          "description": "portability class: Where the item sits in the portability taxonomy (mem:PortabilityScheme).",
+          "items": {
+            "format": "uri",
+            "type": "string"
+          },
+          "type": "array",
+          "x-iri": "https://w3id.org/ompm/mem#portability"
+        },
+        "statement": {
+          "description": "statement: A self-contained natural-language rendering of the item, used when an engine reads memory as text.",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#statement"
+        },
+        "supersedes": {
+          "description": "supersedes: The newer item replaces the older one; the older item is no longer current.",
+          "items": {
+            "description": "IRI of a MemoryItem",
+            "format": "uri",
+            "type": "string"
+          },
+          "type": "array",
+          "x-iri": "https://w3id.org/ompm/mem#supersedes"
+        },
+        "validFrom": {
+          "description": "valid from: When the item became true, or was first stated.",
+          "format": "date-time",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#validFrom"
+        },
+        "validUntil": {
+          "description": "valid until: When the item stopped being true.",
+          "format": "date-time",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#validUntil"
+        }
+      },
+      "required": [
+        "@id"
+      ],
+      "title": "Memory item",
+      "type": "object",
+      "x-iri": "https://w3id.org/ompm/mem#MemoryItem"
+    },
+    "Preference": {
+      "additionalProperties": false,
+      "description": "A memory item recording a subject's liking or aversion toward a target, optionally within a context.",
+      "properties": {
+        "@id": {
+          "description": "IRI of this instance",
+          "format": "uri",
+          "type": "string"
+        },
+        "about": {
+          "description": "about: The person or agent the memory item describes.",
+          "format": "uri",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#about"
+        },
+        "confidence": {
+          "description": "confidence: Extractor confidence in [0,1] that the item is stated, not inferred.",
+          "type": "number",
+          "x-iri": "https://w3id.org/ompm/mem#confidence"
+        },
+        "consentScope": {
+          "description": "consent scope: Which engines or purposes the subject has allowed this item to be shared with.",
+          "items": {
+            "format": "uri",
+            "type": "string"
+          },
+          "type": "array",
+          "x-iri": "https://w3id.org/ompm/mem#consentScope"
+        },
+        "context": {
+          "description": "context: When the preference applies, e.g. 'on long-haul flights'.",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#context"
+        },
+        "polarity": {
+          "description": "polarity: Whether the subject likes the target, dislikes it, or must avoid it (a hard constraint such as an allergy).",
+          "format": "uri",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#polarity"
+        },
+        "portability": {
+          "description": "portability class: Where the item sits in the portability taxonomy (mem:PortabilityScheme).",
+          "items": {
+            "format": "uri",
+            "type": "string"
+          },
+          "type": "array",
+          "x-iri": "https://w3id.org/ompm/mem#portability"
+        },
+        "statement": {
+          "description": "statement: A self-contained natural-language rendering of the item, used when an engine reads memory as text.",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#statement"
+        },
+        "supersedes": {
+          "description": "supersedes: The newer item replaces the older one; the older item is no longer current.",
+          "items": {
+            "description": "IRI of a MemoryItem",
+            "format": "uri",
+            "type": "string"
+          },
+          "type": "array",
+          "x-iri": "https://w3id.org/ompm/mem#supersedes"
+        },
+        "target": {
+          "description": "target: What the preference is about, e.g. 'window seats', 'cilantro'.",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#target"
+        },
+        "validFrom": {
+          "description": "valid from: When the item became true, or was first stated.",
+          "format": "date-time",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#validFrom"
+        },
+        "validUntil": {
+          "description": "valid until: When the item stopped being true.",
+          "format": "date-time",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#validUntil"
+        }
+      },
+      "required": [
+        "@id",
+        "about",
+        "polarity",
+        "statement",
+        "target"
+      ],
+      "title": "Preference",
+      "type": "object",
+      "x-iri": "https://w3id.org/ompm/mem#Preference"
+    },
+    "Relationship": {
+      "additionalProperties": false,
+      "description": "A memory item linking the subject to another person by a typed relation.",
+      "properties": {
+        "@id": {
+          "description": "IRI of this instance",
+          "format": "uri",
+          "type": "string"
+        },
+        "about": {
+          "description": "about: The person or agent the memory item describes.",
+          "format": "uri",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#about"
+        },
+        "confidence": {
+          "description": "confidence: Extractor confidence in [0,1] that the item is stated, not inferred.",
+          "type": "number",
+          "x-iri": "https://w3id.org/ompm/mem#confidence"
+        },
+        "consentScope": {
+          "description": "consent scope: Which engines or purposes the subject has allowed this item to be shared with.",
+          "items": {
+            "format": "uri",
+            "type": "string"
+          },
+          "type": "array",
+          "x-iri": "https://w3id.org/ompm/mem#consentScope"
+        },
+        "portability": {
+          "description": "portability class: Where the item sits in the portability taxonomy (mem:PortabilityScheme).",
+          "items": {
+            "format": "uri",
+            "type": "string"
+          },
+          "type": "array",
+          "x-iri": "https://w3id.org/ompm/mem#portability"
+        },
+        "relatedTo": {
+          "description": "related to: The other party: usually a foaf:Person, but left open so pets and organisations fit.",
+          "format": "uri",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#relatedTo"
+        },
+        "relationType": {
+          "description": "relation type: How the other party relates to the subject, e.g. sibling, colleague, pet.",
+          "format": "uri",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#relationType"
+        },
+        "statement": {
+          "description": "statement: A self-contained natural-language rendering of the item, used when an engine reads memory as text.",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#statement"
+        },
+        "supersedes": {
+          "description": "supersedes: The newer item replaces the older one; the older item is no longer current.",
+          "items": {
+            "description": "IRI of a MemoryItem",
+            "format": "uri",
+            "type": "string"
+          },
+          "type": "array",
+          "x-iri": "https://w3id.org/ompm/mem#supersedes"
+        },
+        "validFrom": {
+          "description": "valid from: When the item became true, or was first stated.",
+          "format": "date-time",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#validFrom"
+        },
+        "validUntil": {
+          "description": "valid until: When the item stopped being true.",
+          "format": "date-time",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#validUntil"
+        }
+      },
+      "required": [
+        "@id",
+        "about",
+        "relatedTo",
+        "relationType",
+        "statement"
+      ],
+      "title": "Relationship",
+      "type": "object",
+      "x-iri": "https://w3id.org/ompm/mem#Relationship"
+    },
+    "Session": {
+      "additionalProperties": false,
+      "description": "One conversation between a user and an engine.",
+      "properties": {
+        "@id": {
+          "description": "IRI of this instance",
+          "format": "uri",
+          "type": "string"
+        }
+      },
+      "required": [
+        "@id"
+      ],
+      "title": "Session",
+      "type": "object",
+      "x-iri": "https://w3id.org/ompm/mem#Session"
+    },
+    "TaskState": {
+      "additionalProperties": false,
+      "description": "A memory item recording an ongoing task, its status and next step.",
+      "properties": {
+        "@id": {
+          "description": "IRI of this instance",
+          "format": "uri",
+          "type": "string"
+        },
+        "about": {
+          "description": "about: The person or agent the memory item describes.",
+          "format": "uri",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#about"
+        },
+        "confidence": {
+          "description": "confidence: Extractor confidence in [0,1] that the item is stated, not inferred.",
+          "type": "number",
+          "x-iri": "https://w3id.org/ompm/mem#confidence"
+        },
+        "consentScope": {
+          "description": "consent scope: Which engines or purposes the subject has allowed this item to be shared with.",
+          "items": {
+            "format": "uri",
+            "type": "string"
+          },
+          "type": "array",
+          "x-iri": "https://w3id.org/ompm/mem#consentScope"
+        },
+        "dueBy": {
+          "description": "due by: The deadline for the task, if one was given.",
+          "format": "date-time",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#dueBy"
+        },
+        "nextStep": {
+          "description": "next step: The next concrete action the subject plans to take on the task.",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#nextStep"
+        },
+        "portability": {
+          "description": "portability class: Where the item sits in the portability taxonomy (mem:PortabilityScheme).",
+          "items": {
+            "format": "uri",
+            "type": "string"
+          },
+          "type": "array",
+          "x-iri": "https://w3id.org/ompm/mem#portability"
+        },
+        "statement": {
+          "description": "statement: A self-contained natural-language rendering of the item, used when an engine reads memory as text.",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#statement"
+        },
+        "supersedes": {
+          "description": "supersedes: The newer item replaces the older one; the older item is no longer current.",
+          "items": {
+            "description": "IRI of a MemoryItem",
+            "format": "uri",
+            "type": "string"
+          },
+          "type": "array",
+          "x-iri": "https://w3id.org/ompm/mem#supersedes"
+        },
+        "task": {
+          "description": "task: The task this state is about, e.g. 'renewing my passport'; successive states of one task share it.",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#task"
+        },
+        "taskStatus": {
+          "description": "task status: Where the task stands: open, in progress, blocked or done.",
+          "format": "uri",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#taskStatus"
+        },
+        "validFrom": {
+          "description": "valid from: When the item became true, or was first stated.",
+          "format": "date-time",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#validFrom"
+        },
+        "validUntil": {
+          "description": "valid until: When the item stopped being true.",
+          "format": "date-time",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#validUntil"
+        }
+      },
+      "required": [
+        "@id",
+        "about",
+        "statement",
+        "task",
+        "taskStatus"
+      ],
+      "title": "Task state",
+      "type": "object",
+      "x-iri": "https://w3id.org/ompm/mem#TaskState"
+    },
+    "Tombstone": {
+      "additionalProperties": false,
+      "description": "A record that a memory item was erased. It keeps the item's IRI and erasure activity but none of its content.",
+      "properties": {
+        "@id": {
+          "description": "IRI of this instance",
+          "format": "uri",
+          "type": "string"
+        },
+        "erasedItem": {
+          "description": "erased item: IRI of the erased memory item. The tombstone keeps only this IRI and the erasure time.",
+          "format": "uri",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#erasedItem"
+        }
+      },
+      "required": [
+        "@id"
+      ],
+      "title": "Tombstone",
+      "type": "object",
+      "x-iri": "https://w3id.org/ompm/mem#Tombstone"
+    },
+    "ToolDefinition": {
+      "additionalProperties": false,
+      "description": "A memory item describing a tool the agent was given, independent of any engine's calling convention.",
+      "properties": {
+        "@id": {
+          "description": "IRI of this instance",
+          "format": "uri",
+          "type": "string"
+        },
+        "about": {
+          "description": "about: The person or agent the memory item describes.",
+          "format": "uri",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#about"
+        },
+        "confidence": {
+          "description": "confidence: Extractor confidence in [0,1] that the item is stated, not inferred.",
+          "type": "number",
+          "x-iri": "https://w3id.org/ompm/mem#confidence"
+        },
+        "consentScope": {
+          "description": "consent scope: Which engines or purposes the subject has allowed this item to be shared with.",
+          "items": {
+            "format": "uri",
+            "type": "string"
+          },
+          "type": "array",
+          "x-iri": "https://w3id.org/ompm/mem#consentScope"
+        },
+        "portability": {
+          "description": "portability class: Where the item sits in the portability taxonomy (mem:PortabilityScheme).",
+          "items": {
+            "format": "uri",
+            "type": "string"
+          },
+          "type": "array",
+          "x-iri": "https://w3id.org/ompm/mem#portability"
+        },
+        "statement": {
+          "description": "statement: A self-contained natural-language rendering of the item, used when an engine reads memory as text.",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#statement"
+        },
+        "supersedes": {
+          "description": "supersedes: The newer item replaces the older one; the older item is no longer current.",
+          "items": {
+            "description": "IRI of a MemoryItem",
+            "format": "uri",
+            "type": "string"
+          },
+          "type": "array",
+          "x-iri": "https://w3id.org/ompm/mem#supersedes"
+        },
+        "validFrom": {
+          "description": "valid from: When the item became true, or was first stated.",
+          "format": "date-time",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#validFrom"
+        },
+        "validUntil": {
+          "description": "valid until: When the item stopped being true.",
+          "format": "date-time",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#validUntil"
+        }
+      },
+      "required": [
+        "@id"
+      ],
+      "title": "Tool definition",
+      "type": "object",
+      "x-iri": "https://w3id.org/ompm/mem#ToolDefinition"
+    },
+    "Utterance": {
+      "additionalProperties": false,
+      "description": "A single turn in a session; memory items are derived from utterances (prov:wasDerivedFrom).",
+      "properties": {
+        "@id": {
+          "description": "IRI of this instance",
+          "format": "uri",
+          "type": "string"
+        },
+        "inSession": {
+          "description": "in session: The session in which the utterance was made. (IRI of a Session)",
+          "format": "uri",
+          "type": "string",
+          "x-iri": "https://w3id.org/ompm/mem#inSession"
+        }
+      },
+      "required": [
+        "@id"
+      ],
+      "title": "Utterance",
+      "type": "object",
+      "x-iri": "https://w3id.org/ompm/mem#Utterance"
+    }
+  },
+  "$id": "ontoreg:@mem/core@0.3.0/schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Generated from the ontology's closed-world constraints. Do not edit.",
+  "title": "@mem/core@0.3.0",
+  "x-onto-semantic-hash": "1dcb0e0eb388b923d8a6b5ef3abb00b5b8344dd98cfbbc0b13a14a207995a657"
+}

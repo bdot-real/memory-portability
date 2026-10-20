@@ -101,17 +101,17 @@ class TestPersona:
 
 
 @pytest.mark.parametrize("p", PERSONAS[:2], ids=lambda p: p.id)
-@pytest.mark.xfail(reason="mem:task arrives in @mem/core 0.3.0; pinned schema is 0.2.0",
-                   strict=True)
-def test_gold_fields_exist_in_registry_schema(p):
-    """One shape everywhere: every gold field is a property of its class in the pinned schema."""
+def test_gold_items_validate_against_registry_schema(p):
+    """One shape everywhere: every gold item is a valid instance of its class in the pinned
+    registry schema, so the gold store, extractor output and store input share one shape."""
+    import jsonschema
+
     from ompm.schema import ITEM_CLASSES, gold_to_envelope, load_package_schema
 
     defs = load_package_schema()["$defs"]
     for field, cls in ITEM_CLASSES.items():
-        allowed = set(defs[cls]["properties"])
         for obj in gold_to_envelope(p)[field]:
-            assert set(obj) <= allowed, (cls, set(obj) - allowed)
+            jsonschema.validate(obj, defs[cls])
 
 
 def test_filler_is_varied():

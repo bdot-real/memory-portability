@@ -25,7 +25,7 @@ import pyoxigraph as ox
 
 ROOT = Path(__file__).resolve().parents[2]
 SCHEMA_DIR = ROOT / "ontology/mem-core/schemas"
-SCHEMA_PATH = SCHEMA_DIR / "mem-core-0.2.0.schema.json"
+SCHEMA_PATH = SCHEMA_DIR / "mem-core-0.3.0.schema.json"
 ONTOLOGY_PATH = ROOT / "ontology/mem-core/mem.ttl"
 MEM = "https://w3id.org/ompm/mem#"
 
