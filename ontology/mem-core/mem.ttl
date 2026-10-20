@@ -10,7 +10,7 @@
 
 # ---------------------------------------------------------------------------
 # @mem/core: a small extension of PROV-O, FOAF, DCMI Terms and OWL-Time for
-# engine-independent user and agent memory. Draft 0.3.0. The namespace is a
+# engine-independent user and agent memory. Draft 0.4.0. The namespace is a
 # placeholder until the w3id.org redirect (or registry IRI) is settled.
 # ---------------------------------------------------------------------------
 
@@ -18,7 +18,7 @@
     dcterms:title "Memory Core (@mem/core)"@en ;
     dcterms:description "Portable user and agent memory: facts, preferences, relationships and task state, with provenance, supersession, consent and erasure."@en ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
-    owl:versionInfo "0.3.0" ;
+    owl:versionInfo "0.4.0" ;
     owl:imports <http://www.w3.org/ns/prov-o> .
 
 # --- Memory items ----------------------------------------------------------
@@ -161,7 +161,7 @@ mem:target a owl:DatatypeProperty, owl:FunctionalProperty ;
 
 mem:polarity a owl:ObjectProperty, owl:FunctionalProperty ;
     rdfs:domain mem:Preference ;
-    rdfs:range skos:Concept ;
+    rdfs:range mem:Polarity ;
     rdfs:label "polarity"@en ;
     skos:definition "Whether the subject likes the target, dislikes it, or must avoid it (a hard constraint such as an allergy)."@en .
 
@@ -180,7 +180,7 @@ mem:relatedTo a owl:ObjectProperty, owl:FunctionalProperty ;
 
 mem:relationType a owl:ObjectProperty, owl:FunctionalProperty ;
     rdfs:domain mem:Relationship ;
-    rdfs:range skos:Concept ;
+    rdfs:range mem:RelationType ;
     rdfs:label "relation type"@en ;
     skos:definition "How the other party relates to the subject, e.g. sibling, colleague, pet."@en .
 
@@ -188,7 +188,7 @@ mem:relationType a owl:ObjectProperty, owl:FunctionalProperty ;
 
 mem:taskStatus a owl:ObjectProperty, owl:FunctionalProperty ;
     rdfs:domain mem:TaskState ;
-    rdfs:range skos:Concept ;
+    rdfs:range mem:TaskStatus ;
     rdfs:label "task status"@en ;
     skos:definition "Where the task stands: open, in progress, blocked or done."@en .
 
@@ -243,6 +243,22 @@ mem:erasedItem a owl:ObjectProperty, owl:FunctionalProperty ;
     rdfs:domain mem:Tombstone ;
     rdfs:label "erased item"@en ;
     skos:definition "IRI of the erased memory item. The tombstone keeps only this IRI and the erasure time."@en .
+
+# --- Enumerations ----------------------------------------------------------------------
+# Each concept-valued property ranges over a closed class of SKOS concepts. owl:oneOf makes the
+# allowed values machine-readable, so generated schemas carry them as enums.
+
+mem:Polarity a owl:Class ;
+    rdfs:label "Polarity"@en ;
+    owl:equivalentClass [ a owl:Class ; owl:oneOf ( mem:Likes mem:Dislikes mem:Avoids ) ] .
+
+mem:RelationType a owl:Class ;
+    rdfs:label "Relation type"@en ;
+    owl:equivalentClass [ a owl:Class ; owl:oneOf ( mem:Partner mem:Child mem:Parent mem:Sibling mem:Friend mem:Colleague mem:Manager mem:Pet ) ] .
+
+mem:TaskStatus a owl:Class ;
+    rdfs:label "Task status"@en ;
+    owl:equivalentClass [ a owl:Class ; owl:oneOf ( mem:Open mem:InProgress mem:Blocked mem:Done ) ] .
 
 # --- Concept schemes -------------------------------------------------------------------
 

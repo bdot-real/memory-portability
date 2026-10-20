@@ -6,8 +6,8 @@ ontology/mem-core/schemas/). The adapter derives a *model view* of each item cla
 - pipeline-owned properties are dropped (@id, confidence, consent, validity, portability):
   the pipeline mints IRIs and records provenance, the model never does;
 - IRI-valued properties that point at people become plain names, resolved by the pipeline;
-- concept-valued properties become enums of SKOS concept local names, read from the ontology
-  (the registry backend does not emit enums yet);
+- concept-valued properties become enums of concept local names, read from the owl:oneOf
+  class each ranges over;
 - annotation keywords that constrained decoders reject (format, pattern, x-iri) are removed.
 
 `to_canonical` maps model output back to the registry shape, which is then validated against
@@ -17,6 +17,7 @@ the unmodified registry schema, so the two cannot drift apart silently.
 from __future__ import annotations
 
 import copy
+import functools
 import json
 from pathlib import Path
 from typing import Any
@@ -45,15 +46,6 @@ PIPELINE_OWNED = {"@id", "confidence", "consentScope", "validFrom", "validUntil"
                   "dueBy"}
 # IRI-valued properties the model fills with a person's name.
 PERSON_VALUED = {"about", "relatedTo"}
-# Concept-valued properties and the SKOS scheme their values come from. The ontology types them
-# only as skos:Concept, so this link lives in the adapter.
-CONCEPT_SCHEMES = {
-    "polarity": "PolarityScheme",
-    "relationType": "RelationScheme",
-    "taskStatus": "TaskStatusScheme",
-}
-
-
 def load_package_schema(path: Path = SCHEMA_PATH) -> dict[str, Any]:
     return json.loads(Path(path).read_text())
 
@@ -71,30 +63,39 @@ def class_schema(name: str, package: dict[str, Any] | None = None) -> dict[str, 
     return strip(copy.deepcopy(package["$defs"][name]))
 
 
-def scheme_members(ontology: Path = ONTOLOGY_PATH) -> dict[str, list[str]]:
-    """Local names of the concepts in each SKOS scheme of @mem/core."""
+@functools.cache
+def concept_enums(ontology: Path = ONTOLOGY_PATH) -> dict[str, list[str]]:
+    """Allowed values (local names) of each concept-valued property, read from the ontology:
+    the property's range is a class defined by owl:oneOf."""
     store = ox.Store()
     store.load(path=str(ontology), format=ox.RdfFormat.TURTLE)
-    q = ("SELECT ?scheme ?c WHERE { ?c <http://www.w3.org/2004/02/skos/core#inScheme> ?scheme }"
-         " ORDER BY ?c")
+    q = """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    SELECT ?p ?m WHERE {
+      ?p rdfs:range ?c .
+      { ?c owl:equivalentClass/owl:oneOf ?list } UNION { ?c owl:oneOf ?list }
+      ?list rdf:rest*/rdf:first ?m .
+    } ORDER BY ?p ?m"""
     out: dict[str, list[str]] = {}
-    for scheme, c in store.query(q):
-        out.setdefault(scheme.value.removeprefix(MEM), []).append(c.value.removeprefix(MEM))
+    for p, m in store.query(q):
+        out.setdefault(p.value.removeprefix(MEM), []).append(m.value.removeprefix(MEM))
     return out
 
 
 def model_view(cls: str, package: dict[str, Any] | None = None,
-               schemes: dict[str, list[str]] | None = None) -> dict[str, Any]:
+               enums: dict[str, list[str]] | None = None) -> dict[str, Any]:
     package = package or load_package_schema()
-    schemes = schemes or scheme_members()
+    enums = enums or concept_enums()
     src = package["$defs"][cls]
     props, required = {}, []
     for name, spec in src["properties"].items():
         if name in PIPELINE_OWNED:
             continue
         spec = strip(copy.deepcopy(spec))
-        if name in CONCEPT_SCHEMES:
-            spec = {"type": "string", "enum": schemes[CONCEPT_SCHEMES[name]]}
+        if name in enums:
+            # Local names are easier for small models than IRIs; to_canonical expands them.
+            spec = {"type": "string", "enum": enums[name]}
         elif name in PERSON_VALUED:
             spec = {"type": "string"}
         props[name] = spec
@@ -107,8 +108,8 @@ def model_view(cls: str, package: dict[str, Any] | None = None,
 def extraction_envelope(package: dict[str, Any] | None = None) -> dict[str, Any]:
     """One object with an array per item class: avoids anyOf, which decoders handle poorly."""
     package = package or load_package_schema()
-    schemes = scheme_members()
-    props = {field: {"type": "array", "items": model_view(cls, package, schemes)}
+    enums = concept_enums()
+    props = {field: {"type": "array", "items": model_view(cls, package, enums)}
              for field, cls in ITEM_CLASSES.items()}
     return {"type": "object", "properties": props, "required": list(props),
             "additionalProperties": False}
@@ -121,7 +122,7 @@ def field_guide(package: dict[str, Any] | None = None) -> str:
     each field has to be in the prompt.
     """
     package = package or load_package_schema()
-    schemes = scheme_members()
+    enums = concept_enums()
     lines = []
     for field, cls in ITEM_CLASSES.items():
         d = package["$defs"][cls]
@@ -130,8 +131,8 @@ def field_guide(package: dict[str, Any] | None = None) -> str:
             if name in PIPELINE_OWNED:
                 continue
             desc = spec.get("description", name)
-            if name in CONCEPT_SCHEMES:
-                desc += f" One of: {', '.join(schemes[CONCEPT_SCHEMES[name]])}."
+            if name in enums:
+                desc += f" One of: {', '.join(enums[name])}."
             elif name in PERSON_VALUED:
                 desc += " Give the person's name, or 'user' for the user."
             elif name == "supersedes":
@@ -147,7 +148,7 @@ def to_canonical(obj: dict[str, Any], cls: str, iri: str, person_iri) -> dict[st
     for k, v in obj.items():
         if k in PERSON_VALUED:
             out[k] = person_iri(v)
-        elif k in CONCEPT_SCHEMES:
+        elif k in concept_enums():
             out[k] = MEM + v
         else:
             out[k] = v
@@ -164,7 +165,7 @@ def gold_canonical(item, persona) -> dict[str, Any]:
     for k, v in item.fields.items():
         if k in PERSON_VALUED:
             obj[k] = b + v
-        elif k in CONCEPT_SCHEMES:
+        elif k in concept_enums():
             obj[k] = MEM + v
         else:
             obj[k] = v
