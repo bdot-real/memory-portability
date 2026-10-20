@@ -12,5 +12,5 @@ Cite these exact versions in the paper. Registry versions are immutable and cont
 Dependencies (exact): `@w3c/prov-o` 1.0.0, `@foaf/foaf` 0.99.0, `@dcmi/terms` 1.0.0,
 `@w3c/time` 1.0.0, `@w3c/skos` 1.0.0.
 
-Pending: w3id.org redirect for
-`https://w3id.org/ompm/mem#` not yet filed; Zenodo DOI for code and dataset at submission.
+Pending: w3id.org redirect (https://github.com/perma-id/w3id.org/pull/6930, opened 2026-10-20) for
+`https://w3id.org/ompm/mem#` awaiting merge; Zenodo DOI for code and dataset at submission.
