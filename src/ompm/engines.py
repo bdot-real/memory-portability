@@ -13,8 +13,8 @@ from typing import Any
 
 import httpx
 
-# Rough chars-per-token for English dialogue; used only to guard against silent truncation.
-CHARS_PER_TOKEN = 3.5
+# Conservative chars-per-token (mistral tokenizes ~10% denser than llama); guards against silent truncation.
+CHARS_PER_TOKEN = 3.2
 
 
 class ContextOverflow(RuntimeError):
