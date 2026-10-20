@@ -1,23 +1,68 @@
 @prefix mem:  <https://w3id.org/ompm/mem#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 @prefix ex:   <https://example.org/p1/> .
 
-ex:user a foaf:Person ; foaf:name "Dana" .
-ex:ingrid a foaf:Person ; foaf:name "Ingrid" .
-ex:s1 a mem:Session ; prov:wasAssociatedWith ex:llama .
-ex:llama a mem:Engine ; foaf:name "llama3.1:8b" .
-ex:u12 a mem:Utterance ; mem:inSession ex:s1 .
+# One persona (Dana) remembered across two sessions on two engines.
 
+ex:user   a foaf:Person ; foaf:name "Dana" .
+ex:ingrid a foaf:Person ; foaf:name "Ingrid" .
+ex:miso   foaf:name "Miso" .
+
+ex:llama   a mem:Engine ; foaf:name "llama3.1:8b" .
+ex:mistral a mem:Engine ; foaf:name "mistral:7b" .
+
+ex:s1 a mem:Session ; prov:wasAssociatedWith ex:llama ;
+  prov:startedAtTime "2026-09-01T18:00:00Z"^^xsd:dateTime .
+ex:s2 a mem:Session ; prov:wasAssociatedWith ex:mistral ;
+  prov:startedAtTime "2026-09-20T09:00:00Z"^^xsd:dateTime .
+
+ex:u12 a mem:Utterance ; mem:inSession ex:s1 .
+ex:u30 a mem:Utterance ; mem:inSession ex:s2 .
+
+# Consent: which engines may receive an item.
+ex:AnyEngine a skos:Concept ; skos:prefLabel "shareable with any engine"@en .
+ex:LocalOnly a skos:Concept ; skos:prefLabel "local engines only"@en .
+
+# Fact, later superseded by a move.
 ex:m1 a mem:Fact ; mem:about ex:user ; mem:attribute "home city" ; mem:value "Montreal" ;
-  mem:statement "Dana lives in Montreal." ; prov:wasDerivedFrom ex:u12 .
+  mem:statement "Dana lives in Montreal." ;
+  mem:validFrom "2020-01-01T00:00:00Z"^^xsd:dateTime ;
+  mem:validUntil "2026-09-15T00:00:00Z"^^xsd:dateTime ;
+  mem:confidence 0.95 ; mem:portability mem:Portable ; mem:consentScope ex:AnyEngine ;
+  prov:wasDerivedFrom ex:u12 .
 ex:m2 a mem:Fact ; mem:about ex:user ; mem:attribute "home city" ; mem:value "Quebec City" ;
-  mem:statement "Dana moved to Quebec City." ; mem:supersedes ex:m1 .
+  mem:statement "Dana moved to Quebec City." ; mem:supersedes ex:m1 ;
+  mem:validFrom "2026-09-15T00:00:00Z"^^xsd:dateTime ;
+  mem:confidence 0.9 ; mem:portability mem:Portable ; mem:consentScope ex:AnyEngine ;
+  prov:wasDerivedFrom ex:u30 .
+
+# Preferences: a hard constraint and a contextual liking.
 ex:m3 a mem:Preference ; mem:about ex:user ; mem:target "walnuts" ; mem:polarity mem:Avoids ;
-  mem:statement "Dana's household must avoid walnuts (Ingrid's allergy)." .
+  mem:statement "Dana's household must avoid walnuts (Ingrid's allergy)." ;
+  mem:portability mem:Portable ; mem:consentScope ex:LocalOnly .
+ex:m7 a mem:Preference ; mem:about ex:user ; mem:target "window seats" ; mem:polarity mem:Likes ;
+  mem:context "on long-haul flights" ;
+  mem:statement "Dana prefers window seats on long-haul flights." .
+
+# Relationships, including a pet.
 ex:m4 a mem:Relationship ; mem:about ex:user ; mem:relatedTo ex:ingrid ; mem:relationType mem:Sibling ;
   mem:statement "Ingrid is Dana's sister." .
+ex:m8 a mem:Relationship ; mem:about ex:user ; mem:relatedTo ex:miso ; mem:relationType mem:Pet ;
+  mem:statement "Miso is Dana's cat." .
+
+# Task state.
 ex:m5 a mem:TaskState ; mem:about ex:user ; mem:taskStatus mem:Blocked ;
-  mem:statement "Renewing Dana's passport." ; mem:nextStep "Get new photos taken." .
-ex:t1 a mem:Tombstone ; mem:erasedItem ex:m6 .
+  mem:statement "Renewing Dana's passport." ; mem:nextStep "Get new photos taken." ;
+  mem:dueBy "2026-11-30T00:00:00Z"^^xsd:dateTime .
+
+# Tool definition, independent of any engine's calling convention.
+ex:m9 a mem:ToolDefinition ; mem:about ex:user ;
+  mem:statement "calendar_lookup(date): returns Dana's events on a date." ;
+  mem:portability mem:Portable .
+
+# Erasure: ex:m6 was erased; only the tombstone remains.
+ex:e1 a mem:Erasure ; prov:atTime "2026-09-21T10:00:00Z"^^xsd:dateTime .
+ex:t1 a mem:Tombstone ; mem:erasedItem ex:m6 ; prov:wasInvalidatedBy ex:e1 .
