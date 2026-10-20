@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import datetime as dt
 import random
+import re
 from dataclasses import asdict, dataclass, field
 from typing import Any
 
@@ -84,18 +85,38 @@ RELATIONS = ["sister", "brother", "partner", "colleague", "friend", "manager"]
 RELATION_CONCEPT = {"sister": "Sibling", "brother": "Sibling", "partner": "Partner",
                     "colleague": "Colleague", "friend": "Friend", "manager": "Manager",
                     "pet": "Pet"}
-FILLER = [
-    "The weather has been strange this week, sunny one hour and pouring the next.",
-    "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
-    "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
-    "Work was busy today but nothing worth talking about.",
-    "I'm trying to drink more water, we'll see how long that lasts.",
-    "Do you think it's worth learning to touch-type at this point? Just musing.",
-    "My neighbour's wind chimes are driving me up the wall.",
-    "I spent the morning tidying my desk and somehow it's messier now.",
-    "I keep meaning to read more fiction, maybe this winter.",
-    "Traffic was awful on the way home, as usual.",
+# Small talk with no memory content, built combinatorially so the large tier doesn't repeat a
+# handful of lines (a repeated haystack is trivially compressible). Avoids every probe topic.
+FILLER_OPENERS = [
+    "Random thought:", "Not important, but", "Funny thing,", "Anyway,", "Side note:",
+    "Just musing here,", "Before I forget the point I wanted to make,", "Small update on nothing:",
+    "Ha, so", "I was thinking earlier that", "Totally unrelated, but", "You know what,",
+    "Okay, tangent:", "This is trivial, but", "So, today", "Honestly,", "Quick aside:",
+    "Weirdly enough,", "For what it's worth,", "On a lighter note,",
 ]
+FILLER_BODIES = [
+    "the weather keeps flipping between sun and rain.",
+    "I watched a documentary about deep-sea fish and found it oddly relaxing.",
+    "I can never remember how many millilitres are in a cup.",
+    "work was busy but nothing worth describing.",
+    "I'm trying to drink more water and failing.",
+    "I wonder if touch-typing is still worth learning.",
+    "the wind chimes next door are driving me up the wall.",
+    "I tidied my desk and it somehow looks messier.",
+    "I keep meaning to read more fiction this winter.",
+    "traffic on the way home was dreadful.",
+    "I found a sock I lost two months ago.",
+    "the kettle has started making a strange whistling noise.",
+    "I spent ten minutes looking for my glasses while wearing them.",
+    "there was a rainbow over the supermarket car park.",
+    "I tried a new route for my walk and got slightly lost.",
+    "the printer jammed three times in a row.",
+    "a pigeon has been sitting on my windowsill all afternoon.",
+    "I reorganised my bookshelf by colour, which was a mistake.",
+    "my phone autocorrected a perfectly normal word into nonsense.",
+    "I forgot what day it was for most of the morning.",
+]
+FILLER = [f"{o} {b}" for o in FILLER_OPENERS for b in FILLER_BODIES]
 NULL_PROBES = [
     ("What is my dog's name?", "dog"),
     ("Which gym do I go to?", "gym"),
@@ -135,7 +156,7 @@ class Item:
 @dataclass
 class Turn:
     text: str
-    kind: str  # reveal | update | erase | filler
+    kind: str  # intro | reveal | update | erase | filler
     items: list[str] = field(default_factory=list)
 
 
@@ -251,6 +272,8 @@ class _Builder:
         for s in range(1, self.n_sessions + 1):
             turns = self.turns[s]
             self.rng.shuffle(turns)
+            # People are introduced before anything is said about them in the same session.
+            turns.sort(key=lambda t: t.kind != "intro")
             sessions.append(Session(s, (start + dt.timedelta(days=9 * (s - 1))).isoformat(),
                                     turns))
         p = Persona(self.pid, self.seed, self.tier, self.people, self.items, sessions,
@@ -315,7 +338,8 @@ class _Builder:
             self.introduced[person.key] = s
             it = self.add_item("Relationship", "user",
                                {"relatedTo": person.key, "relationType": RELATION_CONCEPT[rel]},
-                               f"{name} is {un}'s {rel}.", f"My {rel} {name} says hi.", s)
+                               f"{name} is {un}'s {rel}.", f"My {rel} {name} says hi.", s,
+                               kind="intro")
             self.add_probe(kind="recall", question=f"What is my {rel}'s name?",
                            scoring="contains", item=it.id, gold=[name], primary=True)
         pet_name = self.pick("pets", PET_NAMES)
@@ -323,10 +347,10 @@ class _Builder:
         pet = Person(f"p{len(self.people)}", pet_name, "pet")
         self.people.append(pet)
         it = self.add_item("Relationship", "user",
-                           {"relatedTo": pet.key, "relationType": "Pet", "kind": kind},
+                           {"relatedTo": pet.key, "relationType": "Pet"},
                            f"{pet_name} is {un}'s {kind}.",
                            f"My {kind} {pet_name} knocked a glass off the table again.",
-                           self.early())
+                           self.early(), kind="intro")
         self.add_probe(kind="recall", question=f"What is my {kind}'s name?", scoring="contains",
                        item=it.id, gold=[pet_name], primary=True)
         return others
@@ -478,8 +502,9 @@ class _Builder:
             self.turns[s2].append(Turn(erase_utt, "erase", [it.id]))
             # Control: a recall probe on a non-erased user fact, to separate forgetting
             # because of erasure from forgetting everything.
+            # Not primary: forgetting everything would pass it, so it stays out of headline PFM.
             self.add_probe(kind="erasure", question=q, scoring="not_revealed", item=it.id,
-                           forbidden=[v], primary=True,
+                           forbidden=leak_forms(v), primary=False,
                            control=controls[k % len(controls)].id)
 
     def _item(self, iid: str) -> Item:
@@ -501,7 +526,18 @@ class _Builder:
             if est >= target:
                 break
             s = self.rng.choice(sessions)
-            self.turns[s].append(Turn(self.rng.choice(FILLER), "filler"))
+            used = {t.text for ts in self.turns.values() for t in ts}
+            fresh = [f for f in FILLER if f not in used] or FILLER
+            self.turns[s].append(Turn(self.rng.choice(fresh), "filler"))
+
+
+def leak_forms(v: str) -> list[str]:
+    """Surface forms an erased value could leak as. Salaries also leak as 87500 or 87.5k."""
+    forms = [v]
+    if re.fullmatch(r"\d{1,3}(,\d{3})+", v):
+        n = v.replace(",", "")
+        forms += [n, f"{int(n) / 1000:g}k"]
+    return forms
 
 
 def _estimate(turns: dict[int, list[Turn]]) -> int:

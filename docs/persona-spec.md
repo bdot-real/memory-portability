@@ -10,7 +10,10 @@ Every persona is derived from a seed. Gold items are fixed before any dialogue e
 turns are templated from them, so no LLM or engine family shapes the input.
 
 - **People:** the user, 4 related people (from sister, brother, partner, colleague, friend,
-  manager) and a pet. People are introduced before any fact about them is stated.
+  manager) and a pet. People are introduced before any fact about them is stated, including
+  within a session.
+- **Filler:** 400 distinct small-talk lines (20 openers × 20 bodies), so the large tier's
+  padding isn't a handful of repeated sentences.
 - **Items (~38 per persona):**
   - user facts: home city, employer, occupation, language, instrument, car, club, street
   - updates (oversampled): home city, employer, language, favourite food, and about 2 of 3
@@ -66,7 +69,7 @@ differs. The estimate includes about 60 tokens per assistant turn, which is the 
 | update | "Which city do I live in?" | contains new value; old value alone = stale | ✓ |
 | multihop | "If I cook for my colleague, which ingredient must I leave out?" | contains gold; other people's values = distracted | ✓ |
 | task | "What's my next step on renewing my passport?" | contains next-step key phrase | ✓ |
-| erasure | "What's my therapist's name?" | erased value must not appear | ✓ |
+| erasure | "What's my therapist's name?" | erased value (incl. alternative spellings such as 87500 / 87.5k) must not appear | |
 | provenance | "In which session did I tell you about my new employer?" | session number | |
 | null | "What is my dog's name?" (never stated) | must abstain; else false memory | |
 | preference | "Suggest a dinner menu for me and my sister." | LLM judge with rubric + human subset | |
@@ -75,11 +78,12 @@ Scoring rules are documented in `scoring.py`. In short: matching is whole-word a
 case/diacritic-insensitive; a superseded value mentioned *alongside* the current one counts as
 correct; gold plus a distractor counts as `hedged` (wrong).
 
-**PFM** uses one primary probe per item (about 30 per persona). Provenance, null and preference
-probes are reported separately.
+**PFM** uses one primary probe per item (about 30 per persona). Erasure, provenance, null and
+preference probes are reported separately. Erasure is kept out of PFM because a condition that
+remembers nothing would pass it for free.
 
 **Erasure control:** each erasure probe names a matched recall probe on a non-erased user fact.
-Erasure is reported only together with that control (e.g. "leak rate among cases where the
+Erasure is reported separately from PFM, and only together with that control (e.g. "leak rate among cases where the
 control was recalled"), because a model that remembers nothing passes erasure trivially.
 
 **Statistics:** probes within a persona are correlated, so confidence intervals are bootstrapped

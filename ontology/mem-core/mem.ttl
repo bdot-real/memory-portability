@@ -84,7 +84,8 @@ mem:Relationship rdfs:subClassOf
 mem:TaskState rdfs:subClassOf
     [ a owl:Restriction ; owl:onProperty mem:about ; owl:cardinality "1"^^xsd:nonNegativeInteger ] ,
     [ a owl:Restriction ; owl:onProperty mem:statement ; owl:cardinality "1"^^xsd:nonNegativeInteger ] ,
-    [ a owl:Restriction ; owl:onProperty mem:taskStatus ; owl:cardinality "1"^^xsd:nonNegativeInteger ] .
+    [ a owl:Restriction ; owl:onProperty mem:taskStatus ; owl:cardinality "1"^^xsd:nonNegativeInteger ] ,
+    [ a owl:Restriction ; owl:onProperty mem:task ; owl:cardinality "1"^^xsd:nonNegativeInteger ] .
 
 # --- Common item properties --------------------------------------------------
 
@@ -183,6 +184,12 @@ mem:taskStatus a owl:ObjectProperty, owl:FunctionalProperty ;
     rdfs:domain mem:TaskState ;
     rdfs:range skos:Concept ;
     rdfs:label "task status"@en .
+
+mem:task a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain mem:TaskState ;
+    rdfs:range xsd:string ;
+    rdfs:label "task"@en ;
+    skos:definition "The task this state is about, e.g. 'renewing my passport'; successive states of one task share it."@en .
 
 mem:nextStep a owl:DatatypeProperty, owl:FunctionalProperty ;
     rdfs:domain mem:TaskState ;

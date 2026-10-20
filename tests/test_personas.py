@@ -48,7 +48,8 @@ class TestPersona:
     def test_gold_is_revealed_before_probe_time(self, p):
         text = transcript(p).lower()
         for q in p.probes:
-            for v in q.gold[:1] + q.stale[:1] + q.forbidden:
+            # forbidden[0] is the value as said; later entries are alternative leak spellings.
+            for v in q.gold[:1] + q.stale[:1] + q.forbidden[:1]:
                 if q.scoring in ("contains", "not_revealed", "judge"):
                     assert v.lower() in text, (q.id, v)
 
@@ -97,3 +98,24 @@ class TestPersona:
         assert rows(s, "04") == open_tasks
         assert rows(s, "07") == relationships
         assert rows(s, "03") == len([it for it in p.items if not it.erased_in])
+
+
+@pytest.mark.parametrize("p", PERSONAS[:2], ids=lambda p: p.id)
+@pytest.mark.xfail(reason="mem:task arrives in @mem/core 0.3.0; pinned schema is 0.2.0",
+                   strict=True)
+def test_gold_fields_exist_in_registry_schema(p):
+    """One shape everywhere: every gold field is a property of its class in the pinned schema."""
+    from ompm.schema import ITEM_CLASSES, gold_to_envelope, load_package_schema
+
+    defs = load_package_schema()["$defs"]
+    for field, cls in ITEM_CLASSES.items():
+        allowed = set(defs[cls]["properties"])
+        for obj in gold_to_envelope(p)[field]:
+            assert set(obj) <= allowed, (cls, set(obj) - allowed)
+
+
+def test_filler_is_varied():
+    from ompm.personas import generate
+    p = generate("big", seed=1, tier="large")
+    filler = [t.text for s in p.sessions for t in s.turns if t.kind == "filler"]
+    assert len(set(filler)) / len(filler) > 0.9

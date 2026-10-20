@@ -251,8 +251,7 @@
    "about": "user",
    "fields": {
     "relatedTo": "p5",
-    "relationType": "Pet",
-    "kind": "dog"
+    "relationType": "Pet"
    },
    "statement": "Tuppence is Merritt's dog.",
    "utterance": "My dog Tuppence knocked a glass off the table again.",
@@ -582,90 +581,65 @@
  "sessions": [
   {
    "idx": 1,
-   "date": "2026-06-01",
+   "date": "2026-06-12",
    "turns": [
     {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "text": "Honestly, traffic on the way home was dreadful.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "text": "This is trivial, but I tidied my desk and it somehow looks messier.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "text": "Okay, tangent: I tidied my desk and it somehow looks messier.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "text": "Anyway, I reorganised my bookshelf by colour, which was a mistake.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "text": "Funny thing, I tried a new route for my walk and got slightly lost.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "text": "Small update on nothing: I found a sock I lost two months ago.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "text": "Side note: work was busy but nothing worth describing.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "text": "Weirdly enough, I tidied my desk and it somehow looks messier.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "text": "Before I forget the point I wanted to make, I forgot what day it was for most of the morning.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "text": "Okay, tangent: I reorganised my bookshelf by colour, which was a mistake.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "text": "For what it's worth, my phone autocorrected a perfectly normal word into nonsense.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I spent the morning tidying my desk and somehow it's messier now.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I spent the morning tidying my desk and somehow it's messier now.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "text": "Ha, so I spent ten minutes looking for my glasses while wearing them.",
      "kind": "filler",
      "items": []
     },
@@ -677,22 +651,107 @@
      ]
     },
     {
-     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "text": "Anyway, I keep meaning to read more fiction this winter.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "text": "You know what, there was a rainbow over the supermarket car park.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "text": "For what it's worth, work was busy but nothing worth describing.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "text": "Weirdly enough, the weather keeps flipping between sun and rain.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Just musing here, I reorganised my bookshelf by colour, which was a mistake.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Totally unrelated, but I reorganised my bookshelf by colour, which was a mistake.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Side note: I tried a new route for my walk and got slightly lost.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Small update on nothing: I keep meaning to read more fiction this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Totally unrelated, but I tidied my desk and it somehow looks messier.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Just musing here, I forgot what day it was for most of the morning.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Random thought: the kettle has started making a strange whistling noise.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I was thinking earlier that I can never remember how many millilitres are in a cup.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Okay, tangent: the printer jammed three times in a row.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "You know what, I reorganised my bookshelf by colour, which was a mistake.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "This is trivial, but I watched a documentary about deep-sea fish and found it oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I was thinking earlier that the printer jammed three times in a row.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Okay, tangent: I wonder if touch-typing is still worth learning.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Side note: I keep meaning to read more fiction this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Honestly, I tried a new route for my walk and got slightly lost.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "This is trivial, but I'm trying to drink more water and failing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "You know what, the printer jammed three times in a row.",
      "kind": "filler",
      "items": []
     }
@@ -700,37 +759,14 @@
   },
   {
    "idx": 2,
-   "date": "2026-06-10",
+   "date": "2026-06-21",
    "turns": [
     {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Work was busy today but nothing worth talking about.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
-     "kind": "filler",
-     "items": []
+     "text": "My colleague Osric says hi.",
+     "kind": "intro",
+     "items": [
+      "m012"
+     ]
     },
     {
      "text": "Between us, my salary is 93,150 a year.",
@@ -740,93 +776,17 @@
      ]
     },
     {
-     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "text": "Anyway, I forgot what day it was for most of the morning.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Note that Osric is allergic to shellfish.",
-     "kind": "reveal",
-     "items": [
-      "m017"
-     ]
-    },
-    {
-     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "text": "Before I forget the point I wanted to make, there was a rainbow over the supermarket car park.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Work was busy today but nothing worth talking about.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "My neighbour's wind chimes are driving me up the wall.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I've started learning Basque in the evenings.",
-     "kind": "reveal",
-     "items": [
-      "m006"
-     ]
-    },
-    {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Osric works as a luthier, which still surprises me.",
-     "kind": "reveal",
-     "items": [
-      "m021"
-     ]
-    },
-    {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "text": "On a lighter note, work was busy but nothing worth describing.",
      "kind": "filler",
      "items": []
     },
@@ -838,21 +798,24 @@
      ]
     },
     {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "text": "You know what, I keep meaning to read more fiction this winter.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "text": "Ha, so I tried a new route for my walk and got slightly lost.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "My colleague Osric says hi.",
-     "kind": "reveal",
-     "items": [
-      "m012"
-     ]
+     "text": "You know what, work was busy but nothing worth describing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "On a lighter note, there was a rainbow over the supermarket car park.",
+     "kind": "filler",
+     "items": []
     },
     {
      "text": "My therapist, Dr. Szymanska, suggested I journal more.",
@@ -862,7 +825,73 @@
      ]
     },
     {
-     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "text": "Anyway, there was a rainbow over the supermarket car park.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I've started learning Basque in the evenings.",
+     "kind": "reveal",
+     "items": [
+      "m006"
+     ]
+    },
+    {
+     "text": "Note that Osric is allergic to shellfish.",
+     "kind": "reveal",
+     "items": [
+      "m017"
+     ]
+    },
+    {
+     "text": "Side note: a pigeon has been sitting on my windowsill all afternoon.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Random thought: the printer jammed three times in a row.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I was thinking earlier that I spent ten minutes looking for my glasses while wearing them.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Honestly, I found a sock I lost two months ago.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Osric works as a luthier, which still surprises me.",
+     "kind": "reveal",
+     "items": [
+      "m021"
+     ]
+    },
+    {
+     "text": "Small update on nothing: a pigeon has been sitting on my windowsill all afternoon.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "You know what, traffic on the way home was dreadful.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Small update on nothing: I tried a new route for my walk and got slightly lost.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Not important, but work was busy but nothing worth describing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Just musing here, traffic on the way home was dreadful.",
      "kind": "filler",
      "items": []
     }
@@ -870,76 +899,29 @@
   },
   {
    "idx": 3,
-   "date": "2026-06-19",
+   "date": "2026-06-30",
    "turns": [
     {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
-     "kind": "filler",
-     "items": []
-    },
-    {
      "text": "My dog Tuppence knocked a glass off the table again.",
-     "kind": "reveal",
+     "kind": "intro",
      "items": [
       "m016"
      ]
     },
     {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Please never suggest Monday morning standups at work, I won't take them.",
-     "kind": "reveal",
+     "text": "My partner Ines says hi.",
+     "kind": "intro",
      "items": [
-      "m031"
+      "m014"
      ]
     },
     {
-     "text": "Work was busy today but nothing worth talking about.",
+     "text": "You know what, the weather keeps flipping between sun and rain.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "My flat is on Marrowby Street.",
-     "kind": "reveal",
-     "items": [
-      "m011"
-     ]
-    },
-    {
-     "text": "My neighbour's wind chimes are driving me up the wall.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I spent the morning tidying my desk and somehow it's messier now.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "text": "Anyway, the weather keeps flipping between sun and rain.",
      "kind": "filler",
      "items": []
     },
@@ -951,22 +933,24 @@
      ]
     },
     {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "text": "My colleague Osric lives over in Valparaiso.",
+     "kind": "reveal",
+     "items": [
+      "m025"
+     ]
+    },
+    {
+     "text": "For what it's worth, I keep meaning to read more fiction this winter.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "text": "Weirdly enough, I tried a new route for my walk and got slightly lost.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "text": "Funny thing, I keep meaning to read more fiction this winter.",
      "kind": "filler",
      "items": []
     },
@@ -978,18 +962,6 @@
      ]
     },
     {
-     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "My colleague Osric lives over in Valparaiso.",
-     "kind": "reveal",
-     "items": [
-      "m025"
-     ]
-    },
-    {
      "text": "I play the theremin, badly.",
      "kind": "reveal",
      "items": [
@@ -997,216 +969,159 @@
      ]
     },
     {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "text": "Honestly, I reorganised my bookshelf by colour, which was a mistake.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Traffic was awful on the way home, as usual.",
+     "text": "Before I forget the point I wanted to make, I keep meaning to read more fiction this winter.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "text": "Anyway, I watched a documentary about deep-sea fish and found it oddly relaxing.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Traffic was awful on the way home, as usual.",
+     "text": "Side note: the printer jammed three times in a row.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "text": "Honestly, a pigeon has been sitting on my windowsill all afternoon.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "text": "Random thought: I found a sock I lost two months ago.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "text": "Random thought: I can never remember how many millilitres are in a cup.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "text": "Side note: the kettle has started making a strange whistling noise.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "text": "On a lighter note, the weather keeps flipping between sun and rain.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "text": "I was thinking earlier that I keep meaning to read more fiction this winter.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "text": "Honestly, I wonder if touch-typing is still worth learning.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "text": "I was thinking earlier that I watched a documentary about deep-sea fish and found it oddly relaxing.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "My partner Ines says hi.",
+     "text": "Anyway, my phone autocorrected a perfectly normal word into nonsense.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Funny thing, the weather keeps flipping between sun and rain.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Anyway, I'm trying to drink more water and failing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Honestly, I can never remember how many millilitres are in a cup.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Okay, tangent: my phone autocorrected a perfectly normal word into nonsense.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Ha, so I watched a documentary about deep-sea fish and found it oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Side note: I can never remember how many millilitres are in a cup.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "This is trivial, but traffic on the way home was dreadful.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Quick aside: work was busy but nothing worth describing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Random thought: I watched a documentary about deep-sea fish and found it oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Funny thing, work was busy but nothing worth describing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Please never suggest Monday morning standups at work, I won't take them.",
      "kind": "reveal",
      "items": [
-      "m014"
+      "m031"
      ]
     },
     {
-     "text": "Work was busy today but nothing worth talking about.",
+     "text": "Totally unrelated, but a pigeon has been sitting on my windowsill all afternoon.",
      "kind": "filler",
      "items": []
+    },
+    {
+     "text": "Not important, but I found a sock I lost two months ago.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "My flat is on Marrowby Street.",
+     "kind": "reveal",
+     "items": [
+      "m011"
+     ]
     }
    ]
   },
   {
    "idx": 4,
-   "date": "2026-06-28",
+   "date": "2026-07-09",
    "turns": [
     {
      "text": "My brother Saoirse says hi.",
-     "kind": "reveal",
+     "kind": "intro",
      "items": [
       "m013"
      ]
     },
     {
-     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Work was busy today but nothing worth talking about.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I drive a dark green Volvo 240, don't laugh.",
-     "kind": "reveal",
-     "items": [
-      "m009"
-     ]
-    },
-    {
-     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I live in Antigua Guatemala.",
-     "kind": "reveal",
-     "items": [
-      "m001"
-     ]
-    },
-    {
-     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I could eat pastel de nata every day.",
-     "kind": "reveal",
-     "items": [
-      "m027"
-     ]
-    },
-    {
-     "text": "Ines works as a cartographer, which still surprises me.",
-     "kind": "reveal",
-     "items": [
-      "m023"
-     ]
-    },
-    {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Traffic was awful on the way home, as usual.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I spent the morning tidying my desk and somehow it's messier now.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Work was busy today but nothing worth talking about.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Note that Saoirse is allergic to hazelnuts.",
-     "kind": "reveal",
-     "items": [
-      "m018"
-     ]
-    },
-    {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Big change: I've left and now work at Northgate Ferries.",
-     "kind": "update",
-     "items": [
-      "m004"
-     ]
-    },
-    {
-     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I spent the morning tidying my desk and somehow it's messier now.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I always book aisle seats on red-eye flights.",
-     "kind": "reveal",
-     "items": [
-      "m030"
-     ]
-    },
-    {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Traffic was awful on the way home, as usual.",
+     "text": "Side note: my phone autocorrected a perfectly normal word into nonsense.",
      "kind": "filler",
      "items": []
     },
@@ -1218,12 +1133,151 @@
      ]
     },
     {
-     "text": "Work was busy today but nothing worth talking about.",
+     "text": "Anyway, the wind chimes next door are driving me up the wall.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "text": "I always book aisle seats on red-eye flights.",
+     "kind": "reveal",
+     "items": [
+      "m030"
+     ]
+    },
+    {
+     "text": "Honestly, I spent ten minutes looking for my glasses while wearing them.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I drive a dark green Volvo 240, don't laugh.",
+     "kind": "reveal",
+     "items": [
+      "m009"
+     ]
+    },
+    {
+     "text": "I live in Antigua Guatemala.",
+     "kind": "reveal",
+     "items": [
+      "m001"
+     ]
+    },
+    {
+     "text": "I could eat pastel de nata every day.",
+     "kind": "reveal",
+     "items": [
+      "m027"
+     ]
+    },
+    {
+     "text": "You know what, my phone autocorrected a perfectly normal word into nonsense.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I was thinking earlier that I tried a new route for my walk and got slightly lost.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Anyway, I found a sock I lost two months ago.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Big change: I've left and now work at Northgate Ferries.",
+     "kind": "update",
+     "items": [
+      "m004"
+     ]
+    },
+    {
+     "text": "On a lighter note, my phone autocorrected a perfectly normal word into nonsense.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Just musing here, the kettle has started making a strange whistling noise.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Okay, tangent: I spent ten minutes looking for my glasses while wearing them.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Just musing here, I can never remember how many millilitres are in a cup.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "You know what, I tried a new route for my walk and got slightly lost.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Quick aside: I reorganised my bookshelf by colour, which was a mistake.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Ines works as a cartographer, which still surprises me.",
+     "kind": "reveal",
+     "items": [
+      "m023"
+     ]
+    },
+    {
+     "text": "For what it's worth, the printer jammed three times in a row.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Note that Saoirse is allergic to hazelnuts.",
+     "kind": "reveal",
+     "items": [
+      "m018"
+     ]
+    },
+    {
+     "text": "Random thought: there was a rainbow over the supermarket car park.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Small update on nothing: there was a rainbow over the supermarket car park.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Funny thing, I watched a documentary about deep-sea fish and found it oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "So, today I found a sock I lost two months ago.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Just musing here, I watched a documentary about deep-sea fish and found it oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Just musing here, my phone autocorrected a perfectly normal word into nonsense.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "On a lighter note, I forgot what day it was for most of the morning.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Okay, tangent: the wind chimes next door are driving me up the wall.",
      "kind": "filler",
      "items": []
     }
@@ -1231,57 +1285,27 @@
   },
   {
    "idx": 5,
-   "date": "2026-07-07",
+   "date": "2026-07-18",
    "turns": [
     {
-     "text": "Work was busy today but nothing worth talking about.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I spent the morning tidying my desk and somehow it's messier now.",
-     "kind": "filler",
-     "items": []
-    },
-    {
      "text": "My sister Rasmus says hi.",
-     "kind": "reveal",
+     "kind": "intro",
      "items": [
       "m015"
      ]
     },
     {
-     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "text": "Weirdly enough, I keep meaning to read more fiction this winter.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "text": "So, today the wind chimes next door are driving me up the wall.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "My neighbour's wind chimes are driving me up the wall.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "text": "Weirdly enough, there was a rainbow over the supermarket car park.",
      "kind": "filler",
      "items": []
     },
@@ -1293,26 +1317,6 @@
      ]
     },
     {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Work was busy today but nothing worth talking about.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
-     "kind": "filler",
-     "items": []
-    },
-    {
      "text": "I'm in the middle of renewing my passport. Next I need to get on with booking a photo appointment.",
      "kind": "reveal",
      "items": [
@@ -1320,47 +1324,22 @@
      ]
     },
     {
-     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "text": "On a lighter note, a pigeon has been sitting on my windowsill all afternoon.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "text": "Weirdly enough, traffic on the way home was dreadful.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "text": "Before I forget the point I wanted to make, I spent ten minutes looking for my glasses while wearing them.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "My neighbour's wind chimes are driving me up the wall.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "text": "Not important, but my phone autocorrected a perfectly normal word into nonsense.",
      "kind": "filler",
      "items": []
     },
@@ -1372,6 +1351,66 @@
      ]
     },
     {
+     "text": "Weirdly enough, the printer jammed three times in a row.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Small update on nothing: I wonder if touch-typing is still worth learning.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Quick aside: the weather keeps flipping between sun and rain.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Okay, tangent: the kettle has started making a strange whistling noise.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "You know what, I'm trying to drink more water and failing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Side note: I wonder if touch-typing is still worth learning.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Side note: I spent ten minutes looking for my glasses while wearing them.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Anyway, traffic on the way home was dreadful.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "So, today traffic on the way home was dreadful.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "On a lighter note, traffic on the way home was dreadful.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Anyway, I wonder if touch-typing is still worth learning.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Quick aside: I tried a new route for my walk and got slightly lost.",
+     "kind": "filler",
+     "items": []
+    },
+    {
      "text": "I ran into my ex, Wrenna, at the market.",
      "kind": "reveal",
      "items": [
@@ -1379,17 +1418,37 @@
      ]
     },
     {
-     "text": "Traffic was awful on the way home, as usual.",
+     "text": "Not important, but there was a rainbow over the supermarket car park.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "text": "Totally unrelated, but I wonder if touch-typing is still worth learning.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "text": "Funny thing, my phone autocorrected a perfectly normal word into nonsense.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "For what it's worth, I watched a documentary about deep-sea fish and found it oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "So, today the weather keeps flipping between sun and rain.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Before I forget the point I wanted to make, I tried a new route for my walk and got slightly lost.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Side note: I forgot what day it was for most of the morning.",
      "kind": "filler",
      "items": []
     }
@@ -1397,15 +1456,42 @@
   },
   {
    "idx": 6,
-   "date": "2026-07-16",
+   "date": "2026-07-27",
    "turns": [
     {
-     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "text": "Okay, tangent: I can never remember how many millilitres are in a cup.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Work was busy today but nothing worth talking about.",
+     "text": "Just musing here, I tried a new route for my walk and got slightly lost.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Quick aside: I forgot what day it was for most of the morning.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Small update on nothing: traffic on the way home was dreadful.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Saoirse works as a set designer, which still surprises me.",
+     "kind": "reveal",
+     "items": [
+      "m022"
+     ]
+    },
+    {
+     "text": "Quick aside: there was a rainbow over the supermarket car park.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Small update on nothing: I spent ten minutes looking for my glasses while wearing them.",
      "kind": "filler",
      "items": []
     },
@@ -1417,143 +1503,57 @@
      ]
     },
     {
-     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "text": "I was thinking earlier that I wonder if touch-typing is still worth learning.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "text": "This is trivial, but I spent ten minutes looking for my glasses while wearing them.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "text": "Funny thing, the kettle has started making a strange whistling noise.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "text": "Just musing here, a pigeon has been sitting on my windowsill all afternoon.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I gave up on that language and switched to Icelandic.",
-     "kind": "update",
-     "items": [
-      "m007"
-     ]
-    },
-    {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "text": "Weirdly enough, I watched a documentary about deep-sea fish and found it oddly relaxing.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Work was busy today but nothing worth talking about.",
+     "text": "Just musing here, I tidied my desk and it somehow looks messier.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "text": "Anyway, I tidied my desk and it somehow looks messier.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "text": "For what it's worth, I forgot what day it was for most of the morning.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "text": "Before I forget the point I wanted to make, the weather keeps flipping between sun and rain.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Note that Rasmus is allergic to mustard.",
-     "kind": "reveal",
-     "items": [
-      "m020"
-     ]
-    },
-    {
-     "text": "Rasmus works as a glassblower, which still surprises me.",
-     "kind": "reveal",
-     "items": [
-      "m024"
-     ]
-    },
-    {
-     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "text": "I was thinking earlier that I'm trying to drink more water and failing.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I spent the morning tidying my desk and somehow it's messier now.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Work was busy today but nothing worth talking about.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Work was busy today but nothing worth talking about.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I spent the morning tidying my desk and somehow it's messier now.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "My neighbour's wind chimes are driving me up the wall.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "My neighbour's wind chimes are driving me up the wall.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Traffic was awful on the way home, as usual.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "text": "Not important, but I watched a documentary about deep-sea fish and found it oddly relaxing.",
      "kind": "filler",
      "items": []
     },
@@ -1565,169 +1565,119 @@
      ]
     },
     {
-     "text": "Saoirse works as a set designer, which still surprises me.",
+     "text": "Honestly, I keep meaning to read more fiction this winter.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "You know what, I wonder if touch-typing is still worth learning.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "On a lighter note, the wind chimes next door are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Rasmus works as a glassblower, which still surprises me.",
      "kind": "reveal",
      "items": [
-      "m022"
+      "m024"
      ]
+    },
+    {
+     "text": "Small update on nothing: the kettle has started making a strange whistling noise.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Small update on nothing: I watched a documentary about deep-sea fish and found it oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Note that Rasmus is allergic to mustard.",
+     "kind": "reveal",
+     "items": [
+      "m020"
+     ]
+    },
+    {
+     "text": "Honestly, I watched a documentary about deep-sea fish and found it oddly relaxing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Before I forget the point I wanted to make, a pigeon has been sitting on my windowsill all afternoon.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I gave up on that language and switched to Icelandic.",
+     "kind": "update",
+     "items": [
+      "m007"
+     ]
+    },
+    {
+     "text": "So, today there was a rainbow over the supermarket car park.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Totally unrelated, but I spent ten minutes looking for my glasses while wearing them.",
+     "kind": "filler",
+     "items": []
     }
    ]
   },
   {
    "idx": 7,
-   "date": "2026-07-25",
+   "date": "2026-08-05",
    "turns": [
     {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "text": "Before I forget the point I wanted to make, I reorganised my bookshelf by colour, which was a mistake.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "text": "On a lighter note, I spent ten minutes looking for my glasses while wearing them.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "text": "I was thinking earlier that there was a rainbow over the supermarket car park.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "text": "Weirdly enough, I found a sock I lost two months ago.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "text": "Not important, but I wonder if touch-typing is still worth learning.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "text": "Okay, tangent: work was busy but nothing worth describing.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Traffic was awful on the way home, as usual.",
+     "text": "This is trivial, but work was busy but nothing worth describing.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "text": "I was thinking earlier that the kettle has started making a strange whistling noise.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Update on switching my mortgage lender: collecting six months of payslips is done, so now it's signing with the new lender.",
-     "kind": "update",
-     "items": [
-      "m033"
-     ]
-    },
-    {
-     "text": "Traffic was awful on the way home, as usual.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Work was busy today but nothing worth talking about.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Work was busy today but nothing worth talking about.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Traffic was awful on the way home, as usual.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Work was busy today but nothing worth talking about.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Traffic was awful on the way home, as usual.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Forget what I said about my salary, please.",
-     "kind": "erase",
-     "items": [
-      "m037"
-     ]
-    },
-    {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Work was busy today but nothing worth talking about.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "My neighbour's wind chimes are driving me up the wall.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "text": "So, today work was busy but nothing worth describing.",
      "kind": "filler",
      "items": []
     },
@@ -1739,12 +1689,91 @@
      ]
     },
     {
-     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "text": "Forget what I said about my salary, please.",
+     "kind": "erase",
+     "items": [
+      "m037"
+     ]
+    },
+    {
+     "text": "Ha, so I reorganised my bookshelf by colour, which was a mistake.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "text": "Ha, so work was busy but nothing worth describing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Weirdly enough, a pigeon has been sitting on my windowsill all afternoon.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Just musing here, the wind chimes next door are driving me up the wall.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "This is trivial, but I tried a new route for my walk and got slightly lost.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "This is trivial, but I wonder if touch-typing is still worth learning.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Totally unrelated, but traffic on the way home was dreadful.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "This is trivial, but the weather keeps flipping between sun and rain.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Update on switching my mortgage lender: collecting six months of payslips is done, so now it's signing with the new lender.",
+     "kind": "update",
+     "items": [
+      "m033"
+     ]
+    },
+    {
+     "text": "Honestly, the kettle has started making a strange whistling noise.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Small update on nothing: I can never remember how many millilitres are in a cup.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Just musing here, the weather keeps flipping between sun and rain.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Not important, but I reorganised my bookshelf by colour, which was a mistake.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "This is trivial, but I reorganised my bookshelf by colour, which was a mistake.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Not important, but traffic on the way home was dreadful.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Quick aside: the printer jammed three times in a row.",
      "kind": "filler",
      "items": []
     }
@@ -1752,55 +1781,30 @@
   },
   {
    "idx": 8,
-   "date": "2026-08-03",
+   "date": "2026-08-14",
    "turns": [
     {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "text": "Funny thing, I forgot what day it was for most of the morning.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "text": "For what it's worth, I spent ten minutes looking for my glasses while wearing them.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "text": "Random thought: traffic on the way home was dreadful.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "text": "Before I forget the point I wanted to make, I watched a documentary about deep-sea fish and found it oddly relaxing.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I spent the morning tidying my desk and somehow it's messier now.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "text": "Anyway, I tried a new route for my walk and got slightly lost.",
      "kind": "filler",
      "items": []
     },
@@ -1812,67 +1816,87 @@
      ]
     },
     {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "text": "Ha, so traffic on the way home was dreadful.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Work was busy today but nothing worth talking about.",
+     "text": "Weirdly enough, the wind chimes next door are driving me up the wall.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "text": "Random thought: I tidied my desk and it somehow looks messier.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Traffic was awful on the way home, as usual.",
+     "text": "Small update on nothing: I'm trying to drink more water and failing.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "text": "Ha, so I keep meaning to read more fiction this winter.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "text": "Not important, but the printer jammed three times in a row.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Traffic was awful on the way home, as usual.",
+     "text": "On a lighter note, I reorganised my bookshelf by colour, which was a mistake.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "text": "On a lighter note, I keep meaning to read more fiction this winter.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "text": "You know what, a pigeon has been sitting on my windowsill all afternoon.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "text": "Totally unrelated, but the weather keeps flipping between sun and rain.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "text": "Not important, but a pigeon has been sitting on my windowsill all afternoon.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "text": "Quick aside: a pigeon has been sitting on my windowsill all afternoon.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "text": "Random thought: my phone autocorrected a perfectly normal word into nonsense.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Ha, so the kettle has started making a strange whistling noise.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Small update on nothing: the weather keeps flipping between sun and rain.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Totally unrelated, but work was busy but nothing worth describing.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "So, today I forgot what day it was for most of the morning.",
      "kind": "filler",
      "items": []
     }
@@ -1880,205 +1904,180 @@
   },
   {
    "idx": 9,
-   "date": "2026-08-12",
+   "date": "2026-08-23",
    "turns": [
     {
-     "text": "Traffic was awful on the way home, as usual.",
+     "text": "Side note: there was a rainbow over the supermarket car park.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Work was busy today but nothing worth talking about.",
+     "text": "Ha, so I forgot what day it was for most of the morning.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "text": "Ha, so I found a sock I lost two months ago.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Traffic was awful on the way home, as usual.",
+     "text": "Before I forget the point I wanted to make, I wonder if touch-typing is still worth learning.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "text": "I was thinking earlier that I forgot what day it was for most of the morning.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "text": "So, today a pigeon has been sitting on my windowsill all afternoon.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "text": "Just musing here, I keep meaning to read more fiction this winter.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "text": "So, today I can never remember how many millilitres are in a cup.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "text": "Not important, but I keep meaning to read more fiction this winter.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "text": "Funny thing, I reorganised my bookshelf by colour, which was a mistake.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "text": "On a lighter note, I found a sock I lost two months ago.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Work was busy today but nothing worth talking about.",
+     "text": "Ha, so I wonder if touch-typing is still worth learning.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "text": "Okay, tangent: I found a sock I lost two months ago.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "text": "Quick aside: the wind chimes next door are driving me up the wall.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "text": "Weirdly enough, I can never remember how many millilitres are in a cup.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "text": "Honestly, I tidied my desk and it somehow looks messier.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "text": "Totally unrelated, but I watched a documentary about deep-sea fish and found it oddly relaxing.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "text": "Weirdly enough, I reorganised my bookshelf by colour, which was a mistake.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "text": "This is trivial, but I forgot what day it was for most of the morning.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "text": "Before I forget the point I wanted to make, I tidied my desk and it somehow looks messier.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "text": "You know what, the wind chimes next door are driving me up the wall.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Traffic was awful on the way home, as usual.",
+     "text": "Anyway, the kettle has started making a strange whistling noise.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
+     "text": "So, today I tried a new route for my walk and got slightly lost.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "text": "Side note: I'm trying to drink more water and failing.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Traffic was awful on the way home, as usual.",
+     "text": "On a lighter note, the printer jammed three times in a row.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "text": "Okay, tangent: the weather keeps flipping between sun and rain.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Traffic was awful on the way home, as usual.",
+     "text": "So, today my phone autocorrected a perfectly normal word into nonsense.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
+     "text": "This is trivial, but I keep meaning to read more fiction this winter.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "text": "You know what, I found a sock I lost two months ago.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "text": "I was thinking earlier that work was busy but nothing worth describing.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
+     "text": "This is trivial, but I found a sock I lost two months ago.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Traffic was awful on the way home, as usual.",
+     "text": "So, today I keep meaning to read more fiction this winter.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "My neighbour's wind chimes are driving me up the wall.",
+     "text": "Ha, so my phone autocorrected a perfectly normal word into nonsense.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
+     "text": "Quick aside: I keep meaning to read more fiction this winter.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "text": "For what it's worth, I'm trying to drink more water and failing.",
      "kind": "filler",
      "items": []
     }
@@ -2086,25 +2085,110 @@
   },
   {
    "idx": 10,
-   "date": "2026-08-21",
+   "date": "2026-09-01",
    "turns": [
     {
-     "text": "Traffic was awful on the way home, as usual.",
+     "text": "Funny thing, there was a rainbow over the supermarket car park.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
+     "text": "Anyway, a pigeon has been sitting on my windowsill all afternoon.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "I spent the morning tidying my desk and somehow it's messier now.",
+     "text": "Ha, so the wind chimes next door are driving me up the wall.",
      "kind": "filler",
      "items": []
     },
     {
-     "text": "Traffic was awful on the way home, as usual.",
+     "text": "This is trivial, but the kettle has started making a strange whistling noise.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Quick aside: I can never remember how many millilitres are in a cup.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Okay, tangent: there was a rainbow over the supermarket car park.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "So, today I spent ten minutes looking for my glasses while wearing them.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Quick aside: I found a sock I lost two months ago.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I was thinking earlier that I reorganised my bookshelf by colour, which was a mistake.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "So, today the printer jammed three times in a row.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Funny thing, I wonder if touch-typing is still worth learning.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Honestly, there was a rainbow over the supermarket car park.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Okay, tangent: traffic on the way home was dreadful.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Not important, but the weather keeps flipping between sun and rain.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Random thought: I tried a new route for my walk and got slightly lost.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "I was thinking earlier that a pigeon has been sitting on my windowsill all afternoon.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "This is trivial, but I can never remember how many millilitres are in a cup.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Totally unrelated, but I found a sock I lost two months ago.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Funny thing, I tidied my desk and it somehow looks messier.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "Not important, but I tidied my desk and it somehow looks messier.",
+     "kind": "filler",
+     "items": []
+    },
+    {
+     "text": "So, today I wonder if touch-typing is still worth learning.",
      "kind": "filler",
      "items": []
     },
@@ -2116,112 +2200,7 @@
      ]
     },
     {
-     "text": "I spent the morning tidying my desk and somehow it's messier now.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I watched a documentary about deep-sea fish last night, it was oddly relaxing.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I keep meaning to read more fiction, maybe this winter.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Traffic was awful on the way home, as usual.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "The weather has been strange this week, sunny one hour and pouring the next.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "My neighbour's wind chimes are driving me up the wall.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Traffic was awful on the way home, as usual.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Traffic was awful on the way home, as usual.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "I'm trying to drink more water, we'll see how long that lasts.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Traffic was awful on the way home, as usual.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Traffic was awful on the way home, as usual.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Do you think it's worth learning to touch-type at this point? Just musing.",
-     "kind": "filler",
-     "items": []
-    },
-    {
-     "text": "Can you remind me how to convert cups to millilitres? Never mind, I found it.",
+     "text": "Ha, so I tidied my desk and it somehow looks messier.",
      "kind": "filler",
      "items": []
     }
@@ -2807,7 +2786,7 @@
    "forbidden": [
     "Dr. Szymanska"
    ],
-   "primary": true,
+   "primary": false,
    "control": "q005",
    "rubric": null
   },
@@ -2821,9 +2800,11 @@
    "stale": [],
    "distractors": [],
    "forbidden": [
-    "93,150"
+    "93,150",
+    "93150",
+    "93.15k"
    ],
-   "primary": true,
+   "primary": false,
    "control": "q008",
    "rubric": null
   },
@@ -2839,7 +2820,7 @@
    "forbidden": [
     "Wrenna"
    ],
-   "primary": true,
+   "primary": false,
    "control": "q009",
    "rubric": null
   },
@@ -2886,5 +2867,5 @@
    "rubric": null
   }
  ],
- "est_tokens": 24013
+ "est_tokens": 24021
 }

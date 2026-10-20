@@ -58,3 +58,33 @@ def extraction_envelope(package: dict[str, Any] | None = None) -> dict[str, Any]
         "required": list(props),
         "additionalProperties": False,
     }
+
+
+def gold_to_envelope(persona) -> dict[str, list[dict[str, Any]]]:
+    """A persona's current (non-erased) gold items in the extraction envelope's JSON shape.
+
+    This is what a perfect extractor returns, so extraction can be scored item by item, and it
+    pins the item shape to the registry schema (tests validate it).
+    """
+    from ompm.gold import base
+
+    b = base(persona)
+    mem = "https://w3id.org/ompm/mem#"
+    field_of = {cls: field for field, cls in ITEM_CLASSES.items()}
+    env: dict[str, list[dict[str, Any]]] = {f: [] for f in ITEM_CLASSES}
+    for it in persona.items:
+        if it.erased_in is not None:
+            continue
+        obj: dict[str, Any] = {"@id": b + it.id, "about": b + it.about,
+                               "statement": it.statement}
+        for k, v in it.fields.items():
+            if k in ("relatedTo",):
+                obj[k] = b + v
+            elif k in ("polarity", "relationType", "taskStatus"):
+                obj[k] = mem + v
+            else:
+                obj[k] = v
+        if it.supersedes:
+            obj["supersedes"] = [b + it.supersedes]
+        env[field_of[it.cls]].append(obj)
+    return env

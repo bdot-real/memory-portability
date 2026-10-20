@@ -42,7 +42,7 @@ def render(p: Persona, engine: str = "gold") -> str:
                 continue
             u = f"u{s.idx}_{t_i}"
             out.append(f"ex:{u} a mem:Utterance ; mem:inSession ex:s{s.idx} .")
-            if t.kind in ("reveal", "update"):
+            if t.kind in ("intro", "reveal", "update"):
                 for iid in t.items:
                     utt_of[iid] = u
     date_of = {s.idx: s.date for s in p.sessions}
@@ -68,7 +68,7 @@ def render(p: Persona, engine: str = "gold") -> str:
             props += [f"mem:relatedTo ex:{f['relatedTo']}",
                       f"mem:relationType mem:{f['relationType']}"]
         elif it.cls == "TaskState":
-            props += [f"dcterms:title {lit(f['task'])}", f"mem:taskStatus mem:{f['taskStatus']}",
+            props += [f"mem:task {lit(f['task'])}", f"mem:taskStatus mem:{f['taskStatus']}",
                       f"mem:nextStep {lit(f['nextStep'])}"]
         if it.supersedes:
             props.append(f"mem:supersedes ex:{it.supersedes}")

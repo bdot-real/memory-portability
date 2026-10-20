@@ -55,7 +55,7 @@ ex:m8 a mem:Relationship ; mem:about ex:user ; mem:relatedTo ex:miso ; mem:relat
 
 # Task state.
 ex:m5 a mem:TaskState ; mem:about ex:user ; mem:taskStatus mem:Blocked ;
-  mem:statement "Renewing Dana's passport." ; mem:nextStep "Get new photos taken." ;
+  mem:statement "Renewing Dana's passport." ; mem:task "renewing passport" ; mem:nextStep "Get new photos taken." ;
   mem:dueBy "2026-11-30T00:00:00Z"^^xsd:dateTime .
 
 # Tool definition, independent of any engine's calling convention.
