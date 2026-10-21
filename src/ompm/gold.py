@@ -76,3 +76,24 @@ def render(p: Persona, engine: str = "gold") -> str:
             props.append(f"prov:wasDerivedFrom ex:{utt_of[it.id]}")
         out.append(f"ex:{it.id} " + " ;\n    ".join(props) + " .")
     return "\n".join(out) + "\n"
+
+
+def gold_store(p: Persona):
+    """The gold memory written into a MemoryStore session by session, as a perfect extractor
+    would: the oracle condition, and the reference the replay tests check."""
+    from ompm.schema import gold_canonical
+    from ompm.store import MemoryStore
+
+    st = MemoryStore(base(p), engine="gold")
+    for person in p.people:
+        st.person(person.key, person.name)
+    for s in p.sessions:
+        st.session(s.idx, s.date)
+        for t in s.turns:
+            for iid in t.items:
+                it = p.item(iid)
+                if t.kind == "erase":
+                    st.erase(base(p) + iid, s.date)
+                else:
+                    st.add_item(gold_canonical(it, p), it.cls, s.idx, s.date)
+    return st

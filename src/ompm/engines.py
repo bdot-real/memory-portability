@@ -54,6 +54,7 @@ class Engine:
         messages: list[dict[str, Any]],
         tools: list[dict[str, Any]] | None = None,
         schema: dict[str, Any] | None = None,
+        max_tokens: int | None = None,
     ) -> ChatResult:
         # Ollama truncates over-long prompts without an error, which would quietly handicap the
         # raw-transcript baseline. Refuse anything that might not fit, with headroom for the reply.
@@ -62,12 +63,12 @@ class Engine:
                 f"{self.name}: ~{estimate_tokens(messages)} tokens exceeds 85% of {self.num_ctx}"
             )
         if self.provider == "ollama":
-            return self._ollama(messages, tools, schema)
+            return self._ollama(messages, tools, schema, max_tokens)
         if self.provider == "openai":
-            return self._openai(messages, tools, schema)
+            return self._openai(messages, tools, schema, max_tokens)
         raise ValueError(f"unknown provider {self.provider}")
 
-    def _ollama(self, messages, tools, schema) -> ChatResult:
+    def _ollama(self, messages, tools, schema, max_tokens) -> ChatResult:
         body: dict[str, Any] = {
             "model": self.model,
             "messages": messages,
@@ -78,6 +79,8 @@ class Engine:
             body["tools"] = tools
         if schema:
             body["format"] = schema
+        if max_tokens:
+            body["options"]["num_predict"] = max_tokens
         t0 = time.monotonic()
         r = httpx.post(f"{self.base_url}/api/chat", json=body, timeout=self.timeout)
         r.raise_for_status()
@@ -92,13 +95,15 @@ class Engine:
             raw=data,
         )
 
-    def _openai(self, messages, tools, schema) -> ChatResult:
+    def _openai(self, messages, tools, schema, max_tokens) -> ChatResult:
         body: dict[str, Any] = {
             "model": self.model,
             "messages": messages,
             "temperature": self.temperature,
             "seed": self.seed,
         }
+        if max_tokens:
+            body["max_tokens"] = max_tokens
         if tools:
             body["tools"] = tools
         if schema:

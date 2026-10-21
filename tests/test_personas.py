@@ -119,3 +119,11 @@ def test_filler_is_varied():
     p = generate("big", seed=1, tier="large")
     filler = [t.text for s in p.sessions for t in s.turns if t.kind == "filler"]
     assert len(set(filler)) / len(filler) > 0.9
+
+
+def test_load_roundtrip(tmp_path):
+    from ompm.personas import load
+    p = generate("rt", seed=3)
+    f = tmp_path / "p.json"
+    f.write_text(json.dumps(p.to_json()))
+    assert json.dumps(load(f).to_json()) == json.dumps(p.to_json())

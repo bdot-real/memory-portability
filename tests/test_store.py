@@ -3,9 +3,8 @@ from pathlib import Path
 
 import pytest
 
-from ompm.gold import base
+from ompm.gold import base, gold_store
 from ompm.personas import generate
-from ompm.schema import gold_canonical
 from ompm.store import MemoryStore
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,20 +13,7 @@ CQ = {Path(q).stem[:2]: Path(q).read_text()
 
 
 def replay(p) -> MemoryStore:
-    """Write a persona's gold items into a store session by session, as a perfect extractor."""
-    st = MemoryStore(base(p))
-    for person in p.people:
-        st.person(person.key, person.name)
-    for s in p.sessions:
-        st.session(s.idx, s.date)
-        for t in s.turns:
-            for iid in t.items:
-                it = p.item(iid)
-                if t.kind == "erase":
-                    st.erase(base(p) + iid, s.date)
-                else:
-                    st.add_item(gold_canonical(it, p), it.cls, s.idx, s.date)
-    return st
+    return gold_store(p)
 
 
 @pytest.mark.parametrize("seed", [1, 2, 3])

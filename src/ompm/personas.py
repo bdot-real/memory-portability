@@ -553,3 +553,20 @@ def estimate_persona_tokens(p: Persona) -> int:
 
 def generate(pid: str, seed: int, tier: str = "small") -> Persona:
     return _Builder(pid, seed, tier).build()
+
+
+def load(path) -> Persona:
+    """Read a persona written by scripts/generate_personas.py."""
+    import json
+    from pathlib import Path
+
+    d = json.loads(Path(path).read_text())
+    return Persona(
+        id=d["id"], seed=d["seed"], tier=d["tier"],
+        people=[Person(**x) for x in d["people"]],
+        items=[Item(**x) for x in d["items"]],
+        sessions=[Session(s["idx"], s["date"], [Turn(**t) for t in s["turns"]])
+                  for s in d["sessions"]],
+        probes=[Probe(**x) for x in d["probes"]],
+        est_tokens=d["est_tokens"],
+    )

@@ -146,7 +146,16 @@ class MemoryStore:
                          for c in self.current())
 
     def dump(self) -> str:
-        return self.store.dump(format=ox.RdfFormat.TRIG).decode()
+        """The data graph only, as Turtle. The ontology is reloaded from mem.ttl, never from a
+        dump (reloading it would duplicate its blank-node lists)."""
+        return self.store.dump(format=ox.RdfFormat.TURTLE, from_graph=DATA_GRAPH).decode()
+
+    @classmethod
+    def load(cls, base: str, path, engine: str = "engine") -> "MemoryStore":
+        st = cls(base, engine=engine)
+        st.store.load(path=str(path), format=ox.RdfFormat.TURTLE, to_graph=DATA_GRAPH)
+        st._counter = sum(1 for c in st.current())  # informational; loaded stores are read-only
+        return st
 
     def stats(self) -> dict[str, int]:
         cur = self.current()
