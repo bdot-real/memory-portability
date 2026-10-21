@@ -38,3 +38,19 @@ statements that name people and use they/them where a pronoun is unavoidable.
   the issue was raised with the registry maintainers.
 - The generator had no enum support. Since fixed upstream (owl:oneOf ranges → `enum`), not yet
   deployed; @mem/core 0.4.0 will adopt it.
+
+## F3. Small-model write-in: losses are extraction, and erasure is over-applied (Oct 21, 2026)
+
+Frozen write-in prompt v3, dev personas p02–p04 (30 current gold items each):
+
+| A | strict recall | lenient recall | precision | tombstones (3 requested) | erasures leaked |
+| --- | --- | --- | --- | --- | --- |
+| llama3.1:8b | 0.41 | 0.51 | 0.45 | 9–22 (mean 17) | 2 of 9 |
+| qwen2.5:14b | 0.51 | 0.63 | 0.49 | 1–3 (mean 2.3) | 1 of 9 |
+
+- Relationships survive best (0.6–1.0); plain Facts are lost most (0.07–0.43).
+- The gap between lenient and strict recall (~0.1) is modelling disagreement, e.g. an allergy
+  written as a Fact rather than a Preference that Avoids.
+- llama tombstones far more items than the user asked to forget, which deletes true memories.
+  This is a hazard specific to structured memory: a transcript cannot be over-erased by
+  mistake. The paper should report tombstone precision alongside leaks.

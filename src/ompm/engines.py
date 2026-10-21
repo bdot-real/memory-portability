@@ -47,7 +47,7 @@ class Engine:
     base_url: str = "http://localhost:11434"
     temperature: float = 0.0
     seed: int = 7
-    timeout: float = 600.0
+    timeout: float = 1200.0
 
     def chat(
         self,
