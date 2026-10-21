@@ -104,3 +104,13 @@ def test_tool_bridge_reports_bad_calls():
 
     ans = ask_with_tools(BadTools(p), srv, mcp_tools(srv), "Where do I live?")
     assert ans.tool_errors == 1 and ans.text == "I don't know."
+
+
+def test_extraction_quality_of_perfect_extractor(tmp_path):
+    from ompm.evaluate import extraction_quality
+    p = generate("pl", seed=14)
+    a = FakeEngine(p)
+    store, _ = write_ontology(p, a, dialogue(p, a, cache=tmp_path / "d.json"))
+    q = extraction_quality(p, store)
+    assert q["recall"] == 1.0 and q["precision"] == 1.0
+    assert q["erasures_leaked"] == 0 and q["tombstones"] == q["erasures_requested"] == 3

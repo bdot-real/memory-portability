@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import logging
 import re
 import time
 from dataclasses import asdict, dataclass, field
@@ -24,7 +25,10 @@ from typing import Any
 
 import jsonschema
 
+logging.getLogger("httpx").setLevel(logging.WARNING)
+
 from ompm.engines import Engine, estimate_tokens
+from ompm.evaluate import extraction_quality
 from ompm.gold import base, gold_store
 from ompm.mcp_server import build_server
 from ompm.personas import Persona, Probe
@@ -34,6 +38,8 @@ from ompm.scoring import score
 from ompm.store import MemoryStore
 
 RUNS = Path(__file__).resolve().parents[2] / "runs"
+# Bump when write-in prompts change, so cached stores and summaries are regenerated.
+WRITEIN_VERSION = "v2"
 REPLY_TOKENS = 80  # A's dialogue replies; matches the persona size estimate
 SUMMARY_TOKENS = 900
 ANSWER_TOKENS = 120
@@ -112,12 +118,19 @@ def write_envelope() -> dict[str, Any]:
 def extraction_prompt(user_name: str, guide: str, listing: str, session: str) -> str:
     return (
         f"You maintain a long-term memory store about the user, {user_name}. Read the conversation "
-        "session below and extract every new or changed memory item about the user and the "
-        "people they mention. Write each statement in the third person, naming people rather "
-        "than using pronouns (use they/them if a pronoun is unavoidable), so it makes sense on "
-        "its own. Facts about another person are about that person. If an item replaces an "
-        "existing one, put the old id in supersedes. If the user asks you to forget something, "
-        "put the ids of the matching existing items in erase. Ignore small talk.\n\n"
+        "session below and extract the memory items it adds or changes about the user and the "
+        "people they mention.\n"
+        "Rules:\n"
+        "- Only extract what is said in THIS session. Never repeat an existing memory item.\n"
+        "- Ignore small talk and passing events that won't matter later (weather, traffic, "
+        "lost objects, household annoyances).\n"
+        f"- Write statements in the third person with names, e.g. '{user_name} lives in Ghent', "
+        "never 'I live in Ghent'. Avoid pronouns; use they/them if one is unavoidable.\n"
+        "- A fact about another person is about that person, not about the user.\n"
+        "- If an item replaces an existing one (a move, a new job, a changed plan), put the old "
+        "id in supersedes.\n"
+        "- Put an id in erase ONLY when the user explicitly asks you to forget or delete "
+        "something.\n\n"
         f"Fields:\n{guide}\n\nExisting memory items:\n{listing or '(none yet)'}\n\n"
         f"Session:\n{session}\n\nReturn JSON only."
     )
@@ -175,11 +188,12 @@ def write_summary(p: Persona, a: Engine, sessions: list[dict[str, Any]]) -> tupl
     for s in sessions:
         prompt = (
             f"You keep running notes about the user, {p.people[0].name}, to remember them in "
-            "future conversations. Update the notes with anything new or changed in this session. "
-            "Keep session numbers and dates next to what was said. Replace outdated details. If "
-            "the user asks you to forget something, remove it. Ignore small talk. Write the "
-            "notes in the third person, naming people rather than using pronouns. Return only "
-            "the updated notes.\n\n"
+            "future conversations. Return the COMPLETE updated notes: keep everything from the "
+            "current notes that is still true, even if this session didn't mention it, and add "
+            "anything new. Keep session numbers and dates next to each detail. Replace details "
+            "that changed. If the user asks you to forget something, remove it. Ignore small "
+            "talk. Write in the third person, naming people rather than using pronouns. Return "
+            "only the notes.\n\n"
             f"Current notes:\n{summary or '(none yet)'}\n\n"
             f"Session:\n{session_text(s['idx'], s['date'], s['turns'])}"
         )
@@ -301,7 +315,7 @@ def run(p: Persona, a: Engine, b: Engine, conditions: list[str], out_dir: Path |
 
     store = summary = None
     write_stats = None
-    store_cache = RUNS / "writein" / p.tier / a.name / f"{p.id}.store.ttl"
+    store_cache = RUNS / "writein" / WRITEIN_VERSION / p.tier / a.name / f"{p.id}.store.ttl"
     stats_cache = store_cache.with_suffix(".stats.json")
     if {"a1", "a2"} & set(conditions):
         t0 = time.monotonic()
@@ -317,7 +331,8 @@ def run(p: Persona, a: Engine, b: Engine, conditions: list[str], out_dir: Path |
         timing["write_ontology"] = time.monotonic() - t0
     if "c" in conditions:
         t0 = time.monotonic()
-        summary_cache = RUNS / "writein" / p.tier / a.name / f"{p.id}.summary.txt"
+        summary_cache = (RUNS / "writein" / WRITEIN_VERSION / p.tier / a.name
+                         / f"{p.id}.summary.txt")
         if summary_cache.exists():
             summary = summary_cache.read_text()
         else:
@@ -335,6 +350,7 @@ def run(p: Persona, a: Engine, b: Engine, conditions: list[str], out_dir: Path |
     (out_dir / f"{p.id}.jsonl").write_text("\n".join(json.dumps(r) for r in rows) + "\n")
     meta = {"persona": p.id, "A": a.name, "B": b.name, "conditions": conditions,
             "timing_s": timing, "write_stats": write_stats,
-            "context_tokens": {k: estimate_tokens([{"content": v}]) for k, v in ctx.items()}}
+            "context_tokens": {k: estimate_tokens([{"content": v}]) for k, v in ctx.items()},
+            "extraction": extraction_quality(p, store) if store is not None else None}
     (out_dir / f"{p.id}.meta.json").write_text(json.dumps(meta, indent=1))
     return meta

@@ -22,9 +22,10 @@ import unicodedata
 from ompm.personas import Probe
 
 ABSTAIN = re.compile(
-    r"\b(i don'?t know|i do not know|not sure|no (record|information|memory)|"
-    r"(haven'?t|have not|never|didn'?t|did not) (told|mentioned|said|shared)|"
-    r"(don'?t|do not) have (that|any|this)|not (been )?mentioned|unknown|"
+    r"\b(i don'?t know|i do not know|not sure|not certain|no (record|information|memory)|"
+    r"(haven'?t|have not|never|didn'?t|did not) (told|mentioned|said|shared|provided|given)|"
+    r"(don'?t|do not) have (that|any|this|the|specific|enough)( specific)? ?(information|details|"
+    r"record|memory)?|not (been )?mentioned|unknown|not aware|"
     r"no idea|can'?t recall|cannot recall|don'?t recall|do not recall)\b"
 )
 

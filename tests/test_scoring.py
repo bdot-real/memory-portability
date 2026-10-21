@@ -20,6 +20,8 @@ PROV = Probe("q5", "provenance", "Which session?", "session", gold=["7"])
     (CITY, "Either Coimbra or Tartu.", "hedged"),
     (CITY, "I don't know where you live.", "abstained"),
     (CITY, "Lisbon.", "wrong"),
+    (CITY, "I'm not certain where you live; you haven't provided that.", "abstained"),
+    (CITY, "I don't have that specific information in my memory.", "abstained"),
     (OUD, "You play the oud.", "correct"),
     (OUD, "You play loud music.", "wrong"),  # whole-word matching
     (ERASE, "You asked me to forget that.", "correct"),
