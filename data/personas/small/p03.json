@@ -484,7 +484,7 @@
     "taskStatus": "InProgress",
     "nextStep": "collecting six months of payslips"
    },
-   "statement": "Merritt is switching my mortgage lender; next step: collecting six months of payslips.",
+   "statement": "Merritt is switching their mortgage lender; next step: collecting six months of payslips.",
    "utterance": "I'm in the middle of switching my mortgage lender. Next I need to get on with collecting six months of payslips.",
    "session": 3,
    "supersedes": null,
@@ -499,7 +499,7 @@
     "taskStatus": "InProgress",
     "nextStep": "signing with the new lender"
    },
-   "statement": "Merritt is switching my mortgage lender; next step: signing with the new lender.",
+   "statement": "Merritt is switching their mortgage lender; next step: signing with the new lender.",
    "utterance": "Update on switching my mortgage lender: collecting six months of payslips is done, so now it's signing with the new lender.",
    "session": 7,
    "supersedes": "m032",
@@ -514,7 +514,7 @@
     "taskStatus": "InProgress",
     "nextStep": "booking a photo appointment"
    },
-   "statement": "Merritt is renewing my passport; next step: booking a photo appointment.",
+   "statement": "Merritt is renewing their passport; next step: booking a photo appointment.",
    "utterance": "I'm in the middle of renewing my passport. Next I need to get on with booking a photo appointment.",
    "session": 5,
    "supersedes": null,

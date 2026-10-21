@@ -127,3 +127,10 @@ def test_load_roundtrip(tmp_path):
     f = tmp_path / "p.json"
     f.write_text(json.dumps(p.to_json()))
     assert json.dumps(load(f).to_json()) == json.dumps(p.to_json())
+
+
+def test_statements_are_third_person():
+    import re
+    for p in PERSONAS:
+        for it in p.items:
+            assert not re.search(r"\b(I|my|me)\b", it.statement), it.statement

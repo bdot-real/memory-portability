@@ -333,7 +333,7 @@ ex:m032 a mem:TaskState ;
     prov:wasDerivedFrom ex:u2_8 .
 ex:m033 a mem:TaskState ;
     mem:about ex:user ;
-    mem:statement "Verity is switching my mortgage lender; next step: collecting six months of payslips." ;
+    mem:statement "Verity is switching their mortgage lender; next step: collecting six months of payslips." ;
     mem:validFrom "2026-07-18T12:00:00Z"^^xsd:dateTime ;
     mem:portability mem:Portable ;
     mem:task "switching my mortgage lender" ;

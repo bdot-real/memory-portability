@@ -325,7 +325,7 @@ ex:m031 a mem:Preference ;
     prov:wasDerivedFrom ex:u3_9 .
 ex:m032 a mem:TaskState ;
     mem:about ex:user ;
-    mem:statement "Calloway is switching my mortgage lender; next step: collecting six months of payslips." ;
+    mem:statement "Calloway is switching their mortgage lender; next step: collecting six months of payslips." ;
     mem:validFrom "2026-07-03T12:00:00Z"^^xsd:dateTime ;
     mem:portability mem:Portable ;
     mem:task "switching my mortgage lender" ;

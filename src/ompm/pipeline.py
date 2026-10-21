@@ -39,7 +39,7 @@ from ompm.store import MemoryStore
 
 RUNS = Path(__file__).resolve().parents[2] / "runs"
 # Bump when write-in prompts change, so cached stores and summaries are regenerated.
-WRITEIN_VERSION = "v2"
+WRITEIN_VERSION = "v3"
 REPLY_TOKENS = 80  # A's dialogue replies; matches the persona size estimate
 SUMMARY_TOKENS = 900
 ANSWER_TOKENS = 120
@@ -47,8 +47,8 @@ MAX_TOOL_ROUNDS = 4
 
 DIALOGUE_SYSTEM = ("You are a friendly personal assistant chatting with a user. Reply briefly, "
                    "in one or two sentences.")
-ANSWER_RULES = ("Answer the user's question briefly, using only what you remember about them. "
-                "If you don't have the information, say you don't know.")
+ANSWER_RULES = ("Answer the user's question briefly, in English, using only what you remember "
+                "about them. If you don't have the information, say you don't know.")
 
 
 # --- Dialogue on A ---------------------------------------------------------------------------
@@ -115,15 +115,26 @@ def write_envelope() -> dict[str, Any]:
     return env
 
 
-def extraction_prompt(user_name: str, guide: str, listing: str, session: str) -> str:
+# Rule lists per prompt version. Each change is recorded in docs/tuning-log.md.
+_SMALL_TALK = {
+    "v2": "- Ignore small talk and passing events that won't matter later (weather, traffic, "
+          "lost objects, household annoyances).\n",
+    "v3": "- Capture every lasting personal detail: where people live and work, what they do, "
+          "own, play, learn or belong to, their relationships, health constraints such as "
+          "allergies, likes and dislikes, and plans. Skip only passing remarks about the moment "
+          "(weather, traffic, lost objects, household annoyances).\n",
+}
+
+
+def extraction_prompt(user_name: str, guide: str, listing: str, session: str,
+                      version: str = "v3") -> str:
     return (
         f"You maintain a long-term memory store about the user, {user_name}. Read the conversation "
         "session below and extract the memory items it adds or changes about the user and the "
         "people they mention.\n"
         "Rules:\n"
         "- Only extract what is said in THIS session. Never repeat an existing memory item.\n"
-        "- Ignore small talk and passing events that won't matter later (weather, traffic, "
-        "lost objects, household annoyances).\n"
+        + _SMALL_TALK[version] +
         f"- Write statements in the third person with names, e.g. '{user_name} lives in Ghent', "
         "never 'I live in Ghent'. Avoid pronouns; use they/them if one is unavoidable.\n"
         "- A fact about another person is about that person, not about the user.\n"
@@ -137,7 +148,7 @@ def extraction_prompt(user_name: str, guide: str, listing: str, session: str) ->
 
 
 def write_ontology(p: Persona, a: Engine, sessions: list[dict[str, Any]],
-                   ) -> tuple[MemoryStore, WriteStats]:
+                   version: str = WRITEIN_VERSION) -> tuple[MemoryStore, WriteStats]:
     st = MemoryStore(base(p), engine=a.model)
     defs = load_package_schema()["$defs"]
     people = People(st, p.people[0].name)
@@ -146,7 +157,7 @@ def write_ontology(p: Persona, a: Engine, sessions: list[dict[str, Any]],
     for s in sessions:
         st.session(s["idx"], s["date"])
         prompt = extraction_prompt(p.people[0].name, guide, st.listing(),
-                                   session_text(s["idx"], s["date"], s["turns"]))
+                                   session_text(s["idx"], s["date"], s["turns"]), version)
         r = a.chat([{"role": "user", "content": prompt}], schema=env)
         stats.sessions += 1
         stats.seconds += r.seconds
@@ -227,10 +238,11 @@ def ask_with_context(b: Engine, context: str, question: str) -> Answer:
     return Answer(r.text.strip(), r.seconds, r.prompt_tokens)
 
 
-def ask_with_tools(b: Engine, srv, tools, question: str) -> Answer:
+def ask_with_tools(b: Engine, srv, tools, question: str, user_name: str = "the user") -> Answer:
     msgs: list[dict[str, Any]] = [
-        {"role": "system", "content": "You can look up what you remember about the user with "
-                                      f"the memory tools. {ANSWER_RULES}"},
+        {"role": "system", "content": f"The user's name is {user_name}. You can look up what "
+                                      "you remember about them with the memory tools. "
+                                      f"{ANSWER_RULES}"},
         {"role": "user", "content": question}]
     calls = errors = 0
     seconds = 0.0
@@ -263,13 +275,16 @@ def ask_with_tools(b: Engine, srv, tools, question: str) -> Answer:
 
 def contexts(p: Persona, sessions, store: MemoryStore | None, summary: str | None,
              conditions: list[str]) -> dict[str, str]:
+    """Read-out context per condition. Every condition is told the user's name; the store's
+    rendering (a2, oracle) states it itself."""
+    who = f"The user's name is {p.people[0].name}.\n\n"
     ctx = {}
     if "a2" in conditions and store is not None:
         ctx["a2"] = "What you remember about the user (from your memory store):\n" + store.render()
     if "b" in conditions:
-        ctx["b"] = "Your previous conversations with the user:\n\n" + transcript(sessions)
+        ctx["b"] = who + "Your previous conversations with the user:\n\n" + transcript(sessions)
     if "c" in conditions and summary is not None:
-        ctx["c"] = "Your notes about the user:\n" + summary
+        ctx["c"] = who + "Your notes about the user:\n" + summary
     if "oracle" in conditions:
         ctx["oracle"] = ("What you remember about the user (from your memory store):\n"
                          + gold_store(p).render())
@@ -291,7 +306,7 @@ def probe_all(p: Persona, b: Engine, ctx: dict[str, str], store: MemoryStore | N
             if cond == "a1":
                 if srv is None:
                     continue
-                ans = ask_with_tools(b, srv, tools, q.question)
+                ans = ask_with_tools(b, srv, tools, q.question, p.people[0].name)
             elif cond in ctx:
                 ans = ask_with_context(b, ctx[cond], q.question)
             else:

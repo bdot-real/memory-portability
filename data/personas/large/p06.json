@@ -484,7 +484,7 @@
     "taskStatus": "InProgress",
     "nextStep": "collecting six months of payslips"
    },
-   "statement": "Fenella is switching my mortgage lender; next step: collecting six months of payslips.",
+   "statement": "Fenella is switching their mortgage lender; next step: collecting six months of payslips.",
    "utterance": "I'm in the middle of switching my mortgage lender. Next I need to get on with collecting six months of payslips.",
    "session": 1,
    "supersedes": null,

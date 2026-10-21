@@ -544,7 +544,7 @@
     "taskStatus": "InProgress",
     "nextStep": "collecting six months of payslips"
    },
-   "statement": "Verity is switching my mortgage lender; next step: collecting six months of payslips.",
+   "statement": "Verity is switching their mortgage lender; next step: collecting six months of payslips.",
    "utterance": "I'm in the middle of switching my mortgage lender. Next I need to get on with collecting six months of payslips.",
    "session": 2,
    "supersedes": null,
@@ -559,7 +559,7 @@
     "taskStatus": "InProgress",
     "nextStep": "signing with the new lender"
    },
-   "statement": "Verity is switching my mortgage lender; next step: signing with the new lender.",
+   "statement": "Verity is switching their mortgage lender; next step: signing with the new lender.",
    "utterance": "Update on switching my mortgage lender: collecting six months of payslips is done, so now it's signing with the new lender.",
    "session": 9,
    "supersedes": "m036",

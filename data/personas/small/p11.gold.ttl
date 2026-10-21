@@ -364,7 +364,7 @@ ex:m035 a mem:TaskState ;
     prov:wasDerivedFrom ex:u7_5 .
 ex:m036 a mem:TaskState ;
     mem:about ex:user ;
-    mem:statement "Anouk is renewing my passport; next step: booking a photo appointment." ;
+    mem:statement "Anouk is renewing their passport; next step: booking a photo appointment." ;
     mem:validFrom "2026-06-15T12:00:00Z"^^xsd:dateTime ;
     mem:portability mem:Portable ;
     mem:task "renewing my passport" ;
@@ -373,7 +373,7 @@ ex:m036 a mem:TaskState ;
     prov:wasDerivedFrom ex:u1_3 .
 ex:m037 a mem:TaskState ;
     mem:about ex:user ;
-    mem:statement "Anouk is renewing my passport; next step: mailing the renewal form." ;
+    mem:statement "Anouk is renewing their passport; next step: mailing the renewal form." ;
     mem:validFrom "2026-07-30T12:00:00Z"^^xsd:dateTime ;
     mem:portability mem:Portable ;
     mem:task "renewing my passport" ;

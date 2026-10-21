@@ -345,7 +345,7 @@ ex:m033 a mem:TaskState ;
     prov:wasDerivedFrom ex:u8_7 .
 ex:m034 a mem:TaskState ;
     mem:about ex:user ;
-    mem:statement "Quillon is switching my mortgage lender; next step: collecting six months of payslips." ;
+    mem:statement "Quillon is switching their mortgage lender; next step: collecting six months of payslips." ;
     mem:validFrom "2026-06-14T12:00:00Z"^^xsd:dateTime ;
     mem:portability mem:Portable ;
     mem:task "switching my mortgage lender" ;
@@ -354,7 +354,7 @@ ex:m034 a mem:TaskState ;
     prov:wasDerivedFrom ex:u1_3 .
 ex:m035 a mem:TaskState ;
     mem:about ex:user ;
-    mem:statement "Quillon is switching my mortgage lender; next step: signing with the new lender." ;
+    mem:statement "Quillon is switching their mortgage lender; next step: signing with the new lender." ;
     mem:validFrom "2026-07-02T12:00:00Z"^^xsd:dateTime ;
     mem:portability mem:Portable ;
     mem:task "switching my mortgage lender" ;
@@ -364,7 +364,7 @@ ex:m035 a mem:TaskState ;
     prov:wasDerivedFrom ex:u3_5 .
 ex:m036 a mem:TaskState ;
     mem:about ex:user ;
-    mem:statement "Quillon is renewing my passport; next step: booking a photo appointment." ;
+    mem:statement "Quillon is renewing their passport; next step: booking a photo appointment." ;
     mem:validFrom "2026-06-14T12:00:00Z"^^xsd:dateTime ;
     mem:portability mem:Portable ;
     mem:task "renewing my passport" ;
@@ -373,7 +373,7 @@ ex:m036 a mem:TaskState ;
     prov:wasDerivedFrom ex:u1_10 .
 ex:m037 a mem:TaskState ;
     mem:about ex:user ;
-    mem:statement "Quillon is renewing my passport; next step: mailing the renewal form." ;
+    mem:statement "Quillon is renewing their passport; next step: mailing the renewal form." ;
     mem:validFrom "2026-07-11T12:00:00Z"^^xsd:dateTime ;
     mem:portability mem:Portable ;
     mem:task "renewing my passport" ;

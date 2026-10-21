@@ -19,36 +19,59 @@ from mcp.server.mcpserver import MCPServer
 from ompm.store import FOAF, MEM, PROV, MemoryStore
 
 STOP = {"my", "the", "a", "an", "of", "is", "what", "which", "who", "do", "i", "me", "on", "in",
-        "for", "to", "did", "does", "am", "at", "about", "and", "or", "you", "your"}
+        "for", "to", "did", "does", "am", "at", "about", "and", "or", "you", "your", "now"}
+
+
+def stem(w: str) -> str:
+    """Crude suffix stripping so 'live', 'lives' and 'living' match."""
+    for suf in ("ing", "ies", "es", "ed", "s"):
+        if w.endswith(suf) and len(w) - len(suf) >= 3:
+            return w[: -len(suf)] + ("y" if suf == "ies" else "")
+    return w
 
 
 def tokens(s: str) -> set[str]:
-    return {w for w in re.findall(r"[a-z0-9]+", s.lower()) if w not in STOP}
+    return {stem(w) for w in re.findall(r"[a-z0-9]+", s.lower()) if w not in STOP}
 
 
 def _items(store: MemoryStore, include_superseded: bool = False):
-    q = f"""PREFIX mem: <{MEM}> PREFIX prov: <{PROV}> PREFIX foaf: <{FOAF}>
-    SELECT ?i ?cls ?st ?sess ?date ?newer (GROUP_CONCAT(DISTINCT ?name; separator=" ") AS ?names)
-           (GROUP_CONCAT(DISTINCT ?f; separator=" ") AS ?fields)
-    WHERE {{
-      GRAPH <urn:ompm:data> {{ ?i a ?cls ; mem:statement ?st . }}
+    """Items with an annotation saying whose they are and how that person relates to the user."""
+    cur = store.current()
+    names, rel = store.names(), store.relations(cur)
+    rows = [(c, False) for c in cur]
+    if include_superseded:
+        current_iris = {c.iri for c in cur}
+        rows += [(c, True) for c in _superseded(store) if c.iri not in current_iris]
+    for c, replaced in rows:
+        who = store.describe_person(c.about, names, rel)
+        status = " (replaced later)" if replaced else ""
+        date = c.fields.get("validFrom", "")[:10]
+        when = f"session {c.session}, {date}" if date else f"session {c.session}"
+        text = f"[{when}] {c.statement}{status} (about {who})"
+        match = tokens(" ".join([c.statement, who, c.cls] + [
+            v for k, v in c.fields.items()
+            if k in ("attribute", "target", "task", "context", "nextStep", "value")]))
+        yield {"text": text, "match": match, "user": c.about == store.base + "user"}
+
+
+def _superseded(store: MemoryStore):
+    """Items that a newer item replaced, oldest first (for memory_history)."""
+    from ompm.store import Current
+
+    q = f"""PREFIX mem: <{MEM}> PREFIX prov: <{PROV}>
+    SELECT DISTINCT ?i ?cls ?st ?sess WHERE {{
+      GRAPH <urn:ompm:data> {{ ?i a ?cls ; mem:statement ?st . ?newer mem:supersedes ?i }}
       OPTIONAL {{ ?i prov:wasDerivedFrom/mem:inSession ?sess }}
-      OPTIONAL {{ ?i mem:validFrom ?date }}
-      OPTIONAL {{ ?newer mem:supersedes ?i }}
-      OPTIONAL {{ ?i mem:about|mem:relatedTo ?p . ?p foaf:name ?name }}
-      OPTIONAL {{ ?i mem:attribute|mem:target|mem:task|mem:context|mem:nextStep ?f }}
-    }} GROUP BY ?i ?cls ?st ?sess ?date ?newer ORDER BY ?date ?i"""
+    }}"""
+    out = []
     for r in store.query(q):
-        if r["newer"] and not include_superseded:
-            continue
-        sess = r["sess"].value.removeprefix(store.base + "s") if r["sess"] else "?"
-        date = r["date"].value[:10] if r["date"] else "?"
-        status = " (replaced later)" if r["newer"] else ""
-        yield {
-            "text": f"[session {sess}, {date}] {r['st'].value}{status}",
-            "match": tokens(" ".join(r[k].value for k in ("st", "names", "fields") if r[k])
-                            + " " + r["cls"].value.rsplit("#", 1)[-1]),
-        }
+        sess = r["sess"].value.removeprefix(store.base + "s") if r["sess"] else ""
+        fields = {r2["p"].value.removeprefix(MEM): r2["o"].value.removeprefix(MEM)
+                  for r2 in store.query(f"SELECT ?p ?o WHERE {{ GRAPH <urn:ompm:data> {{ "
+                                        f"<{r['i'].value}> ?p ?o }} }}")}
+        out.append(Current(r["i"].value, r["cls"].value.removeprefix(MEM), r["st"].value,
+                           int(sess) if sess.isdigit() else None, fields.get("about"), fields))
+    return out
 
 
 def build_server(store: MemoryStore) -> MCPServer:
@@ -61,9 +84,9 @@ def build_server(store: MemoryStore) -> MCPServer:
         """Search current memories about the user and people they know by keywords,
         e.g. 'home city', 'sister allergy', 'passport next step'."""
         q = tokens(query)
-        scored = sorted(((len(q & it["match"]), it["text"]) for it in _items(store)),
-                        key=lambda x: -x[0])
-        hits = [t for s, t in scored if s > 0][:limit]
+        scored = [(len(q & it["match"]), it["user"], it["text"]) for it in _items(store)]
+        scored.sort(key=lambda x: (-x[0], not x[1]))  # best match first; the user's own on ties
+        hits = [t for s, _, t in scored if s > 0][:limit]
         return hits or ["No matching memories."]
 
     @srv.tool()
@@ -79,9 +102,12 @@ def build_server(store: MemoryStore) -> MCPServer:
 
     @srv.tool()
     def memories_about(person: str) -> list[str]:
-        """All current memories about one person, by name (use 'user' for the user)."""
-        want = tokens(person)
-        hits = [it["text"] for it in _items(store) if want & it["match"]]
+        """All current memories about one person, by name or by relation to the user
+        (e.g. 'Niamh', 'my sister', 'manager'); use 'user' for the user."""
+        want = tokens(person) - {"user"} or {"__user__"}
+        hits = [it["text"] for it in _items(store)
+                if (want == {"__user__"} and it["user"]) or
+                (want & tokens(it["text"].rsplit("(about ", 1)[-1]))]
         return hits or [f"No memories about {person}."]
 
     @srv.tool()

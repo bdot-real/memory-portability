@@ -324,7 +324,7 @@ ex:m031 a mem:Preference ;
     prov:wasDerivedFrom ex:u3_9 .
 ex:m032 a mem:TaskState ;
     mem:about ex:user ;
-    mem:statement "Merritt is switching my mortgage lender; next step: collecting six months of payslips." ;
+    mem:statement "Merritt is switching their mortgage lender; next step: collecting six months of payslips." ;
     mem:validFrom "2026-07-07T12:00:00Z"^^xsd:dateTime ;
     mem:portability mem:Portable ;
     mem:task "switching my mortgage lender" ;
@@ -333,7 +333,7 @@ ex:m032 a mem:TaskState ;
     prov:wasDerivedFrom ex:u3_14 .
 ex:m033 a mem:TaskState ;
     mem:about ex:user ;
-    mem:statement "Merritt is switching my mortgage lender; next step: signing with the new lender." ;
+    mem:statement "Merritt is switching their mortgage lender; next step: signing with the new lender." ;
     mem:validFrom "2026-08-12T12:00:00Z"^^xsd:dateTime ;
     mem:portability mem:Portable ;
     mem:task "switching my mortgage lender" ;
@@ -343,7 +343,7 @@ ex:m033 a mem:TaskState ;
     prov:wasDerivedFrom ex:u7_0 .
 ex:m034 a mem:TaskState ;
     mem:about ex:user ;
-    mem:statement "Merritt is renewing my passport; next step: booking a photo appointment." ;
+    mem:statement "Merritt is renewing their passport; next step: booking a photo appointment." ;
     mem:validFrom "2026-07-25T12:00:00Z"^^xsd:dateTime ;
     mem:portability mem:Portable ;
     mem:task "renewing my passport" ;

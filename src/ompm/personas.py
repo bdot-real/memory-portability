@@ -458,7 +458,7 @@ class _Builder:
             s = self.early()
             it = self.add_item("TaskState", "user",
                                {"task": task, "taskStatus": "InProgress", "nextStep": step1[0]},
-                               f"{n} is {task}; next step: {step1[0]}.",
+                               f"{n} is {their(task)}; next step: {step1[0]}.",
                                f"I'm in the middle of {task}. Next I need to get on with "
                                f"{step1[0]}.", s)
             if self.rng.random() < 0.67:
@@ -466,7 +466,7 @@ class _Builder:
                 it2 = self.add_item("TaskState", "user",
                                     {"task": task, "taskStatus": "InProgress",
                                      "nextStep": step2[0]},
-                                    f"{n} is {task}; next step: {step2[0]}.",
+                                    f"{n} is {their(task)}; next step: {step2[0]}.",
                                     f"Update on {task}: {step1[0]} is done, so now it's "
                                     f"{step2[0]}.", s2, kind="update", supersedes=it.id)
                 self.add_probe(kind="task", question=f"What's my next step on {task}?",
@@ -529,6 +529,11 @@ class _Builder:
             used = {t.text for ts in self.turns.values() for t in ts}
             fresh = [f for f in FILLER if f not in used] or FILLER
             self.turns[s].append(Turn(self.rng.choice(fresh), "filler"))
+
+
+def their(phrase: str) -> str:
+    """Third-person form of a first-person task phrase, without guessing anyone's pronouns."""
+    return re.sub(r"\bmy\b", "their", phrase)
 
 
 def leak_forms(v: str) -> list[str]:

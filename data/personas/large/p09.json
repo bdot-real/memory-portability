@@ -514,7 +514,7 @@
     "taskStatus": "InProgress",
     "nextStep": "collecting six months of payslips"
    },
-   "statement": "Quillon is switching my mortgage lender; next step: collecting six months of payslips.",
+   "statement": "Quillon is switching their mortgage lender; next step: collecting six months of payslips.",
    "utterance": "I'm in the middle of switching my mortgage lender. Next I need to get on with collecting six months of payslips.",
    "session": 1,
    "supersedes": null,
@@ -529,7 +529,7 @@
     "taskStatus": "InProgress",
     "nextStep": "signing with the new lender"
    },
-   "statement": "Quillon is switching my mortgage lender; next step: signing with the new lender.",
+   "statement": "Quillon is switching their mortgage lender; next step: signing with the new lender.",
    "utterance": "Update on switching my mortgage lender: collecting six months of payslips is done, so now it's signing with the new lender.",
    "session": 3,
    "supersedes": "m034",
@@ -544,7 +544,7 @@
     "taskStatus": "InProgress",
     "nextStep": "booking a photo appointment"
    },
-   "statement": "Quillon is renewing my passport; next step: booking a photo appointment.",
+   "statement": "Quillon is renewing their passport; next step: booking a photo appointment.",
    "utterance": "I'm in the middle of renewing my passport. Next I need to get on with booking a photo appointment.",
    "session": 1,
    "supersedes": null,
@@ -559,7 +559,7 @@
     "taskStatus": "InProgress",
     "nextStep": "mailing the renewal form"
    },
-   "statement": "Quillon is renewing my passport; next step: mailing the renewal form.",
+   "statement": "Quillon is renewing their passport; next step: mailing the renewal form.",
    "utterance": "Update on renewing my passport: booking a photo appointment is done, so now it's mailing the renewal form.",
    "session": 4,
    "supersedes": "m036",

@@ -7,7 +7,7 @@ Erasure deletes an item's content and leaves a tombstone, so CQ5 (no erased cont
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any
 
 import jsonschema
@@ -36,6 +36,8 @@ class Current:
     cls: str
     statement: str
     session: int | None
+    about: str | None = None  # person IRI
+    fields: dict[str, str] = field(default_factory=dict)  # mem: local name -> value
 
 
 class MemoryStore:
@@ -117,7 +119,7 @@ class MemoryStore:
         return self.store.query(sparql, use_default_graph_as_union=True)
 
     def current(self) -> list[Current]:
-        """Items not superseded and not erased, oldest first."""
+        """Items not superseded and not erased, oldest first, with their fields."""
         q = f"""PREFIX mem: <{MEM}> PREFIX prov: <{PROV}>
         SELECT ?i ?cls ?st ?sess WHERE {{
           GRAPH <urn:ompm:data> {{ ?i a ?cls ; mem:statement ?st . }}
@@ -130,14 +132,67 @@ class MemoryStore:
             sess = r["sess"].value.removeprefix(self.base + "s") if r["sess"] else None
             out.append(Current(r["i"].value, r["cls"].value.removeprefix(MEM), r["st"].value,
                                int(sess) if sess and sess.isdigit() else None))
+        fields: dict[str, dict[str, str]] = {}
+        fq = f"""SELECT ?i ?p ?o WHERE {{ GRAPH <urn:ompm:data> {{ ?i ?p ?o }}
+                 FILTER (STRSTARTS(STR(?p), "{MEM}")) }}"""
+        for r in self.query(fq):
+            fields.setdefault(r["i"].value, {})[r["p"].value.removeprefix(MEM)] = \
+                r["o"].value.removeprefix(MEM)
+        for c in out:
+            c.fields = fields.get(c.iri, {})
+            c.about = c.fields.get("about")
+        out.sort(key=lambda c: (c.session if c.session is not None else 10**6, c.iri))
         return out
 
+    def names(self) -> dict[str, str]:
+        q = f"SELECT ?p ?n WHERE {{ ?p <{FOAF}name> ?n }}"
+        return {r["p"].value: r["n"].value for r in self.query(q)}
+
+    def relations(self, cur: list[Current] | None = None) -> dict[str, str]:
+        """Person IRI -> how they relate to the user, from current Relationship items."""
+        user = self.base + "user"
+        rel = {}
+        for c in cur if cur is not None else self.current():
+            if c.cls != "Relationship" or "relationType" not in c.fields:
+                continue
+            other = c.fields.get("relatedTo") if c.about == user else (
+                c.about if c.fields.get("relatedTo") == user else None)
+            if other:
+                rel[other] = c.fields["relationType"].lower()
+        return rel
+
+    def describe_person(self, iri: str | None, names=None, rel=None) -> str:
+        names = names if names is not None else self.names()
+        rel = rel if rel is not None else self.relations()
+        user = names.get(self.base + "user", "the user")
+        if iri == self.base + "user":
+            return f"{user} (the user)"
+        name = names.get(iri or "", "someone")
+        return f"{name}, {user}'s {rel[iri]}" if iri in rel else name
+
     def render(self, with_sessions: bool = True) -> str:
-        """Current items as text, for read-out mode (a2): one statement per line."""
-        lines = []
-        for c in self.current():
-            tag = f"[session {c.session}] " if with_sessions and c.session else ""
-            lines.append(f"- {tag}{c.statement}")
+        """Current items grouped by person, with each person's relation to the user. Used for
+        read-out (a2, oracle) so relational structure in the store reaches the reader."""
+        cur, names = self.current(), self.names()
+        rel = self.relations(cur)
+        user_iri = self.base + "user"
+        groups: dict[str, list[Current]] = {}
+        for c in cur:
+            groups.setdefault(c.about or "", []).append(c)
+        order = [user_iri] + [k for k in groups if k != user_iri]
+        lines = [f"The user is {names.get(user_iri, 'the user')}."]
+        for who in order:
+            items = groups.get(who, [])
+            if not items and who != user_iri:
+                continue
+            lines.append(f"\nAbout {self.describe_person(who, names, rel)}:")
+            for c in items:
+                tag = f"[session {c.session}] " if with_sessions and c.session else ""
+                lines.append(f"- {tag}{c.statement}")
+        known = [k for k in rel if k not in groups]
+        if known:
+            lines.append("\nOther people " + names.get(user_iri, "the user") + " knows: " +
+                         "; ".join(self.describe_person(k, names, rel) for k in known))
         return "\n".join(lines)
 
     def listing(self) -> str:

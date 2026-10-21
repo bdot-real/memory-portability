@@ -544,7 +544,7 @@
     "taskStatus": "InProgress",
     "nextStep": "booking a photo appointment"
    },
-   "statement": "Anouk is renewing my passport; next step: booking a photo appointment.",
+   "statement": "Anouk is renewing their passport; next step: booking a photo appointment.",
    "utterance": "I'm in the middle of renewing my passport. Next I need to get on with booking a photo appointment.",
    "session": 1,
    "supersedes": null,
@@ -559,7 +559,7 @@
     "taskStatus": "InProgress",
     "nextStep": "mailing the renewal form"
    },
-   "statement": "Anouk is renewing my passport; next step: mailing the renewal form.",
+   "statement": "Anouk is renewing their passport; next step: mailing the renewal form.",
    "utterance": "Update on renewing my passport: booking a photo appointment is done, so now it's mailing the renewal form.",
    "session": 6,
    "supersedes": "m036",
