@@ -1,0 +1,389 @@
+@prefix mem:  <https://w3id.org/ompm/mem#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix ex: <https://example.org/ompm/e07/> .
+
+ex:user a foaf:Person ; foaf:name "Fenella" .
+ex:p1 a foaf:Person ; foaf:name "Merritt" .
+ex:p2 a foaf:Person ; foaf:name "Thaddeus" .
+ex:p3 a foaf:Person ; foaf:name "Ines" .
+ex:p4 a foaf:Person ; foaf:name "Zebedee" .
+ex:p5 a foaf:Agent ; foaf:name "Dumpling" .
+ex:engine a mem:Engine ; foaf:name "gold" .
+ex:s1 a mem:Session ; prov:wasAssociatedWith ex:engine ; prov:startedAtTime "2026-06-04T12:00:00Z"^^xsd:dateTime .
+ex:u1_0 a mem:Utterance ; mem:inSession ex:s1 .
+ex:u1_1 a mem:Utterance ; mem:inSession ex:s1 .
+ex:u1_5 a mem:Utterance ; mem:inSession ex:s1 .
+ex:u1_25 a mem:Utterance ; mem:inSession ex:s1 .
+ex:u1_28 a mem:Utterance ; mem:inSession ex:s1 .
+ex:s2 a mem:Session ; prov:wasAssociatedWith ex:engine ; prov:startedAtTime "2026-06-13T12:00:00Z"^^xsd:dateTime .
+ex:u2_0 a mem:Utterance ; mem:inSession ex:s2 .
+ex:u2_1 a mem:Utterance ; mem:inSession ex:s2 .
+ex:u2_4 a mem:Utterance ; mem:inSession ex:s2 .
+ex:u2_12 a mem:Utterance ; mem:inSession ex:s2 .
+ex:u2_14 a mem:Utterance ; mem:inSession ex:s2 .
+ex:u2_21 a mem:Utterance ; mem:inSession ex:s2 .
+ex:u2_26 a mem:Utterance ; mem:inSession ex:s2 .
+ex:u2_32 a mem:Utterance ; mem:inSession ex:s2 .
+ex:u2_34 a mem:Utterance ; mem:inSession ex:s2 .
+ex:u2_42 a mem:Utterance ; mem:inSession ex:s2 .
+ex:s3 a mem:Session ; prov:wasAssociatedWith ex:engine ; prov:startedAtTime "2026-06-22T12:00:00Z"^^xsd:dateTime .
+ex:u3_0 a mem:Utterance ; mem:inSession ex:s3 .
+ex:u3_6 a mem:Utterance ; mem:inSession ex:s3 .
+ex:u3_8 a mem:Utterance ; mem:inSession ex:s3 .
+ex:u3_17 a mem:Utterance ; mem:inSession ex:s3 .
+ex:u3_21 a mem:Utterance ; mem:inSession ex:s3 .
+ex:u3_22 a mem:Utterance ; mem:inSession ex:s3 .
+ex:u3_25 a mem:Utterance ; mem:inSession ex:s3 .
+ex:s4 a mem:Session ; prov:wasAssociatedWith ex:engine ; prov:startedAtTime "2026-07-01T12:00:00Z"^^xsd:dateTime .
+ex:u4_0 a mem:Utterance ; mem:inSession ex:s4 .
+ex:u4_2 a mem:Utterance ; mem:inSession ex:s4 .
+ex:u4_4 a mem:Utterance ; mem:inSession ex:s4 .
+ex:u4_5 a mem:Utterance ; mem:inSession ex:s4 .
+ex:u4_9 a mem:Utterance ; mem:inSession ex:s4 .
+ex:u4_26 a mem:Utterance ; mem:inSession ex:s4 .
+ex:u4_29 a mem:Utterance ; mem:inSession ex:s4 .
+ex:s5 a mem:Session ; prov:wasAssociatedWith ex:engine ; prov:startedAtTime "2026-07-10T12:00:00Z"^^xsd:dateTime .
+ex:u5_1 a mem:Utterance ; mem:inSession ex:s5 .
+ex:u5_7 a mem:Utterance ; mem:inSession ex:s5 .
+ex:u5_15 a mem:Utterance ; mem:inSession ex:s5 .
+ex:u5_25 a mem:Utterance ; mem:inSession ex:s5 .
+ex:s6 a mem:Session ; prov:wasAssociatedWith ex:engine ; prov:startedAtTime "2026-07-19T12:00:00Z"^^xsd:dateTime .
+ex:u6_3 a mem:Utterance ; mem:inSession ex:s6 .
+ex:u6_23 a mem:Utterance ; mem:inSession ex:s6 .
+ex:s7 a mem:Session ; prov:wasAssociatedWith ex:engine ; prov:startedAtTime "2026-07-28T12:00:00Z"^^xsd:dateTime .
+ex:u7_4 a mem:Utterance ; mem:inSession ex:s7 .
+ex:u7_5 a mem:Utterance ; mem:inSession ex:s7 .
+ex:u7_8 a mem:Utterance ; mem:inSession ex:s7 .
+ex:u7_26 a mem:Utterance ; mem:inSession ex:s7 .
+ex:s8 a mem:Session ; prov:wasAssociatedWith ex:engine ; prov:startedAtTime "2026-08-06T12:00:00Z"^^xsd:dateTime .
+ex:s9 a mem:Session ; prov:wasAssociatedWith ex:engine ; prov:startedAtTime "2026-08-15T12:00:00Z"^^xsd:dateTime .
+ex:u9_10 a mem:Utterance ; mem:inSession ex:s9 .
+ex:u9_11 a mem:Utterance ; mem:inSession ex:s9 .
+ex:u9_17 a mem:Utterance ; mem:inSession ex:s9 .
+ex:u9_19 a mem:Utterance ; mem:inSession ex:s9 .
+ex:s10 a mem:Session ; prov:wasAssociatedWith ex:engine ; prov:startedAtTime "2026-08-24T12:00:00Z"^^xsd:dateTime .
+ex:m001 a mem:Fact ;
+    mem:about ex:user ;
+    mem:statement "Fenella lives in Dunedin." ;
+    mem:validFrom "2026-06-22T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:attribute "home city" ;
+    mem:value "Dunedin" ;
+    prov:wasDerivedFrom ex:u3_21 .
+ex:m002 a mem:Fact ;
+    mem:about ex:user ;
+    mem:statement "Fenella moved to Trois-Rivieres." ;
+    mem:validFrom "2026-07-28T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:attribute "home city" ;
+    mem:value "Trois-Rivieres" ;
+    mem:supersedes ex:m001 ;
+    prov:wasDerivedFrom ex:u7_5 .
+ex:m003 a mem:Fact ;
+    mem:about ex:user ;
+    mem:statement "Fenella works at Vantwell Robotics." ;
+    mem:validFrom "2026-06-22T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:attribute "employer" ;
+    mem:value "Vantwell Robotics" ;
+    prov:wasDerivedFrom ex:u3_17 .
+ex:m004 a mem:Fact ;
+    mem:about ex:user ;
+    mem:statement "Fenella now works at Halvorsen Optics." ;
+    mem:validFrom "2026-07-28T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:attribute "employer" ;
+    mem:value "Halvorsen Optics" ;
+    mem:supersedes ex:m003 ;
+    prov:wasDerivedFrom ex:u7_26 .
+ex:m005 a mem:Fact ;
+    mem:about ex:user ;
+    mem:statement "Fenella is a patent examiner." ;
+    mem:validFrom "2026-06-13T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:attribute "occupation" ;
+    mem:value "patent examiner" ;
+    prov:wasDerivedFrom ex:u2_32 .
+ex:m006 a mem:Fact ;
+    mem:about ex:user ;
+    mem:statement "Fenella is learning Icelandic." ;
+    mem:validFrom "2026-06-13T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:attribute "language being learned" ;
+    mem:value "Icelandic" ;
+    prov:wasDerivedFrom ex:u2_26 .
+ex:m007 a mem:Fact ;
+    mem:about ex:user ;
+    mem:statement "Fenella switched to learning Tagalog." ;
+    mem:validFrom "2026-07-28T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:attribute "language being learned" ;
+    mem:value "Tagalog" ;
+    mem:supersedes ex:m006 ;
+    prov:wasDerivedFrom ex:u7_8 .
+ex:m008 a mem:Fact ;
+    mem:about ex:user ;
+    mem:statement "Fenella plays the bagpipes." ;
+    mem:validFrom "2026-06-13T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:attribute "instrument" ;
+    mem:value "bagpipes" ;
+    prov:wasDerivedFrom ex:u2_4 .
+ex:m009 a mem:Fact ;
+    mem:about ex:user ;
+    mem:statement "Fenella drives a orange Citroen 2CV." ;
+    mem:validFrom "2026-07-01T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:attribute "car" ;
+    mem:value "orange Citroen 2CV" ;
+    prov:wasDerivedFrom ex:u4_4 .
+ex:m010 a mem:Fact ;
+    mem:about ex:user ;
+    mem:statement "Fenella belongs to a Thursday orienteering club." ;
+    mem:validFrom "2026-06-04T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:attribute "club" ;
+    mem:value "a Thursday orienteering club" ;
+    prov:wasDerivedFrom ex:u1_5 .
+ex:m011 a mem:Fact ;
+    mem:about ex:user ;
+    mem:statement "Fenella lives on Pellow Crescent." ;
+    mem:validFrom "2026-06-22T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:attribute "street" ;
+    mem:value "Pellow Crescent" ;
+    prov:wasDerivedFrom ex:u3_8 .
+ex:m012 a mem:Relationship ;
+    mem:about ex:user ;
+    mem:statement "Merritt is Fenella's colleague." ;
+    mem:validFrom "2026-06-13T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:relatedTo ex:p1 ;
+    mem:relationType mem:Colleague ;
+    prov:wasDerivedFrom ex:u2_0 .
+ex:m013 a mem:Relationship ;
+    mem:about ex:user ;
+    mem:statement "Thaddeus is Fenella's manager." ;
+    mem:validFrom "2026-07-01T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:relatedTo ex:p2 ;
+    mem:relationType mem:Manager ;
+    prov:wasDerivedFrom ex:u4_0 .
+ex:m014 a mem:Relationship ;
+    mem:about ex:user ;
+    mem:statement "Ines is Fenella's friend." ;
+    mem:validFrom "2026-06-04T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:relatedTo ex:p3 ;
+    mem:relationType mem:Friend ;
+    prov:wasDerivedFrom ex:u1_0 .
+ex:m015 a mem:Relationship ;
+    mem:about ex:user ;
+    mem:statement "Zebedee is Fenella's brother." ;
+    mem:validFrom "2026-06-22T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:relatedTo ex:p4 ;
+    mem:relationType mem:Sibling ;
+    prov:wasDerivedFrom ex:u3_0 .
+ex:m016 a mem:Relationship ;
+    mem:about ex:user ;
+    mem:statement "Dumpling is Fenella's ferret." ;
+    mem:validFrom "2026-06-13T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:relatedTo ex:p5 ;
+    mem:relationType mem:Pet ;
+    prov:wasDerivedFrom ex:u2_1 .
+ex:m017 a mem:Preference ;
+    mem:about ex:p1 ;
+    mem:statement "Merritt is allergic to lupin." ;
+    mem:validFrom "2026-06-22T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:target "lupin" ;
+    mem:polarity mem:Avoids ;
+    mem:context "allergy" ;
+    prov:wasDerivedFrom ex:u3_22 .
+ex:m018 a mem:Preference ;
+    mem:about ex:p2 ;
+    mem:statement "Thaddeus is allergic to soy." ;
+    mem:validFrom "2026-07-01T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:target "soy" ;
+    mem:polarity mem:Avoids ;
+    mem:context "allergy" ;
+    prov:wasDerivedFrom ex:u4_9 .
+ex:m019 a mem:Preference ;
+    mem:about ex:p3 ;
+    mem:statement "Ines is allergic to shellfish." ;
+    mem:validFrom "2026-06-13T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:target "shellfish" ;
+    mem:polarity mem:Avoids ;
+    mem:context "allergy" ;
+    prov:wasDerivedFrom ex:u2_42 .
+ex:m020 a mem:Preference ;
+    mem:about ex:p4 ;
+    mem:statement "Zebedee is allergic to mustard." ;
+    mem:validFrom "2026-07-01T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:target "mustard" ;
+    mem:polarity mem:Avoids ;
+    mem:context "allergy" ;
+    prov:wasDerivedFrom ex:u4_29 .
+ex:m021 a mem:Fact ;
+    mem:about ex:p1 ;
+    mem:statement "Merritt is a luthier." ;
+    mem:validFrom "2026-07-01T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:attribute "occupation" ;
+    mem:value "luthier" ;
+    prov:wasDerivedFrom ex:u4_26 .
+ex:m022 a mem:Fact ;
+    mem:about ex:p2 ;
+    mem:statement "Thaddeus is a court stenographer." ;
+    mem:validFrom "2026-07-19T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:attribute "occupation" ;
+    mem:value "court stenographer" ;
+    prov:wasDerivedFrom ex:u6_23 .
+ex:m023 a mem:Fact ;
+    mem:about ex:p3 ;
+    mem:statement "Ines is a beekeeper." ;
+    mem:validFrom "2026-06-13T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:attribute "occupation" ;
+    mem:value "beekeeper" ;
+    prov:wasDerivedFrom ex:u2_12 .
+ex:m024 a mem:Fact ;
+    mem:about ex:p4 ;
+    mem:statement "Zebedee is a dialysis nurse." ;
+    mem:validFrom "2026-07-10T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:attribute "occupation" ;
+    mem:value "dialysis nurse" ;
+    prov:wasDerivedFrom ex:u5_25 .
+ex:m025 a mem:Fact ;
+    mem:about ex:p1 ;
+    mem:statement "Merritt lives in Gdansk." ;
+    mem:validFrom "2026-07-10T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:attribute "home city" ;
+    mem:value "Gdansk" ;
+    prov:wasDerivedFrom ex:u5_7 .
+ex:m026 a mem:Fact ;
+    mem:about ex:p2 ;
+    mem:statement "Thaddeus lives in Bratislava." ;
+    mem:validFrom "2026-07-10T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:attribute "home city" ;
+    mem:value "Bratislava" ;
+    prov:wasDerivedFrom ex:u5_1 .
+ex:m027 a mem:Preference ;
+    mem:about ex:user ;
+    mem:statement "Fenella loves okonomiyaki." ;
+    mem:validFrom "2026-06-13T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:target "okonomiyaki" ;
+    mem:polarity mem:Likes ;
+    prov:wasDerivedFrom ex:u2_14 .
+ex:m028 a mem:Preference ;
+    mem:about ex:user ;
+    mem:statement "Fenella's favourite food is now laksa." ;
+    mem:validFrom "2026-08-15T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:target "laksa" ;
+    mem:polarity mem:Likes ;
+    mem:supersedes ex:m027 ;
+    prov:wasDerivedFrom ex:u9_19 .
+ex:m029 a mem:Preference ;
+    mem:about ex:user ;
+    mem:statement "Fenella dislikes okra." ;
+    mem:validFrom "2026-06-04T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:target "okra" ;
+    mem:polarity mem:Dislikes ;
+    prov:wasDerivedFrom ex:u1_25 .
+ex:m030 a mem:Preference ;
+    mem:about ex:user ;
+    mem:statement "Fenella prefers aisle seats on red-eye flights." ;
+    mem:validFrom "2026-06-04T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:target "aisle seats" ;
+    mem:polarity mem:Likes ;
+    mem:context "on red-eye flights" ;
+    prov:wasDerivedFrom ex:u1_28 .
+ex:m031 a mem:Preference ;
+    mem:about ex:user ;
+    mem:statement "Fenella won't take Monday morning standups at work." ;
+    mem:validFrom "2026-06-13T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:target "Monday morning standups" ;
+    mem:polarity mem:Avoids ;
+    mem:context "at work" ;
+    prov:wasDerivedFrom ex:u2_34 .
+ex:m032 a mem:TaskState ;
+    mem:about ex:user ;
+    mem:statement "Fenella is switching their mortgage lender; next step: collecting six months of payslips." ;
+    mem:validFrom "2026-06-22T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:task "switching my mortgage lender" ;
+    mem:taskStatus mem:InProgress ;
+    mem:nextStep "collecting six months of payslips" ;
+    prov:wasDerivedFrom ex:u3_25 .
+ex:m033 a mem:TaskState ;
+    mem:about ex:user ;
+    mem:statement "Fenella is switching their mortgage lender; next step: signing with the new lender." ;
+    mem:validFrom "2026-07-28T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:task "switching my mortgage lender" ;
+    mem:taskStatus mem:InProgress ;
+    mem:nextStep "signing with the new lender" ;
+    mem:supersedes ex:m032 ;
+    prov:wasDerivedFrom ex:u7_4 .
+ex:m034 a mem:TaskState ;
+    mem:about ex:user ;
+    mem:statement "Fenella is applying for the sailing course; next step: getting a medical certificate." ;
+    mem:validFrom "2026-07-01T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:task "applying for the sailing course" ;
+    mem:taskStatus mem:InProgress ;
+    mem:nextStep "getting a medical certificate" ;
+    prov:wasDerivedFrom ex:u4_5 .
+ex:m035 a mem:TaskState ;
+    mem:about ex:user ;
+    mem:statement "Fenella is applying for the sailing course; next step: paying the deposit." ;
+    mem:validFrom "2026-08-15T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:task "applying for the sailing course" ;
+    mem:taskStatus mem:InProgress ;
+    mem:nextStep "paying the deposit" ;
+    mem:supersedes ex:m034 ;
+    prov:wasDerivedFrom ex:u9_11 .
+ex:m036 a mem:TaskState ;
+    mem:about ex:user ;
+    mem:statement "Fenella is planning the garden shed build; next step: ordering cedar planks." ;
+    mem:validFrom "2026-06-04T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:task "planning the garden shed build" ;
+    mem:taskStatus mem:InProgress ;
+    mem:nextStep "ordering cedar planks" ;
+    prov:wasDerivedFrom ex:u1_1 .
+ex:m037 a mem:TaskState ;
+    mem:about ex:user ;
+    mem:statement "Fenella is planning the garden shed build; next step: pouring the concrete footings." ;
+    mem:validFrom "2026-07-19T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    mem:task "planning the garden shed build" ;
+    mem:taskStatus mem:InProgress ;
+    mem:nextStep "pouring the concrete footings" ;
+    mem:supersedes ex:m036 ;
+    prov:wasDerivedFrom ex:u6_3 .
+ex:tomb_m038 a mem:Tombstone ; mem:erasedItem ex:m038 ; prov:wasInvalidatedBy ex:erasure_m038 .
+ex:erasure_m038 a mem:Erasure ; prov:atTime "2026-08-15T12:00:00Z"^^xsd:dateTime .
+ex:tomb_m039 a mem:Tombstone ; mem:erasedItem ex:m039 ; prov:wasInvalidatedBy ex:erasure_m039 .
+ex:erasure_m039 a mem:Erasure ; prov:atTime "2026-07-10T12:00:00Z"^^xsd:dateTime .
+ex:tomb_m040 a mem:Tombstone ; mem:erasedItem ex:m040 ; prov:wasInvalidatedBy ex:erasure_m040 .
+ex:erasure_m040 a mem:Erasure ; prov:atTime "2026-08-15T12:00:00Z"^^xsd:dateTime .
