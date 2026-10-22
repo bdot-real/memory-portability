@@ -15,6 +15,8 @@ sessions is exactly what the conditions under test do afterwards.
 from __future__ import annotations
 
 import asyncio
+import os
+import platform
 import json
 import logging
 import re
@@ -364,6 +366,7 @@ def run(p: Persona, a: Engine, b: Engine, conditions: list[str], out_dir: Path |
         r["A"] = a.name
     (out_dir / f"{p.id}.jsonl").write_text("\n".join(json.dumps(r) for r in rows) + "\n")
     meta = {"persona": p.id, "A": a.name, "B": b.name, "conditions": conditions,
+            "host": os.environ.get("OMPM_HOST", platform.node()),
             "timing_s": timing, "write_stats": write_stats,
             "context_tokens": {k: estimate_tokens([{"content": v}]) for k, v in ctx.items()},
             "extraction": extraction_quality(p, store) if store is not None else None}
