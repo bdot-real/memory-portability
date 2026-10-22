@@ -1,6 +1,6 @@
 % Anonymisation toggle: \anontrue for double-blind submission, \anonfalse for camera-ready.
 \newif\ifanon
-\anontrue
+\anonfalse  % ESWC 2027 In-Use review is single anonymous: submissions are not anonymised
 % \anonymised{identifying}{replacement}
 \newcommand{\anonymised}[2]{\ifanon#2\else#1\fi}
 \newcommand{\registry}{\anonymised{\url{https://onto.melx.buzz}}{[registry URL withheld for review]}\xspace}
