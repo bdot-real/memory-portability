@@ -13,7 +13,7 @@ rm -rf "$BUILD" && mkdir -p "$BUILD/bundle" "$BUILD/kernel"
 export KAGGLE_API_TOKEN="$(uv run python -c "from ompm.engines import api_key; print(api_key('KAGGLE_API_KEY'))")"
 
 # Code, ontology and the large-tier personas only: no runs, no .env.
-tar czf "$BUILD/bundle/ompm.tar.gz" pyproject.toml uv.lock README.md src scripts ontology \
+COPYFILE_DISABLE=1 tar czf "$BUILD/bundle/ompm.tar.gz" pyproject.toml uv.lock README.md src scripts ontology \
   data/personas/large
 cat > "$BUILD/bundle/dataset-metadata.json" <<EOF
 {"title": "ompm-bundle", "id": "$USER_NAME/ompm-bundle", "licenses": [{"name": "other"}]}

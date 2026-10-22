@@ -28,8 +28,11 @@ WORK = Path("/kaggle/working/ompm")
 
 def sh(cmd: str, **kw) -> str:
     print("$", cmd, flush=True)
-    return subprocess.run(cmd, shell=True, check=True, text=True, capture_output=True,
-                          **kw).stdout
+    p = subprocess.run(cmd, shell=True, text=True, capture_output=True, **kw)
+    if p.returncode:
+        print(p.stdout[-2000:], p.stderr[-2000:], sep="\n", flush=True)
+        p.check_returncode()
+    return p.stdout
 
 
 def main() -> None:
@@ -44,6 +47,10 @@ def main() -> None:
         src = next(Path("/kaggle/input").rglob("pyproject.toml")).parent
         shutil.copytree(src, WORK, dirs_exist_ok=True)
 
+    print(sh("curl -sS -o /dev/null -w '%{http_code}' https://ollama.com"), "<- internet check",
+          flush=True)
+    # The installer unpacks a .tar.zst; the Kaggle image may lack zstd.
+    sh("command -v zstd || (apt-get update -qq && apt-get install -y -qq zstd)")
     sh("curl -fsSL https://ollama.com/install.sh | sh")
     subprocess.Popen("ollama serve > /kaggle/working/ollama.log 2>&1", shell=True)
     time.sleep(10)
