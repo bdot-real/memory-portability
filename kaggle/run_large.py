@@ -2,7 +2,7 @@
 
 Pushed by scripts/kaggle_push.sh together with the code bundle (private dataset ompm-bundle).
 Steps:
-  1. unpack the bundle into /kaggle/working/ompm (so runs/ lands in the job's output)
+  1. unpack (or copy, if Kaggle unpacked it) the bundle into /kaggle/working/ompm (so runs/ lands in the job's output)
   2. install and start Ollama, pull the three engines, and stop unless every model's digest
      equals the one pinned on the Mac (docs/artifacts.md): same weights, or no run at all
   3. run scripts/run_matrix.py --tier large on the personas in OMPM_PERSONAS
@@ -13,6 +13,7 @@ whole persona is the unit split between machines, so the next push takes the nex
 """
 
 import os
+import shutil
 import subprocess
 import sys
 import tarfile
@@ -32,10 +33,16 @@ def sh(cmd: str, **kw) -> str:
 
 
 def main() -> None:
-    bundle = next(Path("/kaggle/input").rglob("ompm.tar.gz"))
-    WORK.mkdir(parents=True, exist_ok=True)
-    with tarfile.open(bundle) as t:
-        t.extractall(WORK, filter="data")
+    # Kaggle may unpack an uploaded archive, so accept either the tarball or its contents.
+    print(sh("find /kaggle/input -maxdepth 4 | head -30"), flush=True)
+    bundle = next(Path("/kaggle/input").rglob("ompm.tar.gz"), None)
+    if bundle:
+        WORK.mkdir(parents=True, exist_ok=True)
+        with tarfile.open(bundle) as t:
+            t.extractall(WORK, filter="data")
+    else:
+        src = next(Path("/kaggle/input").rglob("pyproject.toml")).parent
+        shutil.copytree(src, WORK, dirs_exist_ok=True)
 
     sh("curl -fsSL https://ollama.com/install.sh | sh")
     subprocess.Popen("ollama serve > /kaggle/working/ollama.log 2>&1", shell=True)
