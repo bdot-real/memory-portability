@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import os
 import time
+from pathlib import Path
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -35,6 +36,18 @@ def estimate_tokens(messages: list[dict[str, Any]]) -> int:
     return int(sum(len(str(m.get("content", ""))) for m in messages) / CHARS_PER_TOKEN)
 
 
+def api_key(var: str) -> str:
+    """The key from the environment, else from the repo's git-ignored .env file."""
+    if var not in os.environ:
+        env = Path(__file__).resolve().parents[2] / ".env"
+        if env.exists():
+            for line in env.read_text().splitlines():
+                k, _, v = line.partition("=")
+                if k.strip() == var:
+                    os.environ[var] = v.strip().strip('"')
+    return os.environ[var]
+
+
 @dataclass
 class Engine:
     """A chat model at a pinned version. `family` is used to keep the judge out of engine families."""
@@ -48,6 +61,7 @@ class Engine:
     temperature: float = 0.0
     seed: int = 7
     timeout: float = 1200.0
+    api_key_env: str = "OPENAI_API_KEY"
 
     def chat(
         self,
@@ -111,15 +125,25 @@ class Engine:
                 "type": "json_schema",
                 "json_schema": {"name": "out", "schema": schema},
             }
+        if "openrouter.ai" in self.base_url:
+            # Route only to providers that honour every parameter (above all response_format).
+            # Current hosted models reject seed and temperature (routing then finds no endpoint),
+            # so hosted calls run at the provider's default sampling. Outputs are cached and
+            # released, which is what makes them reproducible.
+            body.pop("seed")
+            body.pop("temperature")
+            body["provider"] = {"require_parameters": True}
         t0 = time.monotonic()
         r = httpx.post(
             f"{self.base_url}/chat/completions",
             json=body,
-            headers={"Authorization": f"Bearer {os.environ['OPENAI_API_KEY']}"},
+            headers={"Authorization": f"Bearer {api_key(self.api_key_env)}"},
             timeout=self.timeout,
         )
         r.raise_for_status()
         data = r.json()
+        if "error" in data:
+            raise RuntimeError(f"{self.name}: {data['error']}")
         msg = data["choices"][0]["message"]
         usage = data.get("usage", {})
         return ChatResult(
@@ -140,10 +164,15 @@ ENGINES = {
 }
 JUDGE = Engine("judge", "phi4:latest", family="microsoft", num_ctx=16384)
 
-# Hosted engines, enabled when keys and budget exist.
+# Hosted engines through OpenRouter (key OPEN_ROUTER_API_KEY in .env). Not part of the local
+# matrix: `sonnet` is the strong extractor (write-in from the local engines' cached dialogues),
+# `gpt` the hosted judge, a family distinct from both the extractor and the local engines.
+OPENROUTER = "https://openrouter.ai/api/v1"
 HOSTED = {
-    "gpt": Engine(
-        "gpt", "gpt-4o-mini", family="openai", provider="openai",
-        base_url="https://api.openai.com/v1", num_ctx=128000,
-    ),
+    "sonnet": Engine("sonnet", "anthropic/claude-sonnet-5.5", family="anthropic",
+                     provider="openai", base_url=OPENROUTER, num_ctx=200000,
+                     api_key_env="OPEN_ROUTER_API_KEY", timeout=300.0),
+    "gpt": Engine("gpt", "openai/gpt-6.1-sol", family="openai", provider="openai",
+                  base_url=OPENROUTER, num_ctx=200000, api_key_env="OPEN_ROUTER_API_KEY",
+                  timeout=300.0),
 }
