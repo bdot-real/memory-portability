@@ -7,6 +7,6 @@ ESWC 2027 In-Use track, Springer LNCS. `main.tex` inputs one file per section fr
   Until it has run, every result prints as a bold `??`.
 - **Anonymisation:** `\anontrue` in `macros.tex` hides the registry URL, repository, namespace
   owner and byline; set `\anonfalse` for camera-ready.
-- **Build:** needs `llncs.cls` and `splncs04.bst` (Springer LNCS kit) and a TeX toolchain
-  (e.g. `latexmk -pdf main.tex`), or upload the folder to Overleaf.
+- **Build:** `tectonic -X compile main.tex` (Tectonic 0.17, `brew install tectonic`; it fetches
+  `llncs.cls` and `splncs04.bst` from its TeX Live bundle on first run). Overleaf also works.
 - Open items are marked `\todo{...}` and print in red.

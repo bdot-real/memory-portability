@@ -7,3 +7,9 @@ runs/
 # Generated from runs/ by scripts/paper_numbers.py; commit once the eval matrix is final.
 paper/numbers.tex
 paper/tables/
+paper/*.pdf
+paper/*.log
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.out
