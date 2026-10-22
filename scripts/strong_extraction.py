@@ -1,4 +1,4 @@
-"""Strong-extractor experiment: a hosted model writes the store from a local engine's dialogue.
+"""Strong-extractor experiment: a larger hosted model (default gemini-3.5-flash, free tier) writes the store from a local engine's dialogue.
 
 Same personas, same cached dialogue of source engine A, same write-in prompt (v3) and schema;
 only the extracting model changes. Comparing its store with A's own isolates extraction loss.
@@ -9,8 +9,8 @@ only the extracting model changes. Comparing its store with A's own isolates ext
   uv run python scripts/strong_extraction.py probe --personas e01-e12 --a llama,mistral,qwen
 
 Only personas whose dialogue on A is already cached are used, so `write` never calls Ollama.
-Stores: runs/writein/v3/<tier>/sonnet@<A>/. Quality and cost: runs/strong/<tier>/extraction.jsonl.
-Answers: runs/results-strong/<tier>/sonnet@<A>-to-<B>/<persona>.jsonl, conditions a1x and a2x.
+Stores: runs/writein/v3/<tier>/<x>@<A>/. Quality and cost: runs/strong/<tier>/extraction.jsonl.
+Answers: runs/results-strong/<tier>/<x>@<A>-to-<B>/<persona>.jsonl, conditions a1x and a2x.
 """
 
 import argparse
@@ -19,7 +19,7 @@ import time
 from dataclasses import asdict
 from pathlib import Path
 
-from ompm.engines import ENGINES, HOSTED
+from ompm.engines import ENGINES, FREE, HOSTED
 from ompm.evaluate import extraction_quality
 from ompm.personas import load
 from ompm.pipeline import (RUNS, WRITEIN_VERSION, base, contexts, dialogue, probe_all,
@@ -27,6 +27,7 @@ from ompm.pipeline import (RUNS, WRITEIN_VERSION, base, contexts, dialogue, prob
 from ompm.store import MemoryStore
 
 DATA = Path(__file__).resolve().parents[1] / "data/personas"
+EXTRACTORS = {**FREE, **HOSTED}
 
 
 class Metered:
@@ -55,7 +56,7 @@ def store_path(tier: str, x: str, a: str, pid: str) -> Path:
 
 
 def write(args) -> None:
-    x = Metered(HOSTED[args.x])
+    x = Metered(EXTRACTORS[args.x])
     log = RUNS / "strong" / args.tier / "extraction.jsonl"
     log.parent.mkdir(parents=True, exist_ok=True)
     for pid in persona_ids(args.personas):
@@ -68,7 +69,11 @@ def write(args) -> None:
                 continue
             sessions = dialogue(p, ENGINES[a])
             cost0, t0 = x.cost, time.monotonic()
-            st, stats = write_ontology(p, x, sessions)
+            try:
+                st, stats = write_ontology(p, x, sessions)
+            except Exception as e:  # e.g. the free tier stayed overloaded; retried next pass
+                print(pid, a, "FAIL", str(e)[:200], flush=True)
+                continue
             out.parent.mkdir(parents=True, exist_ok=True)
             out.write_text(st.dump())
             out.with_suffix(".stats.json").write_text(json.dumps(asdict(stats), indent=1))
@@ -91,7 +96,7 @@ def probe(args) -> None:
             src = store_path(args.tier, args.x, a, pid)
             if not src.exists():
                 continue
-            store = MemoryStore.load(base(p), src, engine=HOSTED[args.x].model)
+            store = MemoryStore.load(base(p), src, engine=EXTRACTORS[args.x].model)
             sessions = dialogue(p, ENGINES[a])
             for b in [e for e in ENGINES if e != a]:
                 out = (RUNS / "results-strong" / args.tier / f"{args.x}@{a}-to-{b}"
@@ -119,7 +124,7 @@ def main() -> None:
     ap.add_argument("--tier", default="small")
     ap.add_argument("--personas", default="e01-e12")
     ap.add_argument("--a", default="llama,mistral,qwen")
-    ap.add_argument("--x", default="sonnet")
+    ap.add_argument("--x", default="gemini", choices=list(EXTRACTORS))
     args = ap.parse_args()
     (write if args.mode == "write" else probe)(args)
 

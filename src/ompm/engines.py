@@ -62,6 +62,11 @@ class Engine:
     seed: int = 7
     timeout: float = 1200.0
     api_key_env: str = "OPENAI_API_KEY"
+    # Hosted APIs differ in what they accept: current Claude and GPT models on OpenRouter reject
+    # temperature and seed (routing then finds no endpoint), and Gemini rejects seed. Those
+    # engines run without them; their outputs are cached and released instead.
+    send_temperature: bool = True
+    send_seed: bool = True
 
     def chat(
         self,
@@ -110,12 +115,11 @@ class Engine:
         )
 
     def _openai(self, messages, tools, schema, max_tokens) -> ChatResult:
-        body: dict[str, Any] = {
-            "model": self.model,
-            "messages": messages,
-            "temperature": self.temperature,
-            "seed": self.seed,
-        }
+        body: dict[str, Any] = {"model": self.model, "messages": messages}
+        if self.send_temperature:
+            body["temperature"] = self.temperature
+        if self.send_seed:
+            body["seed"] = self.seed
         if max_tokens:
             body["max_tokens"] = max_tokens
         if tools:
@@ -127,19 +131,26 @@ class Engine:
             }
         if "openrouter.ai" in self.base_url:
             # Route only to providers that honour every parameter (above all response_format).
-            # Current hosted models reject seed and temperature (routing then finds no endpoint),
-            # so hosted calls run at the provider's default sampling. Outputs are cached and
-            # released, which is what makes them reproducible.
-            body.pop("seed")
-            body.pop("temperature")
             body["provider"] = {"require_parameters": True}
         t0 = time.monotonic()
-        r = httpx.post(
-            f"{self.base_url}/chat/completions",
-            json=body,
-            headers={"Authorization": f"Bearer {api_key(self.api_key_env)}"},
-            timeout=self.timeout,
-        )
+        for attempt in range(10):
+            # Free tiers rate-limit (429), shed load (503) and stall; wait and retry the request.
+            r = None
+            try:
+                r = httpx.post(
+                    f"{self.base_url}/chat/completions",
+                    json=body,
+                    headers={"Authorization": f"Bearer {api_key(self.api_key_env)}"},
+                    timeout=self.timeout,
+                )
+            except httpx.TimeoutException:
+                if attempt == 9:
+                    raise
+            else:
+                if r.status_code not in (429, 500, 503) or attempt == 9:
+                    break
+            wait = r.headers.get("retry-after") if r is not None else None
+            time.sleep(min(300.0, float(wait or 10 * 2 ** attempt)))
         r.raise_for_status()
         data = r.json()
         if "error" in data:
@@ -164,6 +175,15 @@ ENGINES = {
 }
 JUDGE = Engine("judge", "phi4:latest", family="microsoft", num_ctx=16384)
 
+# Gemini API free tier (key GEMINI_API_KEY in .env), OpenAI-compatible endpoint. Strong extractor
+# and hosted judge at no cost; Google is a family outside the three local engines.
+GEMINI = "https://generativelanguage.googleapis.com/v1beta/openai"
+FREE = {
+    "gemini": Engine("gemini", "gemini-3.5-flash", family="google", provider="openai",
+                     base_url=GEMINI, num_ctx=200000, api_key_env="GEMINI_API_KEY",
+                     timeout=300.0, send_seed=False),
+}
+
 # Hosted engines through OpenRouter (key OPEN_ROUTER_API_KEY in .env). Not part of the local
 # matrix: `sonnet` is the strong extractor (write-in from the local engines' cached dialogues),
 # `gpt` the hosted judge, a family distinct from both the extractor and the local engines.
@@ -171,8 +191,9 @@ OPENROUTER = "https://openrouter.ai/api/v1"
 HOSTED = {
     "sonnet": Engine("sonnet", "anthropic/claude-sonnet-5.5", family="anthropic",
                      provider="openai", base_url=OPENROUTER, num_ctx=200000,
-                     api_key_env="OPEN_ROUTER_API_KEY", timeout=300.0),
+                     api_key_env="OPEN_ROUTER_API_KEY", timeout=300.0,
+                     send_temperature=False, send_seed=False),
     "gpt": Engine("gpt", "openai/gpt-6.1-sol", family="openai", provider="openai",
                   base_url=OPENROUTER, num_ctx=200000, api_key_env="OPEN_ROUTER_API_KEY",
-                  timeout=300.0),
+                  timeout=300.0, send_temperature=False, send_seed=False),
 }
