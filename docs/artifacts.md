@@ -20,3 +20,7 @@ Dependencies (exact): `@w3c/prov-o` 1.0.0, `@foaf/foaf` 0.99.0, `@dcmi/terms` 1.
 
 Pending: w3id.org redirect (https://github.com/perma-id/w3id.org/pull/6930, opened 2026-10-20) for
 `https://w3id.org/ompm/mem#` awaiting merge; Zenodo DOI for code and dataset at submission.
+
+Engines (Ollama, pinned by digest; recorded 2026-10-22 before the eval matrix):
+`llama3.1:8b` 46e0c10c039e · `mistral:7b` 6577803aa9a0 · `qwen2.5:14b-instruct` 7cdf5a0187d5 ·
+judge `phi4:latest` ac896e5b8b34.

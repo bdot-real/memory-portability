@@ -1,0 +1,40 @@
+\section{A Portability Taxonomy of Agent Memory}\label{sec:taxonomy}
+
+``Memory'' covers very different things in LLM systems. We classify them by what it takes to
+move them to another engine (Table~\ref{tab:taxonomy}). The classes are encoded in \memcore as
+the SKOS scheme \texttt{mem:PortabilityScheme}, and every stored item carries its class in
+\texttt{mem:portability}, so an exporter can decide what to move without inspecting content.
+
+\begin{table}[t]
+\centering
+\caption{Agent memory by portability.}\label{tab:taxonomy}
+\begin{tabular}{@{}p{2.6cm}p{4.4cm}p{4.6cm}@{}}
+\toprule
+Class & Examples & What moving it takes \\
+\midrule
+Portable & facts, preferences, relationships, task state, tool definitions, provenance, erasure
+  records & Map into a shared ontology once; any engine reads it through an adapter. \\
+Portable with regeneration & retrieval corpora, vector indexes, embeddings, cached summaries &
+  Move the source; regenerate the derived form with the target engine's model. \\
+Non-portable & weights, fine-tunes, adapters, implicit behaviour learned in training & Cannot be
+  moved between model families; at most re-derived by training on portable data. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Portable memory} is explicit and symbolic: a statement someone could write down and
+check. It is the memory users notice when it is lost (``you already know I'm vegetarian''), and
+the memory data protection law is concerned with. Our ontology and evaluation cover this class.
+
+\paragraph{Embeddings sit in the middle class.} An embedding is a function of both the content
+and the model that produced it. Vectors from one embedding model are meaningless in another's
+space, so moving them is useless; but the content they index can be moved and re-embedded at
+known cost. The same holds for summaries an engine has written for its own use: the source
+moves, the derived form is rebuilt. Treating these as portable would mean shipping data that the
+target cannot interpret.
+
+\paragraph{Non-portable memory} lives in parameters. A fine-tune of one model family cannot be
+loaded into another, and behaviour learned during training cannot be exported as statements. The
+practical consequence is architectural: anything a user should be able to take with them must be
+kept, from the start, in the portable class, with engine-native memory treated as a cache of it
+(Sect.~\ref{sec:architecture}).

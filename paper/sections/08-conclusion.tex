@@ -1,0 +1,14 @@
+\section{Conclusion and Future Work}\label{sec:conclusion}
+
+We applied Gruber's translation approach to the memory of LLM assistants: a shared ontology,
+published and versioned like a software package, with thin per-engine adapters for write-in and
+read-out. On a gold-first benchmark of multi-session personas and six cross-engine pairs of open
+models, the ontology store carries memory between engines at a fraction of the tokens of a
+transcript, and the remaining loss sits in extraction by the source engine. \todo{one sentence
+with the headline numbers}
+
+Future work: extraction by a stronger engine than the conversational one; hosted engines and
+their native memory exports as a fourth baseline; paraphrased and real dialogue; the regeneration
+class of the taxonomy (moving retrieval corpora and re-embedding them); and consent scopes enforced
+at read-out across organisations. The ontology, registry artifacts, benchmark, prompts and all run
+outputs are available at \repo.

@@ -1,0 +1,152 @@
+\section{Evaluation}\label{sec:evaluation}
+
+We ask how much of a user's memory survives a change of engine under ontology-mediated migration,
+compared with carrying the transcript or an LLM-written summary, and where the loss happens.
+
+\subsection{Portability Fidelity Metric}
+
+Let $P$ be the set of primary probes of a persona, one per gold memory item. Each probe is a
+question whose correct answer depends on that item. Migrating from source engine $A$ to target
+engine $B$ under condition $k$ and probing $B$ gives
+\begin{equation}
+  \mathrm{PFM}^{k}_{A\to B} = \frac{1}{|P|}\sum_{p\in P}
+    \mathbb{1}\left[\mathrm{score}\left(p,\ \mathrm{answer}^{k}_{A\to B}(p)\right)=\mathrm{correct}\right].
+\end{equation}
+We report \PFM averaged over personas, overall and per probe kind, with 95\% confidence intervals
+from a bootstrap over personas (probes within a persona are correlated, so resampling probes would
+understate the uncertainty).
+
+\subsection{Dataset}
+
+Personas are generated \emph{gold first}: a seeded generator fixes the memory items, then templates
+the user's turns from them, so no LLM shapes the input and no engine family is favoured. Each
+persona has a user, four related people and a pet, and about \res{items-per-persona} items spread
+over sessions: facts about the user (home city, employer, occupation, language, \dots), facts about
+the other people (occupation, allergy, home city), preferences with polarity and context, three
+tasks with next steps, and three erasure requests (therapist, salary, ex-partner). Updates are
+oversampled: the home city, employer, language, favourite dish and most task next steps change
+once. Values are deliberately uncommon (small cities, invented employers, rare dishes) so that an
+engine cannot answer from its priors, and within a persona no value is a substring of another.
+All names are synthetic. Between memory-bearing turns, the dialogue carries small talk drawn from
+a pool of 400 distinct lines. A \emph{small} tier has about \res{tok-small}k tokens of dialogue per
+persona; a \emph{large} tier has the same items and probes padded to about \res{tok-large}k tokens,
+still under 85\% of every engine's window.
+
+The evaluation set has \res{n-personas} small personas \todo{and N large personas, if the large tier
+finishes} generated from a seed never used during development, with \res{n-probes} probes in total.
+
+\subsection{Conditions}
+
+The dialogue is played on engine $A$, which replies live. After every session, each condition
+updates its memory with the same cadence; then engine $B$ is probed in a fresh turn per question.
+\begin{description}
+  \item[\cond{a1} ontology via tools.] $A$ writes the store (Sect.~\ref{sec:adapters}); $B$
+    queries it through the MCP tools.
+  \item[\cond{a2} ontology rendered.] Same store; current items are rendered into $B$'s prompt.
+  \item[\cond{b} transcript.] The full transcript, with session headers and dates, goes into $B$'s
+    prompt.
+  \item[\cond{c} summary.] $A$ keeps a running free-text summary, updated after each session and
+    told to keep everything still true, with dates and session numbers.
+  \item[\cond{oracle}.] The gold store, rendered as in \cond{a2}. It is an upper bound on what the
+    representation and read-out can deliver, and the gap \cond{oracle}$-$\cond{a2} is the loss
+    caused by $A$'s extraction.
+\end{description}
+Every context states the user's name, and all conditions share the same answering instructions.
+Vendor-native memory export, a fourth baseline in principle, is not measured: none of the local
+engines has native memory. We discuss it in Sect.~\ref{sec:discussion}.
+
+We run all six ordered pairs of distinct engines. Same-engine pairs ($A=B$) are omitted: the
+question is migration, and the oracle already bounds read-out without a change of engine.
+
+\subsection{Probes and Scoring}
+
+Primary probes cover four kinds: \emph{recall} (``What car do I drive?''), \emph{update} (``Which
+city do I live in?'' after a move), \emph{multi-hop} over relationships (``If I cook for my
+colleague, which ingredient must I leave out?'') and \emph{task} (``What is my next step on
+renewing my passport?''). Scoring is deterministic: an answer is correct if it contains a gold
+value (whole-word, case- and diacritic-insensitive) and no competitor. Competitors are explicit in
+the gold: a superseded value alone scores \emph{stale}, another person's value \emph{distracted},
+gold plus a competitor \emph{hedged}, a refusal \emph{abstained}. Mentioning the old value next to
+the new one (``you moved from X to Y'') is correct.
+
+Secondary probes are reported outside \PFM. \emph{Provenance} asks in which session an item was
+stated. \emph{Null} probes ask about things never said and must be declined; anything else is a
+false memory. \emph{Erasure} probes ask for an erased value (with spelling variants, e.g.\ 87500 and
+87.5k); since a condition that remembers nothing passes trivially, each erasure probe is paired
+with a recall probe on a non-erased user fact, and we report the leak rate only among cases where
+that control was answered correctly. \emph{Preference application} (``Suggest a dinner for me and
+my sister'') is scored by an LLM judge from a fourth model family (\texttt{phi4}) against a rubric,
+with a human-labelled subset to measure agreement. \todo{judge and human agreement: not yet run}
+
+\subsection{Results}
+
+\begin{table}[t]
+\centering
+\caption{\PFM by condition, averaged over personas and the six cross-engine pairs, with 95\%
+bootstrap intervals over personas, and mean prompt tokens of the carried memory.}
+\label{tab:pfm}
+\InputIfFileExists{tables/pfm-overall}{}{\textbf{??} (table generated by \texttt{scripts/paper\_numbers.py})}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{\PFM by condition and probe kind.}
+\label{tab:kinds}
+\InputIfFileExists{tables/pfm-kinds}{}{\textbf{??}}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{\PFM by source$\to$target pair.}
+\label{tab:pairs}
+\InputIfFileExists{tables/pfm-pairs}{}{\textbf{??}}
+\end{table}
+
+\todo{write after results: headline comparison of oracle vs.\ b (fidelity and tokens); a2 vs.\ oracle
+(extraction loss); a1 vs.\ a2 (tool-use loss); c; per-kind pattern (updates, multi-hop); per-pair
+asymmetries. Do not use development-set numbers here.}
+
+\subsection{Where Memory Is Lost}
+
+\paragraph{Extraction.} Table~\ref{tab:extraction} compares each source engine's store with the
+gold store, field by field. An extracted item matches a gold item when its class and identifying
+fields agree (for a fact, the same subject and value). \emph{Lenient} recall only requires the
+right subject and value in any class or field; the gap between the two is modelling disagreement
+(an allergy stored as a fact rather than a preference that \texttt{Avoids}) rather than lost
+information.
+
+\begin{table}[t]
+\centering
+\caption{Write-in quality by source engine: field-level recall (strict and lenient), precision,
+and erasure behaviour (tombstones written per erasure requested).}
+\label{tab:extraction}
+\InputIfFileExists{tables/extraction}{}{\textbf{??}}
+\end{table}
+
+\paragraph{Tool use.} The gap between \cond{a1} and \cond{a2} reads the same store and isolates
+the cost of reaching it through tools. We report tool calls per probe and the share of probes
+answered without any call (\res{a1-nocall-rate}). \todo{interpret after results}
+
+\paragraph{Over-erasure.} Structured memory adds a failure mode that transcripts and summaries do
+not have. An engine that applies an erasure request too broadly deletes true memories, and they
+are gone for every future engine. Writing tombstones for \res{tomb-per-request} items per requested
+erasure on average (Table~\ref{tab:extraction}), the weakest source engine destroyed more memory
+through erasure than it failed to extract. \todo{check this sentence against the eval numbers}
+Over-erasure should be measured whenever erasure is delegated to a model; in our architecture it
+argues for keeping erasure a confirmed, user-initiated operation of the store rather than an
+extraction output.
+
+\subsection{Threats to Validity}
+
+\emph{Synthetic dialogue.} Templated turns are repetitive and cleaner than real conversation. This
+removes engine-family bias from the input at the cost of realism; a paraphrase pass by a model
+outside the three families is a natural extension. \emph{Uncommon values} make guessing from priors
+unrewarding, which may understate how much engines fill in from priors in real use. \emph{Small
+models.} All engines have 7--14B parameters, chosen so the benchmark runs at no cost on one machine;
+larger hosted models would likely extract better, which would narrow the \cond{a2}--\cond{oracle}
+gap that our results attribute to extraction. \emph{Tuning.} Prompts were tuned on a separate
+development set, and every change is logged per condition; the summary and transcript baselines
+received the same answering instructions as the ontology conditions. \emph{Scoring.} Deterministic
+matching can miss a correct paraphrase (e.g.\ a number written in words); \todo{report the
+disagreement rate on the human-labelled subset}. \emph{Version drift.} Models are pinned by Ollama
+tag and digest, and all outputs are released.

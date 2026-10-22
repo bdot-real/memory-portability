@@ -1,0 +1,31 @@
+\section{Implementation}\label{sec:implementation}
+
+The prototype, \texttt{ompm}, is about \res{loc} lines of Python and is released under an open
+licence at \repo, together with the dataset generator, the dataset, all prompts, and the raw
+outputs of every run.
+
+\paragraph{Engines.} All engines run locally through Ollama on a single Apple M4 machine with
+32\,GB of memory: \texttt{llama3.1:8b} (Meta), \texttt{mistral:7b} (Mistral AI) and
+\texttt{qwen2.5:14b-instruct} (Alibaba), three families that support tool calling. Decoding is
+greedy (temperature 0, fixed seed) with a 32k-token context window set explicitly on every call.
+Because Ollama silently truncates over-long prompts, the client refuses any prompt estimated at
+more than 85\% of the window; no run in this paper was truncated. Hosted engines (OpenAI,
+Anthropic) sit behind the same interface but were not used, so the benchmark costs nothing to
+reproduce beyond compute time.
+
+\paragraph{Store and tools.} The store is pyoxigraph, with the ontology in the default graph and
+memory in a named data graph. The MCP server uses the reference Python SDK; in the evaluation the
+engine's tool calls are bridged to it in-process for up to four rounds per question, and failed
+calls (unknown tool, bad arguments) are counted.
+
+\paragraph{Ontology artifacts.} \memcore 0.4.0 is pinned by integrity hash
+\texttt{blake3-c9d66511\ldots0a4ef0}; its generated JSON Schema is checked into the repository and
+loaded by the adapter. Enumerations are read from the ontology's \texttt{owl:oneOf} ranges. The
+namespace \memns is registered as a persistent w3id.org identifier. \todo{confirm w3id PR 6930 is merged and the namespace resolves}
+
+\paragraph{Reproducibility.} Personas are generated from seeds, and every persona file is listed
+with its SHA-256 in a manifest. Dialogues, write-in outputs and summaries are cached per source
+engine, so every condition read by a target engine is built from the same source-engine session
+transcript. Development and evaluation personas come from different seeds: prompts, renderer and
+search were tuned on the development set only, every change is logged, and the evaluation set was
+generated after the freeze.

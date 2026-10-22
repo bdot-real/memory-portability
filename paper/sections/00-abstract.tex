@@ -1,0 +1,21 @@
+\begin{abstract}
+Assistants built on large language models now keep memory about their users: facts,
+preferences, relationships and unfinished tasks. That memory is stored in each vendor's own
+format, so switching engines resets what the assistant knows. Transport protocols such as the
+Model Context Protocol (MCP) let engines reach external data, but they do not give memory a
+shared meaning. We argue that user memory becomes portable when it is stored against a shared
+ontology and translated for each engine by thin adapters, the translation approach Gruber
+proposed for knowledge bases in 1993. We contribute (i) a taxonomy of agent memory by
+portability; (ii) \memcore, a small OWL extension of PROV-O, SKOS, FOAF, DCMI Terms and
+OWL-Time, published in a versioned ontology registry that generates the JSON Schema used to
+constrain extraction and the MCP tools used for read-out; (iii) the portability fidelity metric
+(\PFM), the share of seeded memory items an engine can still answer about after migration; and
+(iv) an open-source prototype with a benchmark of synthetic multi-session personas. On
+\res{n-personas} personas and six cross-engine pairs of three open-weight model families, the
+gold ontology store reaches a \PFM of \res{pfm-oracle} using \res{tok-ratio-oracle-b}$\times$
+fewer prompt tokens than carrying the raw transcript (\PFM \res{pfm-b}). When the source engine
+writes the store itself, \PFM drops to \res{pfm-a2}: with small models, the bottleneck is
+extraction, not representation. We also find that structured memory adds a failure mode
+transcripts lack: an engine that over-applies an erasure request deletes true memories.
+\keywords{Agent memory \and Portability \and Ontologies \and PROV-O \and MCP \and LLM evaluation}
+\end{abstract}

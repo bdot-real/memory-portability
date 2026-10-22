@@ -1,0 +1,37 @@
+\section{Discussion}\label{sec:discussion}
+
+\paragraph{The representation is not the bottleneck.} \todo{confirm with eval numbers} The
+oracle condition shows that a small ontology, rendered into a few hundred tokens, carries nearly
+everything the probes ask for, and that every engine we tested can read it. What limits
+ontology-mediated migration with small models is write-in: deciding which utterances carry lasting
+information, whom they are about, and whether they replace something already stored. This is
+encouraging for the architecture, because extraction is the part that improves with every model
+generation and can be run by a different, stronger engine than the one the user talks to, while
+the ontology and the store stay fixed.
+
+\paragraph{Alignment loss.} A shared ontology avoids pairwise alignment, but only for what it can
+express. Anything outside \memcore's classes is either forced into a \texttt{Fact} with a free-text
+attribute, where it is portable but weakly typed, or dropped. Our enumerations are closed (eight
+relation types); a user's grandparent or neighbour does not fit. Extending the ontology is a
+SemVer-minor change that the registry checks, but every adapter must then move to the new version.
+LLM-based matching~\cite{qiang2024agentom} could map vendor memory schemas onto \memcore where a
+vendor keeps its own.
+
+\paragraph{Governance.} Who maintains the shared ontology matters more than its first version.
+Publishing it as a versioned package with competency questions as tests, content hashes and a
+persistent namespace gives the governance problem a concrete form: changes are proposed as
+versions, their compatibility is checked mechanically, and consumers pin what they rely on.
+A standards body, such as the W3C Community Group on agent memory~\cite{w3cmemcg2026}, is a
+natural owner.
+
+\paragraph{Vendor incentives and native export.} Vendors gain from lock-in and have little reason
+to adopt a shared memory format unprompted. Native memory exports, where they exist, are free-text
+lists or proprietary JSON, closer to our summary condition than to an ontology store; we could not
+measure them with local engines. We expect regulation to be the adoption mechanism: portability
+rights~\cite{gdpr,quebec25} already require a machine-readable export, and an ontology-backed export
+is the cheapest way for a vendor to meet that requirement in a form other engines can actually use.
+
+\paragraph{Erasure.} The tombstone design makes erasure auditable, but our results show that
+delegating the decision to the engine is risky in both directions: missed requests leak, and
+over-broad ones destroy memory. Erasure belongs in the store's API, confirmed by the user, with the
+engine at most proposing candidates.

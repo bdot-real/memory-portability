@@ -1,0 +1,44 @@
+\section{Introduction}\label{sec:intro}
+
+Assistants built on large language models (LLMs) increasingly remember their users across
+sessions: where they live, what they cannot eat, who their manager is, and what they planned to
+do next. This memory is valuable to the user, and it is held in a format and a store chosen by
+the vendor of the engine. A user who moves to another engine, or an organisation that swaps the
+model behind an agent, starts again from nothing. Memory is becoming the new lock-in.
+
+Interoperability work for agents has concentrated on transport and syntax. MCP~\cite{mcp} gives
+an engine a uniform way to call tools and read resources, and agent-to-agent protocols define
+message envelopes~\cite{ehtesham2025survey}. Neither says what a stored item \emph{means}: whether
+``Lisbon'' is the user's home city or their sister's, whether it still holds, or whether the user
+asked for it to be forgotten. Recent analyses of agent protocols make the same observation, that
+syntactic agreement leaves a semantic gap~\cite{beyondmessage2026}. Data protection law, meanwhile,
+already grants users a right to take their data with them (GDPR Art.~20~\cite{gdpr}; Quebec's
+Law~25~\cite{quebec25}), and a W3C Community Group on agent memory interoperability was chartered
+in 2026~\cite{w3cmemcg2026}.
+
+The knowledge engineering community met this problem before. Gruber's translation approach to
+portable ontology specifications~\cite{gruber1993} let knowledge bases move between
+representation systems by committing to a shared ontology and translating per system. We argue
+that the same approach applies to LLM memory: store memory against a shared ontology, and give
+each engine a thin adapter that writes into it and reads out of it. Only model-internal state
+(weights, embeddings, fine-tunes) stays out of reach.
+
+This paper makes four contributions:
+\begin{enumerate}
+  \item A \textbf{taxonomy of agent memory by portability} (Sect.~\ref{sec:taxonomy}): portable,
+    portable with regeneration, and non-portable.
+  \item A \textbf{reference architecture and ontology} (Sect.~\ref{sec:architecture}): \memcore,
+    a small extension of PROV-O and SKOS with supersession, consent and verifiable erasure,
+    published in a versioned ontology registry whose generated artifacts (JSON Schema with
+    enumerations, competency-question tests, content hashes) drive the engine adapters.
+  \item The \textbf{portability fidelity metric} (\PFM) and a benchmark of synthetic,
+    gold-first, multi-session personas with deterministic scoring (Sect.~\ref{sec:evaluation}).
+  \item An \textbf{open-source prototype} and a cross-engine evaluation on three open-weight
+    model families, comparing ontology-mediated migration with raw transcript transfer and an
+    LLM-written summary, against an oracle store that separates extraction loss from read-out
+    loss (Sects.~\ref{sec:implementation}--\ref{sec:evaluation}).
+\end{enumerate}
+
+In one line: the representation works (the gold store reaches \PFM \res{pfm-oracle} at about
+\res{tok-ratio-oracle-b}$\times$ fewer tokens than the transcript), and with small local models
+the open problem is getting memory \emph{into} the representation.

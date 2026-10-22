@@ -1,0 +1,51 @@
+\section{Background and Related Work}\label{sec:related}
+
+\paragraph{Ontology portability.}
+Gruber~\cite{gruber1993} framed portability of knowledge bases as translation: systems commit to
+a shared ontology and translators map it into each system's representation. The ontology fixes
+meaning, and the translators stay small because they deal only in syntax and conventions. Our
+adapters play the role of those translators, with one change: the systems on either side are
+LLMs. The write-in direction (text to ontology) is therefore an extraction problem rather than a
+syntactic mapping, and it is where we measure most of the loss. Industrial interoperability
+frameworks~\cite{ontointerop2025} and LLM-based ontology matching such as
+Agent-OM~\cite{qiang2024agentom} address alignment \emph{between} ontologies. We avoid alignment
+by having all engines commit to one small ontology, and we discuss when that is not enough in
+Sect.~\ref{sec:discussion}.
+
+\paragraph{Agent communication semantics.}
+Surveys of agent interoperability protocols~\cite{ehtesham2025survey} describe MCP, A2A and
+related protocols as layers of transport and message syntax. A semantic reading of these
+protocols~\cite{beyondmessage2026} separates communication, syntactic and semantic layers and
+observes that current protocols standardise the first two. Memory portability sits in the third
+layer: two engines can exchange well-formed JSON and still disagree on whether an item is a
+current fact about the user or a superseded fact about someone else.
+
+\paragraph{Memory for LLM agents.}
+MemGPT~\cite{packer2023memgpt} manages a hierarchy of context and external storage for a single
+agent. Mem0~\cite{chhikara2025mem0} extracts and consolidates salient facts from conversations.
+Zep~\cite{rasmussen2025zep} stores memory as a temporal knowledge graph with validity intervals,
+and AriGraph~\cite{anokhin2024arigraph} combines semantic and episodic memory in a graph for
+agents acting in text environments. These systems show that structured, time-aware memory helps
+a single agent. None of them treats the memory as an artifact that must keep its meaning when
+the engine behind the agent changes, and their schemas are internal to each system. MCP servers
+that expose a knowledge graph as tools are close to our read-out layer; what we add is a
+published, versioned ontology behind the tools, and a measurement of what survives migration.
+
+\paragraph{Benchmarks.}
+LongMemEval~\cite{wu2025longmemeval} evaluates the long-term memory of chat assistants over long
+histories of sessions, including knowledge updates and temporal reasoning. We reuse its insight
+that updates and abstention must be probed explicitly, but build our own personas: LongMemEval has
+no notion of migrating memory between engines, of erasure, or of a structured store, and its
+free-text answers lack the competitor strings (superseded values, other people's values) that our
+deterministic scoring needs.
+
+\paragraph{Standards and regulation.}
+We reuse W3C vocabularies rather than define new ones where they exist: PROV-O~\cite{provo} for
+derivation and invalidation, SKOS~\cite{skos} for controlled values, FOAF~\cite{foaf} for people,
+DCMI Terms~\cite{dcterms} for metadata and OWL-Time~\cite{owltime} for validity. The W3C AI Agent
+Memory Interoperability Community Group~\cite{w3cmemcg2026} was chartered in July 2026; our
+ontology and metric are offered as input to such efforts. Article~20 of the GDPR~\cite{gdpr}
+gives data subjects a right to receive their data ``in a structured, commonly used and
+machine-readable format''; Quebec's Law~25~\cite{quebec25} adds a comparable portability right.
+Neither says what format would make memory usable by a different engine.
+\todo{verify the GDPR quote against EUR-Lex and the Law 25 provision once refs.bib is in}

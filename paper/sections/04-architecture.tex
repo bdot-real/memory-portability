@@ -1,0 +1,122 @@
+\section{Architecture}\label{sec:architecture}
+
+The architecture has one canonical store and one adapter per engine (Fig.~\ref{fig:arch}). The
+store holds memory as RDF against \memcore. An adapter has two directions: \emph{write-in} turns
+what the engine heard in a session into ontology items, and \emph{read-out} gives the engine
+access to the store, either through MCP tools or by rendering the store into its prompt.
+Engine-native memory, where an engine has it, is treated as a cache of the store, never as the
+system of record.
+
+\begin{figure}[t]
+\centering
+\fbox{\parbox{0.9\linewidth}{\centering\vspace{2.5em}\todo{architecture diagram: engines A and B,
+their adapters (write-in: schema-constrained extraction; read-out: MCP tools or rendered prompt),
+the canonical RDF store, and the registry supplying ontology, JSON Schema and CQ tests}\vspace{2.5em}}}
+\caption{Ontology-mediated memory. The registry publishes \memcore and the artifacts generated
+from it; adapters use the JSON Schema to constrain write-in and the store to serve read-out.}
+\label{fig:arch}
+\end{figure}
+
+\subsection{The \memcore Ontology}
+
+\memcore (namespace \memns) is deliberately small: 14 classes (three of them enumerations of SKOS concepts) and 21 properties, and every
+property carries a \texttt{skos:definition}. It reuses W3C vocabularies wherever they already
+say what we need, and adds only what memory needs on top.
+
+\paragraph{Items.} \texttt{mem:MemoryItem} is a \texttt{prov:Entity} with four content subclasses:
+\texttt{Fact} (subject, attribute, value), \texttt{Preference} (subject, target, polarity, optional
+context), \texttt{Relationship} (subject, related person, relation type) and \texttt{TaskState}
+(subject, task, status, next step, optional due date). \texttt{ToolDefinition} records a tool an
+agent was given, independent of any engine's calling convention. Every item has a natural-language
+\texttt{mem:statement}, so a reader that knows nothing of the ontology can still use it, and a
+subject (\texttt{mem:about}, ranging over \texttt{foaf:Agent}), which keeps the user's facts apart
+from facts about the people they mention.
+
+\paragraph{Closed-world shape.} The fields that identify an item are \texttt{owl:FunctionalProperty}
+and carry \texttt{owl:cardinality 1} restrictions on their class. These axioms are not decoration:
+the registry turns functional properties into single-valued fields and cardinality restrictions
+into required fields of the generated JSON Schema, which then constrains extraction
+(Sect.~\ref{sec:adapters}). The three concept-valued properties (polarity, relation type, task
+status) range over classes defined by \texttt{owl:oneOf} over SKOS concepts, which the registry
+emits as JSON Schema \texttt{enum}, Pydantic \texttt{Literal} and SHACL \texttt{sh:in}.
+
+\paragraph{Time and supersession.} Memory changes. \texttt{mem:supersedes}, a subproperty of
+\texttt{prov:wasRevisionOf}, links a new item to the one it replaces; an item is \emph{current}
+when nothing supersedes it and it has not been erased. Superseded items stay in the store, so
+the history (``you moved from Aarhus to Coimbra'') remains answerable. \texttt{mem:validFrom} and
+\texttt{mem:validUntil} record validity time.
+
+\paragraph{Provenance.} Every item is \texttt{prov:wasDerivedFrom} the utterance it came from,
+and each utterance is \texttt{mem:inSession} a \texttt{mem:Session} (a \texttt{prov:Activity}).
+Engines are \texttt{prov:SoftwareAgent}s. The pipeline, not the model, writes provenance, so
+``in which session did I tell you\dots'' is answered from the record rather than from the
+engine's recollection.
+
+\paragraph{Consent and erasure.} \texttt{mem:consentScope} limits which engines may receive an
+item. Erasure removes every triple about the item and leaves a \texttt{mem:Tombstone} with the
+item's IRI and a \texttt{mem:Erasure} activity (a \texttt{prov:Invalidation}) with its time, but
+none of its content. An auditor can therefore verify that an erasure happened, and that the
+content is gone, without learning what it was.
+
+Listing~\ref{lst:item} shows an updated fact with its provenance.
+
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize,frame=single,float=t,
+  caption={A fact that supersedes an earlier one (prefixes omitted).},label={lst:item}]
+:m14 a mem:Fact ;
+    mem:about :user ; mem:attribute "home city" ; mem:value "Coimbra" ;
+    mem:statement "Idony lives in Coimbra." ;
+    mem:supersedes :m02 ;
+    mem:validFrom "2026-07-14T12:00:00Z"^^xsd:dateTime ;
+    mem:portability mem:Portable ;
+    prov:wasDerivedFrom :s8-u3 .
+:s8-u3 a mem:Utterance ; mem:inSession :session8 .
+\end{lstlisting}
+\todo{regenerate Listing 1 from an eval persona's gold store so the values are real}
+
+\subsection{Ontology as a Versioned Package}\label{sec:registry}
+
+\memcore is published in an ontology registry (\registry) that treats ontologies like software
+packages. Each version is immutable and identified by SemVer and two hashes: an integrity hash of
+the serialised package and a semantic hash of its axioms, so a change of formatting is
+distinguishable from a change of meaning. The registry enforces the SemVer bump a change
+requires, records dependencies at exact versions (here PROV-O, FOAF, DCMI Terms, OWL-Time and
+SKOS), and runs the package's competency questions~\cite{gruninger1995} as tests on publication.
+
+\memcore ships eleven competency questions as SPARQL queries with expected results on an example
+store, among them: \emph{which preferences are current}, \emph{which facts were superseded and by
+what}, \emph{in which session was an item learnt}, \emph{which items may be shared with engine
+X}, and \emph{is every erased item absent apart from its tombstone}. Version 0.4.0, the version
+used in this paper, passes all of them and covers 35 of 35 declared terms.
+
+For the adapters, the important artifact is the generated JSON Schema: a closed-world projection
+of each class with types from ranges, required fields from cardinalities, single values from
+functional properties, enumerations from \texttt{owl:oneOf}, and descriptions from
+\texttt{skos:definition}. The adapters never hand-write a schema; they pin a registry version and
+derive everything from it.
+
+\subsection{Adapters}\label{sec:adapters}
+
+\paragraph{Write-in} runs after every session. The engine receives the session, a listing of the
+current store (so it can link supersessions and act on erasure requests), and a field guide built
+from the schema's descriptions. Its reply is constrained by a JSON Schema derived from the
+registry schema: Ollama's structured output turns the schema into a grammar, so the reply is
+syntactically valid by construction. The adapter removes from the model's view the fields the
+pipeline owns (identifiers, provenance, validity, consent, portability class), maps names to
+person IRIs, converts enumeration labels to concept IRIs, validates every item against the
+registry schema, and writes it. Supersession and erasure references must point to existing
+items; invalid references are counted, not repaired.
+
+\paragraph{Read-out} has two forms. With \emph{tools}, the engine queries an MCP server with
+four tools: \texttt{search\_memory}, \texttt{list\_people}, \texttt{memories\_about} (by name or
+relation) and \texttt{memory\_history} (including superseded items). With \emph{rendering}, the
+current items are written into the prompt, grouped by person and annotated with that person's
+relation to the user. Both forms show only current, non-erased items, apart from the history tool.
+
+\paragraph{Why constraint is not enough.} An early version of \memcore made every property an
+optional array. Its generated schema was satisfiable by almost anything, and on a development
+excerpt all three engines produced output that validated and was nonsense: facts with no
+attribute, person IRIs used as item identifiers, invented classes. Declaring functional
+properties, cardinalities and definitions in the ontology, so that they flow through the registry
+into the schema and the prompt, is what made extraction usable (development observation; see the
+repository's findings log). Schema-valid is not the same as meaningful; the ontology's
+closed-world shape carries the meaning into the grammar.
