@@ -24,6 +24,12 @@ else
   uvx kaggle datasets create -p "$BUILD/bundle"
 fi
 
+# The kernel only sees the dataset once Kaggle has finished processing it.
+for _ in $(seq 1 40); do
+  [ "$(uvx kaggle datasets status "$USER_NAME/ompm-bundle" 2>/dev/null | tail -1)" = ready ] && break
+  sleep 15
+done
+
 sed "s/^PERSONAS = .*/PERSONAS = \"$PERSONAS\"/" kaggle/run_large.py > "$BUILD/kernel/run_large.py"
 cat > "$BUILD/kernel/kernel-metadata.json" <<EOF
 {"id": "$USER_NAME/ompm-large", "title": "ompm-large", "code_file": "run_large.py",
