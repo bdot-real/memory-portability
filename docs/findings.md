@@ -54,3 +54,19 @@ Frozen write-in prompt v3, dev personas p02–p04 (30 current gold items each):
 - llama tombstones far more items than the user asked to forget, which deletes true memories.
   This is a hazard specific to structured memory: a transcript cannot be over-erased by
   mistake. The paper should report tombstone precision alongside leaks.
+
+## F4. Large tier on Kaggle: llama write-in never terminates (Oct 23, 2026)
+
+Kaggle session v4 (T4, same pinned digests), large tier e01–e03, 12 h session limit:
+
+- Every pair with llama3.1:8b as A failed: its first write-in request hit the 20-minute timeout.
+  Kaggle's Ollama starts llama-server with `--context-shift`, so a reply that never closes its
+  JSON is never cut off by the context window. mistral and qwen write-ins took 2–7 min per
+  persona on the same machine.
+- Fix (commit 7112316): local write-in replies are capped at 4096 tokens; a capped reply fails
+  to parse and counts as an errored session. Small-tier llama write-ins take ~30 s per session
+  on the Mac, far below the cap, so small-tier results are unaffected.
+- Throughput: qwen→llama took 2.4–2.6 h per persona on the T4 (vs ~0.5 h on the Mac for small),
+  so one 12 h session covers about 1.5 personas. The large tier needs several sessions.
+- Early sign (10 runs, not yet analysed): with the full large-tier transcript (b), llama as B
+  scores 0.54–0.57 against 0.79–0.89 for qwen, while the oracle store stays at 0.86–1.0.
