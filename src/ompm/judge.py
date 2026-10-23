@@ -18,6 +18,7 @@ import json
 from typing import Any
 
 from ompm.personas import Probe
+from ompm.pipeline import first_json
 
 VERDICTS = ["pass", "fail", "abstained"]
 
@@ -63,8 +64,8 @@ def judge(engine, probe: Probe, answer: str) -> dict[str, Any]:
     r = engine.chat([{"role": "user", "content": prompt(probe, answer)}], schema=SCHEMA,
                     max_tokens=200)
     try:
-        out = json.loads(r.text)
-        assert out.get("verdict") in VERDICTS
+        out = first_json(r.text)
+        assert isinstance(out, dict) and out.get("verdict") in VERDICTS
     except (json.JSONDecodeError, AssertionError):
         out = {"verdict": "unparseable", "reason": r.text[:200]}
     out["cost_usd"] = float((r.raw.get("usage") or {}).get("cost") or 0)

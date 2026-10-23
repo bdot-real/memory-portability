@@ -176,12 +176,16 @@ ENGINES = {
 JUDGE = Engine("judge", "phi4:latest", family="microsoft", num_ctx=16384)
 
 # Gemini API free tier (key GEMINI_API_KEY in .env), OpenAI-compatible endpoint. Strong extractor
-# and hosted judge at no cost; Google is a family outside the three local engines.
+# and hosted judge at no cost; Google is a family outside the three local engines. Free Gemini
+# models allow only 20 requests a day, so `gemma` (open weights, higher free limit) does the work.
 GEMINI = "https://generativelanguage.googleapis.com/v1beta/openai"
 FREE = {
     "gemini": Engine("gemini", "gemini-3.5-flash", family="google", provider="openai",
                      base_url=GEMINI, num_ctx=200000, api_key_env="GEMINI_API_KEY",
                      timeout=300.0, send_seed=False),
+    "gemma": Engine("gemma", "gemma-4-31b-it", family="google", provider="openai",
+                    base_url=GEMINI, num_ctx=128000, api_key_env="GEMINI_API_KEY",
+                    timeout=300.0, send_seed=False),
 }
 
 # Hosted engines through OpenRouter (key OPEN_ROUTER_API_KEY in .env). Not part of the local

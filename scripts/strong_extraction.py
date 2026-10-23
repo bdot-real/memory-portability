@@ -124,7 +124,7 @@ def main() -> None:
     ap.add_argument("--tier", default="small")
     ap.add_argument("--personas", default="e01-e12")
     ap.add_argument("--a", default="llama,mistral,qwen")
-    ap.add_argument("--x", default="gemini", choices=list(EXTRACTORS))
+    ap.add_argument("--x", default="gemma", choices=list(EXTRACTORS))
     args = ap.parse_args()
     (write if args.mode == "write" else probe)(args)
 

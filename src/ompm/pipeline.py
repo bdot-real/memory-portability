@@ -154,6 +154,12 @@ def extraction_prompt(user_name: str, guide: str, listing: str, session: str,
     )
 
 
+def first_json(text: str) -> Any:
+    """Parse the first JSON value in text. gemma-4 (hosted, no grammar) sometimes appends more
+    output after a complete object; local engines decode under the schema and never do."""
+    return json.JSONDecoder().raw_decode(text.lstrip())[0]
+
+
 def write_ontology(p: Persona, a: Engine, sessions: list[dict[str, Any]],
                    version: str = WRITEIN_VERSION) -> tuple[MemoryStore, WriteStats]:
     st = MemoryStore(base(p), engine=a.model)
@@ -170,7 +176,7 @@ def write_ontology(p: Persona, a: Engine, sessions: list[dict[str, Any]],
         stats.sessions += 1
         stats.seconds += r.seconds
         try:
-            data = json.loads(r.text)
+            data = first_json(r.text)
         except json.JSONDecodeError as e:
             stats.errors.append(f"s{s['idx']}: unparseable output: {e}")
             continue

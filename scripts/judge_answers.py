@@ -1,6 +1,7 @@
 """Run a judge over matrix answers: every preference answer, plus a scorer-audit sample.
 
-  uv run python scripts/judge_answers.py --judge gemini         # hosted, free tier
+  uv run python scripts/judge_answers.py --judge gemma          # hosted, free tier (default)
+  uv run python scripts/judge_answers.py --judge gemini         # hosted, free tier, 20 requests/day
   uv run python scripts/judge_answers.py --judge gpt            # hosted (OpenRouter, paid)
   uv run python scripts/judge_answers.py --judge phi4           # local (needs Ollama)
   uv run python scripts/judge_answers.py --judge gpt --audit 40 # 40 answers per outcome
@@ -24,7 +25,7 @@ from ompm.personas import load
 from ompm.pipeline import RUNS
 
 DATA = Path(__file__).resolve().parents[1] / "data/personas"
-JUDGES = {"gemini": FREE["gemini"], "gpt": HOSTED["gpt"], "phi4": JUDGE}
+JUDGES = {"gemma": FREE["gemma"], "gemini": FREE["gemini"], "gpt": HOSTED["gpt"], "phi4": JUDGE}
 
 
 def key(r) -> str:
@@ -42,7 +43,7 @@ def audit_sample(rows, per_outcome: int, seed: int = 2027):
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--judge", choices=list(JUDGES), default="gemini")
+    ap.add_argument("--judge", choices=list(JUDGES), default="gemma")
     ap.add_argument("--tier", default="small")
     ap.add_argument("--prefix", default="e")
     ap.add_argument("--audit", type=int, default=40, help="answers per outcome; 0 to skip")

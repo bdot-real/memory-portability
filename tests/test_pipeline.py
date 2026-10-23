@@ -4,11 +4,13 @@ store through the real write path (model view -> registry shape -> validation ->
 import json
 import re
 
+import pytest
+
 from ompm.engines import ChatResult
 from ompm.gold import gold_store
 from ompm.personas import generate
-from ompm.pipeline import (ask_with_tools, build_server, contexts, dialogue, mcp_tools, probe_all,
-                           write_ontology, write_summary)
+from ompm.pipeline import (ask_with_tools, build_server, contexts, dialogue, first_json, mcp_tools,
+                           probe_all, write_ontology, write_summary)
 
 
 class FakeEngine:
@@ -114,3 +116,9 @@ def test_extraction_quality_of_perfect_extractor(tmp_path):
     q = extraction_quality(p, store)
     assert q["recall"] == 1.0 and q["precision"] == 1.0
     assert q["erasures_leaked"] == 0 and q["tombstones"] == q["erasures_requested"] == 3
+
+
+def test_first_json_ignores_trailing_output():
+    assert first_json(' {"facts": []}\n\n{"facts": [1]}') == {"facts": []}
+    with pytest.raises(json.JSONDecodeError):
+        first_json("no json here")
