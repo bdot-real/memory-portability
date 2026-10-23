@@ -12,9 +12,12 @@ BUILD=runs/kaggle/build
 rm -rf "$BUILD" && mkdir -p "$BUILD/bundle" "$BUILD/kernel"
 export KAGGLE_API_TOKEN="$(uv run python -c "from ompm.engines import api_key; print(api_key('KAGGLE_API_KEY'))")"
 
-# Code, ontology and the large-tier personas only: no runs, no .env.
+# Code, ontology, the large-tier personas and the large-tier runs so far (so the matrix resumes
+# instead of redoing finished pairs; merge each session's output into runs/ before the next push).
+# No other runs, no .env.
+PRIOR=$(ls -d runs/results/large runs/dialogue/large runs/writein/v3/large runs/matrix-large.log 2>/dev/null || true)
 COPYFILE_DISABLE=1 tar czf "$BUILD/bundle/ompm.tar.gz" pyproject.toml uv.lock README.md src scripts ontology \
-  data/personas/large
+  data/personas/large $PRIOR
 cat > "$BUILD/bundle/dataset-metadata.json" <<EOF
 {"title": "ompm-bundle", "id": "$USER_NAME/ompm-bundle", "licenses": [{"name": "other"}]}
 EOF

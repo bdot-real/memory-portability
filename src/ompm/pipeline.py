@@ -46,6 +46,11 @@ REPLY_TOKENS = 80  # A's dialogue replies; matches the persona size estimate
 SUMMARY_TOKENS = 900
 ANSWER_TOKENS = 120
 MAX_TOOL_ROUNDS = 4
+# Cap on one write-in reply. A model that never closes its JSON (seen with llama3.1:8b on the
+# large tier) otherwise generates until the request times out; the capped reply fails to parse
+# and counts as an errored session. Small-tier replies are far shorter, so the cap never binds.
+# Local engines only: hosted reasoning models count thinking tokens against the same limit.
+WRITE_TOKENS = 4096
 
 DIALOGUE_SYSTEM = ("You are a friendly personal assistant chatting with a user. Reply briefly, "
                    "in one or two sentences.")
@@ -160,7 +165,8 @@ def write_ontology(p: Persona, a: Engine, sessions: list[dict[str, Any]],
         st.session(s["idx"], s["date"])
         prompt = extraction_prompt(p.people[0].name, guide, st.listing(),
                                    session_text(s["idx"], s["date"], s["turns"]), version)
-        r = a.chat([{"role": "user", "content": prompt}], schema=env)
+        r = a.chat([{"role": "user", "content": prompt}], schema=env,
+                   max_tokens=WRITE_TOKENS if getattr(a, "provider", None) == "ollama" else None)
         stats.sessions += 1
         stats.seconds += r.seconds
         try:
