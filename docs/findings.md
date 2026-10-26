@@ -70,3 +70,22 @@ Kaggle session v4 (T4, same pinned digests), large tier e01–e03, 12 h session 
   so one 12 h session covers about 1.5 personas. The large tier needs several sessions.
 - Early sign (10 runs, not yet analysed): with the full large-tier transcript (b), llama as B
   scores 0.54–0.57 against 0.79–0.89 for qwen, while the oracle store stays at 0.86–1.0.
+
+## F5. Large tier complete: the transcript degrades, the gold store does not (Oct 26, 2026)
+
+Kaggle sessions v5–v6, e01–e12, all 72 runs, no failures (F4's cap fixed the llama pairs).
+`paper_numbers.py --tier large`:
+
+| condition | small PFM | large PFM | large tokens |
+| --- | --- | --- | --- |
+| oracle | 0.95 | 0.93 [0.91, 0.94] | 569 |
+| b transcript | 0.84 | 0.58 [0.56, 0.61] | 17,360 |
+| a2 rendered store | 0.47 | 0.36 [0.31, 0.40] | 693 |
+| c summary | 0.44 | 0.20 [0.14, 0.25] | 727 |
+| a1 MCP tools | 0.14 | 0.08 [0.07, 0.10] | -- |
+
+- The oracle store is 31× smaller than the transcript and 0.35 better on the large tier.
+- Transcript loss is engine-dependent: as reader B, mistral 0.35 and llama 0.55, qwen 0.86 (e01–e06).
+- Small-model write-in recall falls to 0.25–0.36 (from 0.35–0.56); tombstones per request 3.9.
+- Gemma 4 31B as strong extractor (small tier, first 18 stores): recall 0.80–0.97, precision
+  0.69–0.94, tombstones 2–4 for 3 requests. The store's ceiling is extraction, not the format.
