@@ -31,16 +31,18 @@ EXTRACTORS = {**FREE, **HOSTED}
 
 
 class Metered:
-    """Wraps an engine to add up OpenRouter's reported cost."""
+    """Wraps an engine to add up OpenRouter's reported cost and the model versions served (a
+    hosted alias can resolve to a newer model than the one requested)."""
 
     def __init__(self, engine):
-        self.engine, self.cost, self.calls = engine, 0.0, 0
+        self.engine, self.cost, self.calls, self.served = engine, 0.0, 0, set()
         self.name, self.model = engine.name, engine.model
 
     def chat(self, *args, **kw):
         r = self.engine.chat(*args, **kw)
         self.calls += 1
         self.cost += float(r.raw.get("usage", {}).get("cost") or 0)
+        self.served.add(r.raw.get("model") or "")
         return r
 
 
@@ -69,6 +71,7 @@ def write(args) -> None:
                 continue
             sessions = dialogue(p, ENGINES[a])
             cost0, t0 = x.cost, time.monotonic()
+            x.served = set()
             try:
                 st, stats = write_ontology(p, x, sessions)
             except Exception as e:  # e.g. the free tier stayed overloaded; retried next pass
@@ -78,7 +81,8 @@ def write(args) -> None:
             out.write_text(st.dump())
             out.with_suffix(".stats.json").write_text(json.dumps(asdict(stats), indent=1))
             q = extraction_quality(p, st)
-            rec = {"persona": pid, "A": a, "extractor": x.model, "cost_usd": round(x.cost - cost0, 4),
+            rec = {"persona": pid, "A": a, "extractor": x.model,
+                   "served": sorted(x.served - {""}), "cost_usd": round(x.cost - cost0, 4),
                    "seconds": round(time.monotonic() - t0), "invalid": stats.invalid,
                    "bad_refs": stats.bad_refs, **q}
             with log.open("a") as f:

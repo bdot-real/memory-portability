@@ -69,6 +69,7 @@ def judge(engine, probe: Probe, answer: str) -> dict[str, Any]:
     except (json.JSONDecodeError, AssertionError):
         out = {"verdict": "unparseable", "reason": r.text[:200]}
     out["cost_usd"] = float((r.raw.get("usage") or {}).get("cost") or 0)
+    out["served"] = r.raw.get("model") or ""  # what the host actually ran
     return out
 
 
