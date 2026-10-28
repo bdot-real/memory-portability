@@ -43,7 +43,7 @@ emits as JSON Schema \texttt{enum}, Pydantic \texttt{Literal} and SHACL \texttt{
 \paragraph{Time and supersession.} Memory changes. \texttt{mem:supersedes}, a subproperty of
 \texttt{prov:wasRevisionOf}, links a new item to the one it replaces; an item is \emph{current}
 when nothing supersedes it and it has not been erased. Superseded items stay in the store, so
-the history (``you moved from Aarhus to Coimbra'') remains answerable. \texttt{mem:validFrom} and
+the history (``you moved from Lviv to Bendigo'') remains answerable. \texttt{mem:validFrom} and
 \texttt{mem:validUntil} record validity time.
 
 \paragraph{Provenance.} Every item is \texttt{prov:wasDerivedFrom} the utterance it came from,
@@ -61,17 +61,18 @@ content is gone, without learning what it was.
 Listing~\ref{lst:item} shows an updated fact with its provenance.
 
 \begin{lstlisting}[basicstyle=\ttfamily\scriptsize,frame=single,float=t,
-  caption={A fact that supersedes an earlier one (prefixes omitted).},label={lst:item}]
-:m14 a mem:Fact ;
-    mem:about :user ; mem:attribute "home city" ; mem:value "Coimbra" ;
-    mem:statement "Idony lives in Coimbra." ;
-    mem:supersedes :m02 ;
-    mem:validFrom "2026-07-14T12:00:00Z"^^xsd:dateTime ;
+  caption={A fact that supersedes an earlier one (prefixes omitted), from the gold store of evaluation persona e01.},label={lst:item}]
+ex:m002 a mem:Fact ;
+    mem:about ex:user ;
+    mem:statement "Wrenna moved to Bendigo." ;
+    mem:validFrom "2026-07-15T12:00:00Z"^^xsd:dateTime ;
     mem:portability mem:Portable ;
-    prov:wasDerivedFrom :s8-u3 .
-:s8-u3 a mem:Utterance ; mem:inSession :session8 .
+    mem:attribute "home city" ;
+    mem:value "Bendigo" ;
+    mem:supersedes ex:m001 ;
+    prov:wasDerivedFrom ex:u5_15 .
+ex:u5_15 a mem:Utterance ; mem:inSession ex:s5 .
 \end{lstlisting}
-\todo{regenerate Listing 1 from an eval persona's gold store so the values are real}
 
 \subsection{Ontology as a Versioned Package}\label{sec:registry}
 
