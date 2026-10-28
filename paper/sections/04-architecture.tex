@@ -9,9 +9,25 @@ system of record.
 
 \begin{figure}[t]
 \centering
-\fbox{\parbox{0.9\linewidth}{\centering\vspace{2.5em}\todo{architecture diagram: engines A and B,
-their adapters (write-in: schema-constrained extraction; read-out: MCP tools or rendered prompt),
-the canonical RDF store, and the registry supplying ontology, JSON Schema and CQ tests}\vspace{2.5em}}}
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[font=\scriptsize, node distance=4mm and 10mm,
+  box/.style={draw, rounded corners=2pt, align=center, minimum height=8mm, inner sep=3pt},
+  arr/.style={-{Stealth[length=1.6mm]}, semithick}]
+\node[box, minimum width=15mm] (A) {Engine $A$\\(session)};
+\node[box, right=of A] (W) {write-in adapter\\schema-constrained\\extraction};
+\node[box, right=of W, fill=black!6] (S) {canonical store\\RDF / \memcore\\+ PROV, tombstones};
+\node[box, right=of S] (R) {read-out adapter\\MCP tools (a1) or\\rendered prompt (a2)};
+\node[box, right=of R, minimum width=15mm] (B) {Engine $B$\\(new session)};
+\node[box, above=8mm of S, minimum width=118mm] (G) {registry: \memcore{} versions, JSON Schema,
+  SHACL, CQ tests};
+\draw[arr] (A) -- node[above]{turns} (W);
+\draw[arr] (W) -- node[above]{items} (S);
+\draw[arr] (S) -- (R);
+\draw[arr] (R) -- node[above]{prompt} (B);
+\draw[arr, dashed] (W.north |- G.south) -- node[right]{JSON Schema} (W.north);
+\draw[arr, dashed] (G) -- node[right]{SHACL shapes, CQ tests} (S);
+\end{tikzpicture}
+}
 \caption{Ontology-mediated memory. The registry publishes \memcore and the artifacts generated
 from it; adapters use the JSON Schema to constrain write-in and the store to serve read-out.}
 \label{fig:arch}
