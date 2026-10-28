@@ -79,7 +79,14 @@ that control was answered correctly. \emph{Preference application} (``Suggest a 
 my sister'') is scored by an LLM judge against a rubric: \texttt{phi4}, a fourth model family run
 locally under a pinned digest, as the primary judge, and Gemma~4 31B (hosted) as a second rater.
 Both judges also grade a stratified sample of deterministically scored answers, and a human labels
-a blind subset of 200 answers. \todo{judge--judge and judge--human agreement}
+a blind subset of 200 answers. On the sampled deterministic answers, \texttt{phi4} agrees with
+the scorer on pass versus not-pass for \res{agree-scorer-phi4-small} (small) and
+\res{agree-scorer-phi4-large} (large) of answers (Cohen's $\kappa$ \res{kappa-scorer-phi4-small},
+\res{kappa-scorer-phi4-large}). Most disagreement is on \emph{hedged} answers, which the scorer fails
+and the judge often passes; without them agreement is \res{agree-scorer-phi4-nohedge-small} and
+\res{agree-scorer-phi4-nohedge-large} ($\kappa$ \res{kappa-scorer-phi4-nohedge-small},
+\res{kappa-scorer-phi4-nohedge-large}). \todo{phi4--Gemma agreement on preference answers and
+judge--human agreement, once complete}
 
 \subsection{Results}
 

@@ -186,6 +186,59 @@ def tier_numbers(tier: str, prefix: str, tables: Path) -> tuple[dict, dict, list
     return out, cells, ext_rows
 
 
+def kappa(a: list, b: list) -> tuple[float, float]:
+    """Raw agreement and Cohen's kappa of two equal-length label lists."""
+    n = len(a)
+    po = sum(x == y for x, y in zip(a, b)) / n
+    pe = sum(a.count(c) / n * b.count(c) / n for c in set(a) | set(b))
+    return po, (po - pe) / (1 - pe) if pe < 1 else 1.0
+
+
+def agreement() -> dict[str, str]:
+    """Scorer-judge, judge-judge and human agreement on pass vs. not pass.
+
+    The scorer passes only `correct`; `hedged` (gold plus a competitor) counts as not passed, which
+    is where most scorer-judge disagreement sits, so it is also reported without hedged answers.
+    Human labels come from runs/labelling/sheet.csv, joined to the judges through keys.json.
+    """
+    import csv
+
+    out, verdicts = {}, defaultdict(dict)  # (tier, key) -> {judge or "scorer": pass?}
+    for f in sorted((ROOT / "runs/judge").glob("*/*/*.jsonl")):
+        tier, judge = f.parts[-3], f.parts[-2]
+        for r in (json.loads(x) for x in f.read_text().splitlines() if x):
+            verdicts[tier, r["key"]][judge] = r["verdict"] == "pass"
+            if r["scorer"] != "needs_judge":
+                verdicts[tier, r["key"]]["scorer"] = r["scorer"] == "correct"
+                verdicts[tier, r["key"]]["hedged"] = r["scorer"] == "hedged"
+    sheet, keys = ROOT / "runs/labelling/sheet.csv", ROOT / "runs/labelling/keys.json"
+    if sheet.exists() and keys.exists():
+        ids = json.loads(keys.read_text())
+        with sheet.open() as fh:
+            for row in csv.DictReader(fh):
+                lab = row["label (pass/fail/abstained)"].strip().lower()
+                if lab:
+                    tier, k = ids[row["id"]].split("|", 1)
+                    verdicts[tier, k]["human"] = lab == "pass"
+    raters = ["scorer", "phi4", "gemma", "human"]
+    for tier in TIERS:
+        vs = [v for (t, _), v in verdicts.items() if t == tier]
+        for i, a in enumerate(raters):
+            for b in raters[i + 1:]:
+                both = [v for v in vs if a in v and b in v]
+                if len(both) < 20:
+                    continue
+                po, k = kappa([v[a] for v in both], [v[b] for v in both])
+                out[f"agree-{a}-{b}-{tier}"], out[f"kappa-{a}-{b}-{tier}"] = fmt(po), fmt(k)
+                out[f"n-{a}-{b}-{tier}"] = str(len(both))
+                if a == "scorer":
+                    nh = [v for v in both if not v["hedged"]]
+                    po, k = kappa([v[a] for v in nh], [v[b] for v in nh])
+                    out[f"agree-{a}-{b}-nohedge-{tier}"] = fmt(po)
+                    out[f"kappa-{a}-{b}-nohedge-{tier}"] = fmt(k)
+    return out
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--prefix", default="e")
@@ -240,6 +293,7 @@ def main() -> None:
         if mf.exists():
             ps = json.loads(mf.read_text())["personas"]
             out[f"tok-{tier}"] = f"{statistics.mean(p['est_tokens'] for p in ps) / 1000:.0f}"
+    out.update(agreement())
     out["loc"] = f"{sum(len(f.read_text().splitlines()) for f in (ROOT / 'src').rglob('*.py')):,}"
     out["loc"] = out["loc"].replace(",", "{,}")
 
