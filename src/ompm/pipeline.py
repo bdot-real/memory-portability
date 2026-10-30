@@ -267,7 +267,8 @@ def ask_with_tools(b: Engine, srv, tools, question: str, user_name: str = "the u
         prompt_tokens += r.prompt_tokens
         if not r.tool_calls:
             return Answer(r.text.strip(), seconds, prompt_tokens, calls, errors)
-        msgs.append({"role": "assistant", "content": r.text, "tool_calls": r.tool_calls})
+        msgs.append({"role": "assistant", "content": r.text, "tool_calls": r.tool_calls,
+                     **r.replay})
         for tc in r.tool_calls:
             fn = tc.get("function", {})
             name, args = fn.get("name", ""), fn.get("arguments") or {}
@@ -282,7 +283,7 @@ def ask_with_tools(b: Engine, srv, tools, question: str, user_name: str = "the u
                 out = f"Error: {e}"
             msgs.append({"role": "tool", "content": out, "tool_name": name})
     # Out of tool rounds: ask for a final answer without tools.
-    r = b.chat(msgs, max_tokens=ANSWER_TOKENS)
+    r = b.chat(msgs, tools=tools, max_tokens=ANSWER_TOKENS, use_tools=False)
     return Answer(r.text.strip(), seconds + r.seconds, prompt_tokens + r.prompt_tokens,
                   calls, errors)
 

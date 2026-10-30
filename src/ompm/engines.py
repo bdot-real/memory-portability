@@ -1,17 +1,20 @@
 """Engine clients behind one interface.
 
 Every engine in the study is reached through `Engine.chat`. Local models run on Ollama; hosted
-models (OpenAI-compatible endpoints) plug in behind the same interface when keys are available.
+models (OpenAI-compatible endpoints, and Claude through the Anthropic SDK) plug in behind the same
+interface when keys are available.
 """
 
 from __future__ import annotations
 
 import os
 import time
+from functools import cache
 from pathlib import Path
 from dataclasses import dataclass, field
 from typing import Any
 
+import anthropic
 import httpx
 
 # Conservative chars-per-token (mistral tokenizes ~10% denser than llama); guards against silent truncation.
@@ -30,6 +33,9 @@ class ChatResult:
     completion_tokens: int
     seconds: float
     raw: dict[str, Any] = field(repr=False)
+    # Extra keys for the assistant message that replays this reply in a tool loop (Claude needs
+    # its own content blocks back, thinking included).
+    replay: dict[str, Any] = field(default_factory=dict, repr=False)
 
 
 def estimate_tokens(messages: list[dict[str, Any]]) -> int:
@@ -46,6 +52,50 @@ def api_key(var: str) -> str:
                 if k.strip() == var:
                     os.environ[var] = v.strip().strip('"')
     return os.environ[var]
+
+
+# USD per million tokens: input, output, cache write (5-minute TTL), cache read.
+CLAUDE_PRICES = {
+    "claude-haiku-5-5": (0.10, 0.50, 0.125, 0.01),
+    "claude-sonnet-5-5": (2.00, 10.00, 2.50, 0.20),
+    "claude-opus-5-5": (4.00, 20.00, 5.00, 0.20),
+}
+
+
+@cache
+def _anthropic_client(var: str) -> anthropic.Anthropic:
+    return anthropic.Anthropic(api_key=api_key(var), max_retries=8)
+
+
+def _claude_messages(messages: list[dict[str, Any]]) -> tuple[str, list[dict[str, Any]]]:
+    """OpenAI/Ollama-style messages as an Anthropic system prompt and message list. Tool results
+    carry no call id in the pipeline, so they are matched to the preceding calls in order."""
+    system, out, pending = [], [], []
+    for m in messages:
+        role = m["role"]
+        if role == "system":
+            system.append(m["content"])
+        elif role == "user":
+            out.append({"role": "user", "content": m["content"]})
+        elif role == "assistant":
+            calls = m.get("tool_calls") or []
+            blocks = m.get("blocks")
+            if blocks is None:
+                blocks = [{"type": "text", "text": m["content"]}] if m.get("content") else []
+                blocks += [{"type": "tool_use", "id": tc["id"], "name": tc["function"]["name"],
+                            "input": tc["function"]["arguments"]} for tc in calls]
+            out.append({"role": "assistant", "content": blocks})
+            pending = [tc["id"] for tc in calls]
+        elif role == "tool":
+            result = {"type": "tool_result", "tool_use_id": pending.pop(0),
+                      "content": m["content"]}
+            if out[-1]["role"] == "user" and isinstance(out[-1]["content"], list):
+                out[-1]["content"].append(result)
+            else:
+                out.append({"role": "user", "content": [result]})
+        else:
+            raise ValueError(f"unknown role {role}")
+    return "\n\n".join(system), out
 
 
 @dataclass
@@ -67,6 +117,13 @@ class Engine:
     # engines run without them; their outputs are cached and released instead.
     send_temperature: bool = True
     send_seed: bool = True
+    # Claude only. Local engines answer without reasoning, so thinking is off where the model
+    # allows it. Where it can't be (Opus 5.5), or still runs between tool calls (Sonnet 5.5),
+    # effort is low and `thinking_tokens` is added to every reply cap, so the pipeline's caps
+    # bound the answer rather than the thinking.
+    thinking: dict[str, Any] | None = None
+    effort: str = "low"
+    thinking_tokens: int = 0
 
     def chat(
         self,
@@ -74,13 +131,21 @@ class Engine:
         tools: list[dict[str, Any]] | None = None,
         schema: dict[str, Any] | None = None,
         max_tokens: int | None = None,
+        use_tools: bool = True,
     ) -> ChatResult:
+        """`use_tools=False` asks for an answer without further tool calls. Claude needs the
+        tool definitions while its history holds tool calls, so it gets them with tool use off;
+        other providers just get no tools."""
         # Ollama truncates over-long prompts without an error, which would quietly handicap the
         # raw-transcript baseline. Refuse anything that might not fit, with headroom for the reply.
         if estimate_tokens(messages) > 0.85 * self.num_ctx:
             raise ContextOverflow(
                 f"{self.name}: ~{estimate_tokens(messages)} tokens exceeds 85% of {self.num_ctx}"
             )
+        if self.provider == "anthropic":
+            return self._anthropic(messages, tools, schema, max_tokens, use_tools)
+        if not use_tools:
+            tools = None
         if self.provider == "ollama":
             return self._ollama(messages, tools, schema, max_tokens)
         if self.provider == "openai":
@@ -166,6 +231,49 @@ class Engine:
             raw=data,
         )
 
+    def _anthropic(self, messages, tools, schema, max_tokens, use_tools=True) -> ChatResult:
+        if schema:
+            raise NotImplementedError(f"{self.name}: schema-constrained output not wired up yet")
+        system, msgs = _claude_messages(messages)
+        kw: dict[str, Any] = {
+            "model": self.model,
+            "max_tokens": (max_tokens or 16000) + self.thinking_tokens,
+            "messages": msgs,
+            "output_config": {"effort": self.effort},
+        }
+        if system:
+            # The context is the stable prefix of every probe in a condition: cache it.
+            kw["system"] = [{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}]
+        if self.thinking:
+            kw["thinking"] = self.thinking
+        if tools:
+            kw["tools"] = [{"name": t["function"]["name"],
+                            "description": t["function"]["description"],
+                            "input_schema": t["function"]["parameters"]} for t in tools]
+            if not use_tools:
+                kw["tool_choice"] = {"type": "none"}
+        t0 = time.monotonic()
+        r = _anthropic_client(self.api_key_env).messages.create(**kw)
+        data = r.to_dict()
+        u = r.usage
+        p_in, p_out, p_write, p_read = CLAUDE_PRICES[self.model]
+        cache_write = u.cache_creation_input_tokens or 0
+        cache_read = u.cache_read_input_tokens or 0
+        data["usage"]["cost"] = (u.input_tokens * p_in + u.output_tokens * p_out
+                                 + cache_write * p_write + cache_read * p_read) / 1e6
+        blocks = [b.to_dict() for b in r.content]
+        calls = [{"id": b.id, "function": {"name": b.name, "arguments": b.input}}
+                 for b in r.content if b.type == "tool_use"]
+        return ChatResult(
+            text="".join(b.text for b in r.content if b.type == "text"),
+            tool_calls=calls,
+            prompt_tokens=u.input_tokens + cache_write + cache_read,
+            completion_tokens=u.output_tokens,
+            seconds=time.monotonic() - t0,
+            raw=data,
+            replay={"blocks": blocks} if calls else {},
+        )
+
 
 # Three model families as engines; the judge comes from a fourth family.
 ENGINES = {
@@ -200,4 +308,18 @@ HOSTED = {
     "gpt": Engine("gpt", "openai/gpt-6.1-sol", family="openai", provider="openai",
                   base_url=OPENROUTER, num_ctx=200000, api_key_env="OPEN_ROUTER_API_KEY",
                   timeout=300.0, send_temperature=False, send_seed=False),
+}
+
+# Claude through the Anthropic API (key CLAUDE_API_KEY in .env), as reader B and, later, strong
+# extractor. Outside the local matrix; the judge stays outside the Anthropic family.
+CLAUDE = {
+    "haiku": Engine("haiku", "claude-haiku-5-5", family="anthropic", provider="anthropic",
+                    num_ctx=1000000, api_key_env="CLAUDE_API_KEY", timeout=600.0,
+                    thinking={"type": "disabled"}),
+    "sonnet": Engine("sonnet", "claude-sonnet-5-5", family="anthropic", provider="anthropic",
+                     num_ctx=1000000, api_key_env="CLAUDE_API_KEY", timeout=600.0,
+                     thinking={"type": "between_tools"}, thinking_tokens=2048),
+    "opus": Engine("opus", "claude-opus-5-5", family="anthropic", provider="anthropic",
+                   num_ctx=1000000, api_key_env="CLAUDE_API_KEY", timeout=600.0,
+                   thinking_tokens=2048),
 }
