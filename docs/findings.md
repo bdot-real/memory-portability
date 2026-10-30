@@ -89,3 +89,26 @@ Kaggle sessions v5–v6, e01–e12, all 72 runs, no failures (F4's cap fixed the
 - Small-model write-in recall falls to 0.25–0.36 (from 0.35–0.56); tombstones per request 3.9.
 - Gemma 4 31B as strong extractor (small tier, first 18 stores): recall 0.80–0.97, precision
   0.69–0.94, tombstones 2–4 for 3 requests. The store's ceiling is extraction, not the format.
+
+## F6. Claude as reader B: transcript loss is a small-reader effect (Oct 30, 2026)
+
+`scripts/claude_readout.py`, large tier e01–e12, B = `claude-opus-5-5` and `claude-haiku-5-5` on
+each local engine's cached dialogue, store and summary (36 runs per B). Thinking off where the
+model allows it (Opus: low effort, thinking headroom above the 120-token answer cap). PFM with 95%
+bootstrap intervals over personas:
+
+| B | oracle | b transcript | a2 store | c summary | a1 MCP tools |
+| --- | --- | --- | --- | --- | --- |
+| local (6 pairs) | 0.93 [0.91, 0.94] | 0.58 [0.56, 0.61] | 0.36 [0.31, 0.40] | 0.20 [0.14, 0.25] | 0.08 [0.07, 0.10] |
+| Haiku 5.5 | 0.97 [0.95, 0.99] | 0.90 [0.87, 0.93] | 0.41 [0.36, 0.45] | 0.20 [0.15, 0.26] | 0.31 [0.27, 0.36] |
+| Opus 5.5 | 0.94 [0.93, 0.95] | 0.95 [0.93, 0.96] | 0.41 [0.37, 0.46] | 0.20 [0.14, 0.25] | 0.35 [0.31, 0.38] |
+
+- A strong reader recovers the 17k-token transcript (0.95) as well as the gold store (0.94). F5's
+  transcript degradation belongs to 7–14B readers; for strong readers the gold store's advantage
+  is tokens (~31× fewer), not accuracy.
+- Stores written by local engines stay near 0.41 even with Opus reading them: the ceiling is
+  extraction, as F5 found. Large-tier strong extraction (a2x) is the missing number.
+- Both Claude models called a tool for every probe (1.8 calls per probe; locals 0.43, mistral
+  none). a1 reaches 85% of a2 on the same stores, so local a1 (0.08) is mostly tool-use weakness.
+- Cost: Opus $27.61 (9,270 calls), Haiku $0.77 (8,220 calls); the transcript prefix is cached.
+  Hosted Claude models take no temperature or seed; outputs are kept under runs/results-claude/.
