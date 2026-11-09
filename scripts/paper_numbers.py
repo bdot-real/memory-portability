@@ -20,6 +20,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CONDS = ["oracle", "a2", "a1", "b", "c"]
 STRONG = ["a2x", "a1x"]  # same conditions, store written by the strong extractor
+# The paper's strong extractor. Other extractors' runs sit beside it under runs/ (e.g. Claude,
+# F6) and are reported separately.
+PAPER_X = "gemma"
 TIERS = ["small", "large"]
 LABEL = {"oracle": "oracle (gold store)", "a2": "a2 ontology, rendered",
          "a1": "a1 ontology, MCP tools", "b": "b transcript", "c": "c summary",
@@ -45,10 +48,11 @@ def load(tier: str, prefix: str):
         m = f.with_suffix(".meta.json")
         if m.exists():
             metas.append(json.loads(m.read_text()))
-    for f in sorted((ROOT / "runs/results-strong" / tier).glob(f"*-to-*/{prefix}*.jsonl")):
+    for f in sorted((ROOT / "runs/results-strong" / tier).glob(f"{PAPER_X}@*-to-*/{prefix}*.jsonl")):
         strong += [json.loads(x) for x in f.read_text().splitlines() if x]
     log = ROOT / "runs/strong" / tier / "extraction.jsonl"
     ext = [json.loads(x) for x in log.read_text().splitlines() if x] if log.exists() else []
+    ext = [e for e in ext if e["extractor"].startswith(PAPER_X)]
     return rows, metas, strong, ext
 
 

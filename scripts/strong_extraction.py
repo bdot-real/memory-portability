@@ -1,4 +1,4 @@
-"""Strong-extractor experiment: a larger hosted model (default gemini-3.5-flash, free tier) writes the store from a local engine's dialogue.
+"""Strong-extractor experiment: a larger hosted model (default gemma, free tier; or Claude, e.g. `--x claude-opus`) writes the store from a local engine's dialogue.
 
 Same personas, same cached dialogue of source engine A, same write-in prompt (v3) and schema;
 only the extracting model changes. Comparing its store with A's own isolates extraction loss.
@@ -19,7 +19,7 @@ import time
 from dataclasses import asdict
 from pathlib import Path
 
-from ompm.engines import ENGINES, FREE, HOSTED
+from ompm.engines import CLAUDE, ENGINES, FREE, HOSTED
 from ompm.evaluate import extraction_quality
 from ompm.personas import load
 from ompm.pipeline import (RUNS, WRITEIN_VERSION, base, contexts, dialogue, probe_all,
@@ -27,7 +27,9 @@ from ompm.pipeline import (RUNS, WRITEIN_VERSION, base, contexts, dialogue, prob
 from ompm.store import MemoryStore
 
 DATA = Path(__file__).resolve().parents[1] / "data/personas"
-EXTRACTORS = {**FREE, **HOSTED}
+# Claude engines through the Anthropic API get a `claude-` prefix: `sonnet` is already the
+# OpenRouter route.
+EXTRACTORS = {**FREE, **HOSTED, **{f"claude-{k}": e for k, e in CLAUDE.items()}}
 
 
 class Metered:

@@ -62,6 +62,19 @@ CLAUDE_PRICES = {
 }
 
 
+def _closed(schema: Any) -> Any:
+    """A copy of a JSON Schema with every object closed (additionalProperties: false), which
+    Anthropic structured outputs require. Objects already declare every key the pipeline reads."""
+    if isinstance(schema, dict):
+        out = {k: _closed(v) for k, v in schema.items()}
+        if out.get("type") == "object":
+            out.setdefault("additionalProperties", False)
+        return out
+    if isinstance(schema, list):
+        return [_closed(v) for v in schema]
+    return schema
+
+
 @cache
 def _anthropic_client(var: str) -> anthropic.Anthropic:
     return anthropic.Anthropic(api_key=api_key(var), max_retries=8)
@@ -232,8 +245,6 @@ class Engine:
         )
 
     def _anthropic(self, messages, tools, schema, max_tokens, use_tools=True) -> ChatResult:
-        if schema:
-            raise NotImplementedError(f"{self.name}: schema-constrained output not wired up yet")
         system, msgs = _claude_messages(messages)
         kw: dict[str, Any] = {
             "model": self.model,
@@ -241,6 +252,9 @@ class Engine:
             "messages": msgs,
             "output_config": {"effort": self.effort},
         }
+        if schema:
+            # Same role as Ollama's `format`: the registry schema constrains the decoder.
+            kw["output_config"]["format"] = {"type": "json_schema", "schema": _closed(schema)}
         if system:
             # The context is the stable prefix of every probe in a condition: cache it.
             kw["system"] = [{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}]
