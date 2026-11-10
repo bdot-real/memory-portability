@@ -8,7 +8,16 @@ ontology-mediated migration with small models is write-in: deciding which uttera
 information, whom they are about, and whether they replace something already stored. This is
 encouraging for the architecture, because extraction is the part that improves with every model
 generation and can be run by a different, stronger engine than the one the user talks to, while
-the ontology and the store stay fixed.
+the ontology and the store stay fixed. Our strong-extractor runs confirm it: a store written once
+by a hosted model is read by 7--14B engines as well as the gold store. This suggests a deployment
+in which a capable model curates memory at write time, and any engine, including a small local
+one, carries it.
+
+\paragraph{When the transcript is enough.} A frontier reader recovers nearly everything from a
+long transcript, so for a user who only ever moves between frontier engines the ontology's case is
+not accuracy but cost and control: \res{ptok-ratio-a2x-b-large}$\times$ fewer prompt tokens per
+question, provenance per item, and erasure that removes a value instead of adding a request to
+forget it next to the value.
 
 \paragraph{Alignment loss.} A shared ontology avoids pairwise alignment, but only for what it can
 express. Anything outside \memcore's classes is either forced into a \texttt{Fact} with a free-text

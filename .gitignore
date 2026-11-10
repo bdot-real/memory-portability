@@ -6,6 +6,7 @@ runs/
 .DS_Store
 # Generated from runs/ by scripts/paper_numbers.py; commit once the eval matrix is final.
 paper/numbers.tex
+paper/numbers-claude.tex
 paper/tables/
 paper/*.pdf
 paper/*.log

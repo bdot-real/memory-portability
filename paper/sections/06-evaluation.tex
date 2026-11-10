@@ -51,6 +51,10 @@ updates its memory with the same cadence; then engine $B$ is probed in a fresh t
   \item[\cond{oracle}.] The gold store, rendered as in \cond{a2}. It is an upper bound on what the
     representation and read-out can deliver, and the gap \cond{oracle}$-$\cond{a2} is the loss
     caused by $A$'s extraction.
+  \item[\cond{a2x}, \cond{a1x} strong extractor.] As \cond{a2} and \cond{a1}, but the store is
+    written from $A$'s dialogue by a larger hosted model with the same prompt and schema:
+    Gemma~4 31B on the small tier and Claude Opus~5.5 on the large tier. The gap
+    \cond{a2x}$-$\cond{a2} isolates the extractor.
 \end{description}
 Every context states the user's name, and all conditions share the same answering instructions.
 Vendor-native memory export, a fourth baseline in principle, is not measured: none of the local
@@ -119,6 +123,16 @@ ones, at \res{tok-ratio-oracle-b-large} times the tokens of the store. Summaries
 \res{pfm-c-small} and \res{pfm-c-large}. When the source engine writes the store, \cond{a2} reaches
 only \res{pfm-a2-small} and \res{pfm-a2-large}, below the transcript at both tiers; the
 \cond{oracle}$-$\cond{a2} gap, which isolates extraction, is the largest loss in the table.
+A stronger extractor closes it: on the same dialogues, stores written by Gemma~4 31B (small) and
+Claude Opus~5.5 (large) reach \res{pfm-a2x-small} and \res{pfm-a2x-opus-large}
+\res{pfm-a2x-opus-large-ci}, level with the gold store, while the 7--14B engines that read them
+are unchanged. Per reader on the large tier, \cond{a2}$\to$\cond{a2x} moves
+\texttt{llama3.1:8b} from \res{pfm-a2-llama-reader-large} to \res{pfm-a2x-opus-llama-large},
+\texttt{mistral:7b} from \res{pfm-a2-mistral-reader-large} to \res{pfm-a2x-opus-mistral-large} and
+\texttt{qwen2.5:14b} from \res{pfm-a2-qwen-reader-large} to \res{pfm-a2x-opus-qwen-large}, each
+close to its \cond{oracle} score (\res{pfm-oracle-llama-reader-large},
+\res{pfm-oracle-mistral-reader-large}, \res{pfm-oracle-qwen-reader-large}). Extraction cost
+about \$\res{cost-opus-per-store-large} per persona.
 
 By kind (Table~\ref{tab:kinds}), the transcript's decline on long histories is concentrated in
 updates and multi-hop questions, and it is mostly abstention rather than error: with the relevant
@@ -136,6 +150,38 @@ On secondary probes, the gold store attributes items to the right session in nea
 and it never leaks an erased value (\res{leak-oracle-large}), while the transcript leaks
 \res{leak-b-large} of erased values whose control item was recalled: an engine reading a
 transcript sees both the value and the request to forget it, and does not always comply.
+
+\paragraph{Strong readers.} To test whether the transcript's decline is a property of the
+transcript or of the reader, we repeat the large tier with Claude Opus~5.5 and Haiku~5.5 as
+target $B$, on the same cached dialogues, stores and summaries of the three local source engines
+(Table~\ref{tab:strong-readers}). Both read the long transcript almost as well as the gold store
+(Opus \res{pfm-b-opus-reader-large} against \res{pfm-oracle-opus-reader-large}; Haiku
+\res{pfm-b-haiku-reader-large} against \res{pfm-oracle-haiku-reader-large}), so the transcript's
+loss on long histories belongs to 7--14B readers. For strong readers the gold store's advantage is
+cost, not accuracy. Neither strong reader lifts the stores written by small engines above
+\res{pfm-a2-opus-reader-large}, which confirms that the ceiling there is extraction. Taken
+together, the two experiments separate the roles: a strong model is needed once, at write-in,
+after which a 7--14B reader of the store (\res{pfm-a2x-opus-large}, about
+\res{ptok-a2x-large} prompt tokens per question) matches a frontier model reading the full
+transcript (\res{pfm-b-opus-reader-large}, \res{ptok-b-large} tokens).
+
+\begin{table}[t]
+\centering
+\caption{\PFM with strong target engines, large tier: each of Claude Opus~5.5 and Haiku~5.5
+reads the memory carried from the three local source engines (36 runs each), with 95\% bootstrap
+intervals over personas. The local row averages the six local pairs (Table~\ref{tab:pfm}).}
+\label{tab:strong-readers}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+Target $B$ & \cond{oracle} & \cond{b} & \cond{a2} & \cond{c} & \cond{a1} \\
+\midrule
+7--14B (local) & \res{pfm-oracle-large} & \res{pfm-b-large} & \res{pfm-a2-large} & \res{pfm-c-large} & \res{pfm-a1-large} \\
+Haiku~5.5 & \res{pfm-oracle-haiku-reader-large} & \res{pfm-b-haiku-reader-large} & \res{pfm-a2-haiku-reader-large} & \res{pfm-c-haiku-reader-large} & \res{pfm-a1-haiku-reader-large} \\
+Opus~5.5 & \res{pfm-oracle-opus-reader-large} & \res{pfm-b-opus-reader-large} & \res{pfm-a2-opus-reader-large} & \res{pfm-c-opus-reader-large} & \res{pfm-a1-opus-reader-large} \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{Where Memory Is Lost}
 
@@ -160,7 +206,11 @@ answered without any call (\res{a1-nocall-rate-small} at both tiers). Engines di
 \texttt{mistral:7b} never called a tool, \texttt{qwen2.5:14b} called one for about three probes in
 ten, and \texttt{llama3.1:8b} called one for almost every probe yet still scored below \cond{a2},
 because its queries often missed the item. The tools themselves returned no errors; the loss is in
-whether and how 7--14B engines look things up. Rendering the store into the prompt (\cond{a2})
+whether and how 7--14B engines look things up. Claude models, by contrast, called a tool for
+every probe (\res{a1-calls-per-probe-opus-large} calls per probe) and reached
+\res{pfm-a1-opus-reader-large} on the stores where rendering gives \res{pfm-a2-opus-reader-large};
+small readers stay low even on strong-extracted stores (\cond{a1x} \res{pfm-a1x-opus-large}), so
+tool use is a property of the reader, not the store. Rendering the store into the prompt (\cond{a2})
 removes this loss and costs only a few hundred tokens, so it is the better read-out for small
 engines; MCP read-out pays off when the store is too large to render.
 
@@ -180,7 +230,11 @@ removes engine-family bias from the input at the cost of realism; a paraphrase p
 outside the three families is a natural extension. \emph{Uncommon values} make guessing from priors
 unrewarding, which may understate how much engines fill in from priors in real use. \emph{Small
 models.} All engines have 7--14B parameters, chosen so the benchmark runs at no cost; the strong
-extractor is a hosted model whose weights are open but whose serving is not pinned by digest.
+strong extractors and readers are hosted. Gemma's weights are open but its serving is not pinned
+by digest; Claude models are closed, served by model identifier only, and accept no sampling
+temperature or seed at the settings we used, so their runs are not bit-reproducible. We release
+their outputs and pair each Claude run with local engines only, so no engine reads memory written
+by its own family.
 \emph{Decoding failures.} Write-in replies are capped at 4096 tokens; on the large tier
 \texttt{llama3.1:8b} hit the cap in \res{write-errors-llama-large} sessions, which count as lost
 extraction. \emph{Hardware.} The tiers ran on different machines with the same model digests;

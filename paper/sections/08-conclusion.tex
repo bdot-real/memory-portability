@@ -7,10 +7,12 @@ models, the ontology store carries memory between engines at a fraction of the t
 transcript, and the remaining loss sits in extraction by the source engine. On long histories
 the gold store reaches \PFM \res{pfm-oracle-large} where the transcript reaches
 \res{pfm-b-large}, at \res{tok-ratio-oracle-b-large}$\times$ fewer tokens; stores written by
-7--14B engines reach \res{pfm-a2-large}.
+7--14B engines reach \res{pfm-a2-large}, but a store written once by a stronger model reaches
+\res{pfm-a2x-opus-large} with the same small readers, matching a frontier model that reads the
+whole transcript with \res{ptok-ratio-a2x-b-large}$\times$ fewer prompt tokens.
 
-Future work: extraction by a stronger engine than the conversational one; hosted engines and
-their native memory exports as a fourth baseline; paraphrased and real dialogue; the regeneration
+Future work: extraction by the conversational engine itself as models improve; hosted engines'
+native memory exports as a fourth baseline; paraphrased and real dialogue; the regeneration
 class of the taxonomy (moving retrieval corpora and re-embedding them); and consent scopes enforced
 at read-out across organisations. The ontology, registry artifacts, benchmark, prompts and all run
 outputs are available at \repo.
