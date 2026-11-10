@@ -112,3 +112,29 @@ bootstrap intervals over personas:
   none). a1 reaches 85% of a2 on the same stores, so local a1 (0.08) is mostly tool-use weakness.
 - Cost: Opus $27.61 (9,270 calls), Haiku $0.77 (8,220 calls); the transcript prefix is cached.
   Hosted Claude models take no temperature or seed; outputs are kept under runs/results-claude/.
+
+## F7. A strong extractor once, then any small reader: the store matches the gold store (Nov 10, 2026)
+
+`scripts/strong_extraction.py --x claude-opus`, large tier e01–e12. `claude-opus-5-5` (low effort)
+writes the store from each local engine's cached dialogue with the frozen v3 prompt, constrained
+by the registry schema (Anthropic structured outputs); the two other local engines read it
+(conditions a2x, a1x; Mac, pinned digests). Every pair is cross-family.
+
+- Extraction (36 stores): recall 0.83–0.97 (lenient 0.90–1.0), precision 0.61–0.77, no erasure
+  leaked, 2–4 tombstones per 3 requests. The source engines' own stores reach 0.25–0.36 (F5).
+  $9.38 in total, about 35 s per persona.
+- Local readers, PFM with 95% bootstrap intervals over personas:
+
+| condition | PFM | mean prompt tokens |
+| --- | --- | --- |
+| oracle (gold store) | 0.93 [0.91, 0.94] | 652 |
+| a2x Opus-written store, rendered | 0.94 [0.92, 0.95] | 916 |
+| a2 source engine's store, rendered | 0.36 [0.31, 0.40] | 726 |
+| b transcript | 0.58 [0.56, 0.61] | 13,255 |
+| a1x Opus-written store, MCP tools | 0.26 [0.24, 0.28] | -- |
+
+- Per reader, a2 → a2x: llama 0.33 → 0.89, mistral 0.39 → 0.96, qwen 0.36 → 0.96, each within
+  0.04 of its oracle. With F6: a 7–14B reader of a strong-extracted store (0.94) matches Opus
+  reading the full transcript (0.95) at ~14× fewer prompt tokens.
+- a1x stays low (mistral never calls a tool; llama 0.58, qwen 0.20): the tool-use gap of F6
+  remains a reader property.
