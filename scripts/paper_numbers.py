@@ -212,6 +212,7 @@ def agreement() -> dict[str, str]:
         tier, judge = f.parts[-3], f.parts[-2]
         for r in (json.loads(x) for x in f.read_text().splitlines() if x):
             verdicts[tier, r["key"]][judge] = r["verdict"] == "pass"
+            verdicts[tier, r["key"]]["pref"] = r["scorer"] == "needs_judge"
             if r["scorer"] != "needs_judge":
                 verdicts[tier, r["key"]]["scorer"] = r["scorer"] == "correct"
                 verdicts[tier, r["key"]]["hedged"] = r["scorer"] == "hedged"
@@ -235,6 +236,16 @@ def agreement() -> dict[str, str]:
                 po, k = kappa([v[a] for v in both], [v[b] for v in both])
                 out[f"agree-{a}-{b}-{tier}"], out[f"kappa-{a}-{b}-{tier}"] = fmt(po), fmt(k)
                 out[f"n-{a}-{b}-{tier}"] = str(len(both))
+                # Preference-application answers only (no deterministic score), with each
+                # rater's pass rate, since only judges grade them.
+                pref = [v for v in both if v.get("pref")]
+                if a != "scorer" and len(pref) >= 20:
+                    po, k = kappa([v[a] for v in pref], [v[b] for v in pref])
+                    out[f"agree-{a}-{b}-pref-{tier}"] = fmt(po)
+                    out[f"kappa-{a}-{b}-pref-{tier}"] = fmt(k)
+                    out[f"n-{a}-{b}-pref-{tier}"] = str(len(pref))
+                    for r_ in (a, b):
+                        out[f"pass-{r_}-{a}-{b}-pref-{tier}"] = fmt(mean(v[r_] for v in pref))
                 if a == "scorer":
                     nh = [v for v in both if not v["hedged"]]
                     po, k = kappa([v[a] for v in nh], [v[b] for v in nh])

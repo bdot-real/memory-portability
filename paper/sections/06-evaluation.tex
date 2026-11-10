@@ -89,8 +89,13 @@ the scorer on pass versus not-pass for \res{agree-scorer-phi4-small} (small) and
 \res{kappa-scorer-phi4-large}). Most disagreement is on \emph{hedged} answers, which the scorer fails
 and the judge often passes; without them agreement is \res{agree-scorer-phi4-nohedge-small} and
 \res{agree-scorer-phi4-nohedge-large} ($\kappa$ \res{kappa-scorer-phi4-nohedge-small},
-\res{kappa-scorer-phi4-nohedge-large}). \todo{phi4--Gemma agreement on preference answers and
-judge--human agreement, once complete}
+\res{kappa-scorer-phi4-nohedge-large}). On the \res{n-phi4-gemma-pref-small} preference answers
+of the small tier, the two judges agree on \res{agree-phi4-gemma-pref-small} of verdicts
+($\kappa$ \res{kappa-phi4-gemma-pref-small}): \texttt{phi4} is the stricter, passing
+\res{pass-phi4-phi4-gemma-pref-small} of answers against \res{pass-gemma-phi4-gemma-pref-small}
+for Gemma, so preference-application scores are best read as a lower bound and compared across
+conditions rather than in absolute terms. \todo{judge--human agreement, once the labelled subset is
+complete}
 
 \subsection{Results}
 
