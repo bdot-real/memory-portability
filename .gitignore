@@ -14,3 +14,7 @@ paper/*.aux
 paper/*.bbl
 paper/*.blg
 paper/*.out
+
+# Private planning notes (kept locally, not published)
+docs/plan.md
+docs/thesis.md
