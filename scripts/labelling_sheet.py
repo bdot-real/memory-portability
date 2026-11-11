@@ -26,7 +26,14 @@ def main() -> None:
     ap.add_argument("--audit", type=int, default=10, help="answers per outcome and tier")
     ap.add_argument("--pref", type=int, default=40, help="preference answers per tier")
     ap.add_argument("--prefix", default="e")
+    ap.add_argument("--force", action="store_true", help="overwrite a sheet that has labels")
     args = ap.parse_args()
+    path = RUNS / "labelling" / "sheet.csv"
+    if path.exists() and not args.force:
+        with path.open(newline="") as f:
+            n = sum(bool(r["label (pass/fail/abstained)"].strip()) for r in csv.DictReader(f))
+        if n:
+            raise SystemExit(f"{path} has {n} labels; a new sheet would discard them (--force)")
 
     rng, out = random.Random(2028), []
     for tier in ("small", "large"):
@@ -48,7 +55,6 @@ def main() -> None:
                         "criteria": criteria(probe), "answer": r["text"].strip() or "(empty)",
                         "label (pass/fail/abstained)": "", "note": ""})
     rng.shuffle(out)
-    path = RUNS / "labelling" / "sheet.csv"
     path.parent.mkdir(parents=True, exist_ok=True)
     keys = {}
     for i, row in enumerate(out, 1):

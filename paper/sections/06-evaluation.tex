@@ -93,9 +93,25 @@ and the judge often passes; without them agreement is \res{agree-scorer-phi4-noh
 of the small tier, the two judges agree on \res{agree-phi4-gemma-pref-small} of verdicts
 ($\kappa$ \res{kappa-phi4-gemma-pref-small}): \texttt{phi4} is the stricter, passing
 \res{pass-phi4-phi4-gemma-pref-small} of answers against \res{pass-gemma-phi4-gemma-pref-small}
-for Gemma, so preference-application scores are best read as a lower bound and compared across
-conditions rather than in absolute terms. \todo{judge--human agreement, once the labelled subset is
-complete}
+for Gemma.
+
+The human labels (\res{n-phi4-human-all} answers, both tiers) confirm the scorer: on deterministic
+answers the human agrees with it on \res{agree-scorer-human-all} ($\kappa$
+\res{kappa-scorer-human-all}), and on \res{agree-scorer-human-nohedge-all} ($\kappa$
+\res{kappa-scorer-human-nohedge-all}) without hedged answers. On preference answers agreement is
+low: the human passes \res{pass-human-phi4-human-pref-all} of them, \texttt{phi4}
+\res{pass-phi4-phi4-human-pref-all} ($\kappa$ \res{kappa-phi4-human-pref-all}; Gemma
+\res{kappa-gemma-human-pref-small} on the small tier). The disagreement is about the rubric, not
+the answers. Each rubric has hard constraints (``must not contain'' an allergen or a disliked
+food) and a soft one (``ideally it features'' a favourite dish). Both judges read the soft clause
+as required, and the human did not: of the \res{n-pref-dis-phi4-human-all} answers the human
+passed and \texttt{phi4} failed, \res{n-pref-dis-nodish-phi4-human-all} do not name the favourite
+dish. Counting those as failures too, \texttt{phi4} agrees with the human on
+\res{agree-phi4-humanstrict-pref-all} of preference answers ($\kappa$
+\res{kappa-phi4-humanstrict-pref-all}). Preference-application scores therefore measure whether
+an engine \emph{uses} the remembered favourite, not only whether it avoids harm; we report them
+under the judges' strict reading and compare them across conditions rather than in absolute
+terms.
 
 \subsection{Results}
 
@@ -246,6 +262,9 @@ extraction. \emph{Hardware.} The tiers ran on different machines with the same m
 greedy decoding on different hardware can still differ in rare tokens. \emph{Tuning.} Prompts were tuned on a separate
 development set, and every change is logged per condition; the summary and transcript baselines
 received the same answering instructions as the ontology conditions. \emph{Scoring.} Deterministic
-matching can miss a correct paraphrase (e.g.\ a number written in words); \todo{report the
-disagreement rate on the human-labelled subset}. \emph{Version drift.} Models are pinned by Ollama
+matching can miss a correct paraphrase (e.g.\ a number written in words); on the
+\res{n-scorer-human-all} human-labelled deterministic answers it agrees with the human on
+\res{agree-scorer-human-all}, and on \res{agree-scorer-human-nohedge-all} without hedged answers,
+which it fails by design. Preference rubrics are judged, and their soft ``ideally'' clause admits
+two readings; a rubric for reuse should state whether it is required. \emph{Version drift.} Models are pinned by Ollama
 tag and digest, and all outputs are released.

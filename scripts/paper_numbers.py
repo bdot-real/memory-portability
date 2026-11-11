@@ -13,6 +13,8 @@ intervals over personas.
 import argparse
 import json
 import random
+import re
+import unicodedata
 import statistics
 from collections import defaultdict
 from pathlib import Path
@@ -190,6 +192,11 @@ def tier_numbers(tier: str, prefix: str, tables: Path) -> tuple[dict, dict, list
     return out, cells, ext_rows
 
 
+def fold(s: str) -> str:
+    """Lower-case and strip diacritics, for matching a dish name inside an answer."""
+    return unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode().lower()
+
+
 def kappa(a: list, b: list) -> tuple[float, float]:
     """Raw agreement and Cohen's kappa of two equal-length label lists."""
     n = len(a)
@@ -225,9 +232,22 @@ def agreement() -> dict[str, str]:
                 if lab:
                     tier, k = ids[row["id"]].split("|", 1)
                     verdicts[tier, k]["human"] = lab == "pass"
-    raters = ["scorer", "phi4", "gemma", "human"]
-    for tier in TIERS:
-        vs = [v for (t, _), v in verdicts.items() if t == tier]
+                    # Strict reading of a preference rubric: its "Ideally it features X" clause
+                    # is required too, as both judges read it; the labeller read it as optional.
+                    m = re.search(r"Ideally it features (.+?)\.$", row["criteria"].strip())
+                    has = bool(m) and fold(m.group(1)) in fold(row["answer"])
+                    verdicts[tier, k]["humanstrict"] = lab == "pass" and (has or not m)
+                    verdicts[tier, k]["features"] = has
+    raters = ["scorer", "phi4", "gemma", "human", "humanstrict"]
+    for tier in TIERS + ["all"]:  # "all": both tiers pooled
+        vs = [v for (t, _), v in verdicts.items() if t == tier or tier == "all"]
+        pref_h = [v for v in vs if v.get("pref") and "human" in v and "phi4" in v]
+        if pref_h:
+            # Preference answers the labeller passed and phi4 failed, and how many of those lack
+            # the rubric's ideal dish.
+            dis = [v for v in pref_h if v["human"] and not v["phi4"]]
+            out[f"n-pref-dis-phi4-human-{tier}"] = str(len(dis))
+            out[f"n-pref-dis-nodish-phi4-human-{tier}"] = str(sum(not v["features"] for v in dis))
         for i, a in enumerate(raters):
             for b in raters[i + 1:]:
                 both = [v for v in vs if a in v and b in v]
