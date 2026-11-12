@@ -17,5 +17,8 @@ uv run python scripts/smoke_timing.py 16000 llama
 Code, benchmark generator and data: Apache-2.0 (`LICENSE`). The `@mem/core` ontology
 (`ontology/mem-core/`) is CC BY 4.0, as declared in `mem.ttl`.
 
-Run outputs (`runs/`: dialogues, stores, answers, judge verdicts, human labels) are not in git;
-they will be released as a versioned archive at the evaluation freeze.
+Run outputs (`runs/`: dialogues, stores, answers, judge verdicts, human labels) are not in git.
+They are archived on Zenodo, CC BY 4.0:
+[doi:10.5281/zenodo.24168038](https://doi.org/10.5281/zenodo.24168038) (latest version). Unzip
+at the repository root; `scripts/paper_numbers.py` and `scripts/claude_numbers.py` then
+regenerate the paper's numbers without calling any engine.
