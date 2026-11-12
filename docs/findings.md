@@ -141,25 +141,25 @@ by the registry schema (Anthropic structured outputs); the two other local engin
 
 ## F8. Human labels: the scorer holds; preference rubrics have two readings (Nov 11, 2026)
 
-`scripts/label_ui.py`, blind labelling of the 200-answer sheet (`runs/labelling/sheet.csv`; 199
-labelled after a recheck on Nov 12, item 116 open). Agreement on pass vs. not pass, both tiers pooled:
+`scripts/label_ui.py`, blind labelling of the 200-answer sheet (`runs/labelling/sheet.csv`; all 200
+labelled, after a recheck on Nov 12). Agreement on pass vs. not pass, both tiers pooled:
 
 | rater pair | answers | agreement | κ |
 | --- | --- | --- | --- |
 | scorer–human, deterministic answers | 120 | 0.84 | 0.57 |
 | same, without hedged answers | | 0.95 | 0.85 |
-| phi4–human, preference answers | 79 | 0.59 | 0.29 |
-| gemma–human, preference answers (small) | 39 | 0.49 | 0.06 |
-| phi4–human, preference, strict reading | 79 | 0.82 | 0.60 |
+| phi4–human, preference answers | 80 | 0.59 | 0.28 |
+| gemma–human, preference answers (small) | 40 | 0.47 | 0.05 |
+| phi4–human, preference, strict reading | 80 | 0.82 | 0.60 |
 
 - The deterministic scorer is confirmed; its disagreements are hedged answers, which it fails by
   design.
-- Preference answers: the human passed 0.62, phi4 0.22, Gemma 0.36 (small tier: 0.67, 0.26, 0.36). Both judges read the rubric's
+- Preference answers: the human passed 0.62, phi4 0.21, Gemma 0.35 (small tier: 0.68, 0.25, 0.35). Both judges read the rubric's
   "Ideally it features X" as required; the labeller read it as optional (on Claude's suggestion
-  during labelling). 18 of the 32 human-pass/phi4-fail answers do not name the dish. Requiring it
+  during labelling). 19 of the 33 human-pass/phi4-fail answers do not name the dish. Requiring it
   ("strict reading", computed, not relabelled) lifts phi4–human to 0.82. Rubrics for reuse should
   say whether the soft clause is required.
-- Rechecked Nov 12: 12 pass, 35 abstained, 57 fail, 187 pass; 116 still unlabelled.
+- Rechecked Nov 12: 12 pass, 35 abstained, 57 fail, 116 pass, 187 pass.
 - Preference application by condition (`fav-*`: menu names the favourite dish; `pref-*`: phi4
   pass), small / large: oracle 0.89 / 0.76, a2 0.67 / 0.56, b 0.51 / 0.29, c 0.47 / 0.19,
   a1 0.00 / 0.01. Unlike PFM, the engine-written store beats the transcript: a stored preference
