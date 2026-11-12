@@ -1,28 +1,18 @@
 \begin{abstract}
-Assistants built on large language models now keep memory about their users: facts,
-preferences, relationships and unfinished tasks. That memory is stored in each vendor's own
-format, so switching engines resets what the assistant knows. Transport protocols such as the
-Model Context Protocol (MCP) let engines reach external data, but they do not give memory a
-shared meaning. We argue that user memory becomes portable when it is stored against a shared
-ontology and translated for each engine by thin adapters, the translation approach Gruber
-proposed for knowledge bases in 1993. We contribute (i) a taxonomy of agent memory by
-portability; (ii) \memcore, a small OWL extension of PROV-O, SKOS, FOAF, DCMI Terms and
-OWL-Time, published in a versioned ontology registry that generates the JSON Schema used to
-constrain extraction and the MCP tools used for read-out; (iii) the portability fidelity metric
-(\PFM), the share of seeded memory items an engine can still answer about after migration; and
-(iv) an open-source prototype with a benchmark of synthetic multi-session personas. On
-\res{n-personas-small} personas per tier and six cross-engine pairs of three open-weight model
-families, the gold ontology store reaches a \PFM of \res{pfm-oracle-large} on long histories
-(a \res{tok-hist-large}k-token transcript) using \res{tok-ratio-oracle-b-large}$\times$ fewer prompt tokens
-than the raw transcript, which falls to \res{pfm-b-large}; on short histories the two are
-\res{pfm-oracle-small} and \res{pfm-b-small}. When a 7--14B source engine writes the store
-itself, \PFM drops to \res{pfm-a2-large} and \res{pfm-a2-small}, below the transcript: the
-representation suffices, but extraction by small models does not. When a stronger hosted model
-writes the store once from the same dialogue, the small engines read it at \res{pfm-a2x-opus-large}
-and \res{pfm-a2x-small}, level with the gold store; on long histories this matches a frontier
-model reading the whole transcript (\res{pfm-b-opus-reader-large}) at
-\res{tok-ratio-a2x-b-large}$\times$ fewer prompt tokens. We also find that structured memory adds a
-failure mode transcripts lack: an engine that over-applies an erasure request deletes true
-memories.
+Assistants built on large language models keep memory about their users, but each vendor stores
+it in its own format, so switching engines resets what the assistant knows. Following Gruber's
+translation approach, we store user memory against a shared ontology and translate it for each
+engine with thin adapters. We contribute (i) a taxonomy of agent memory by portability;
+(ii) \memcore, a small OWL extension of PROV-O and SKOS, published in a versioned registry that
+generates the JSON Schema for extraction and the Model Context Protocol (MCP) tools for read-out; (iii) the portability
+fidelity metric (\PFM); and (iv) an open-source prototype and benchmark of synthetic multi-session
+personas. Across six cross-engine pairs of open-weight models, the gold store reaches a \PFM of
+\res{pfm-oracle-large} on \res{tok-hist-large}k-token histories with
+\res{tok-ratio-oracle-b-large}$\times$ fewer prompt tokens than the transcript
+(\res{pfm-b-large}). Stores written by the 7--14B source engines reach only \res{pfm-a2-large}, but
+a store written once by a stronger model reaches \res{pfm-a2x-opus-large} with the same small
+readers, matching a frontier model that reads the whole transcript (\res{pfm-b-opus-reader-large})
+with \res{tok-ratio-a2x-b-large}$\times$ fewer tokens. Structured memory also adds a failure mode:
+an engine that over-applies an erasure request deletes true memories.
 \keywords{Agent memory \and Portability \and Ontologies \and PROV-O \and MCP \and LLM evaluation}
 \end{abstract}
