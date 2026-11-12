@@ -22,9 +22,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CONDS = ["oracle", "a2", "a1", "b", "c"]
 STRONG = ["a2x", "a1x"]  # same conditions, store written by the strong extractor
-# The paper's strong extractor. Other extractors' runs sit beside it under runs/ (e.g. Claude,
-# F6) and are reported separately.
-PAPER_X = "gemma"
+# The paper's strong extractor per tier: Gemma 4 31B (free tier) on the small tier, Claude Opus
+# 5.5 on the large tier (findings F7). Keys are the run-directory prefixes `<x>@<A>`.
+PAPER_X = {"small": "gemma", "large": "claude-opus"}
+X_LABEL = {"gemma": "Gemma", "claude-opus": "Opus"}
 TIERS = ["small", "large"]
 LABEL = {"oracle": "oracle (gold store)", "a2": "a2 ontology, rendered",
          "a1": "a1 ontology, MCP tools", "b": "b transcript", "c": "c summary",
@@ -50,12 +51,33 @@ def load(tier: str, prefix: str):
         m = f.with_suffix(".meta.json")
         if m.exists():
             metas.append(json.loads(m.read_text()))
-    for f in sorted((ROOT / "runs/results-strong" / tier).glob(f"{PAPER_X}@*-to-*/{prefix}*.jsonl")):
+    x = PAPER_X[tier]
+    for f in sorted((ROOT / "runs/results-strong" / tier).glob(f"{x}@*-to-*/{prefix}*.jsonl")):
         strong += [json.loads(x) for x in f.read_text().splitlines() if x]
     log = ROOT / "runs/strong" / tier / "extraction.jsonl"
     ext = [json.loads(x) for x in log.read_text().splitlines() if x] if log.exists() else []
-    ext = [e for e in ext if e["extractor"].startswith(PAPER_X)]
-    return rows, metas, strong, ext
+    # One record per store: a rerun appends a second line, and the last matches the store on disk.
+    latest = {(e["persona"], e["A"]): e for e in ext
+              if e["extractor"].startswith(x) and e["persona"].startswith(prefix)}
+    return rows, metas, strong, list(latest.values())
+
+
+def strong_store_tokens(tier: str, prefix: str) -> list[int]:
+    """Carried-memory tokens of each strong-extracted store, rendered as for a2 and counted like
+    the matrix's context_tokens (no engine call)."""
+    from ompm.engines import estimate_tokens
+    from ompm.personas import load as load_persona
+    from ompm.pipeline import WRITEIN_VERSION, base
+    from ompm.store import MemoryStore
+
+    out = []
+    root = ROOT / "runs/writein" / WRITEIN_VERSION / tier
+    for f in sorted(root.glob(f"{PAPER_X[tier]}@*/{prefix}*.store.ttl")):
+        p = load_persona(ROOT / "data/personas" / tier / f"{f.name.split('.')[0]}.json")
+        st = MemoryStore.load(base(p), f, engine=PAPER_X[tier])
+        ctx = "What you remember about the user (from your memory store):\n" + st.render()
+        out.append(estimate_tokens([{"content": ctx}]))
+    return out
 
 
 def pfm_table(rows, cond, kinds=None):
@@ -86,6 +108,7 @@ def tier_numbers(tier: str, prefix: str, tables: Path) -> tuple[dict, dict, list
     for m in metas:
         for c, t in (m.get("context_tokens") or {}).items():
             tok[c].append(t)
+    tok["a2x"] = strong_store_tokens(tier, prefix)
 
     # Overall PFM, plus the strong-extractor conditions on the personas they cover so far.
     cells = {}
@@ -106,6 +129,9 @@ def tier_numbers(tier: str, prefix: str, tables: Path) -> tuple[dict, dict, list
             out[f"n-personas-{c}"] = str(len(pp))
     if tok["oracle"] and tok["b"]:
         out["tok-ratio-oracle-b"] = f"{mean(tok['b']) / mean(tok['oracle']):.0f}"
+        out["tok-hist"] = f"{mean(tok['b']) / 1000:.0f}"  # measured transcript, thousands
+    if tok["a2x"] and tok["b"]:
+        out["tok-ratio-a2x-b"] = f"{mean(tok['b']) / mean(tok['a2x']):.0f}"
 
     # By probe kind, and by pair.
     lines = [r"\begin{tabular}{@{}l" + "c" * len(KINDS) + "@{}}", r"\toprule",
@@ -137,7 +163,7 @@ def tier_numbers(tier: str, prefix: str, tables: Path) -> tuple[dict, dict, list
         errs[f.parent.name][1] += st["sessions"]
     groups = [(a, a, [e for (_, aa), e in ext.items() if aa == a])
               for a in sorted({k[1] for k in ext})]
-    groups += [(f"gemma@{a}", f"x-{a}", [e for e in ext_strong if e["A"] == a])
+    groups += [(f"{X_LABEL[PAPER_X[tier]]}@{a}", f"x-{a}", [e for e in ext_strong if e["A"] == a])
                for a in sorted({e["A"] for e in ext_strong})]
     ext_rows, worst_tomb = [], 0.0
     for name, k, es in groups:

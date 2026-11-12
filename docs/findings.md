@@ -120,8 +120,9 @@ writes the store from each local engine's cached dialogue with the frozen v3 pro
 by the registry schema (Anthropic structured outputs); the two other local engines read it
 (conditions a2x, a1x; Mac, pinned digests). Every pair is cross-family.
 
-- Extraction (36 stores): recall 0.83–0.97 (lenient 0.90–1.0), precision 0.61–0.77, no erasure
-  leaked, 2–4 tombstones per 3 requests. The source engines' own stores reach 0.25–0.36 (F5).
+- Extraction (36 stores): recall 0.83–0.97 (lenient 0.90–1.0), precision 0.61–0.77, 2–4
+  tombstones per 3 requests; 3 of 108 erasures leaked (e02@qwen, e05@llama, e05@mistral).
+  Corrected Nov 12: this line first said none leaked. The source engines' own stores reach 0.25–0.36 (F5).
   $9.38 in total, about 35 s per persona.
 - Local readers, PFM with 95% bootstrap intervals over personas:
 

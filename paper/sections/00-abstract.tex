@@ -13,7 +13,7 @@ constrain extraction and the MCP tools used for read-out; (iii) the portability 
 (iv) an open-source prototype with a benchmark of synthetic multi-session personas. On
 \res{n-personas-small} personas per tier and six cross-engine pairs of three open-weight model
 families, the gold ontology store reaches a \PFM of \res{pfm-oracle-large} on long histories
-(about \res{tok-large}k tokens) using \res{tok-ratio-oracle-b-large}$\times$ fewer prompt tokens
+(a \res{tok-hist-large}k-token transcript) using \res{tok-ratio-oracle-b-large}$\times$ fewer prompt tokens
 than the raw transcript, which falls to \res{pfm-b-large}; on short histories the two are
 \res{pfm-oracle-small} and \res{pfm-b-small}. When a 7--14B source engine writes the store
 itself, \PFM drops to \res{pfm-a2-large} and \res{pfm-a2-small}, below the transcript: the
@@ -21,7 +21,7 @@ representation suffices, but extraction by small models does not. When a stronge
 writes the store once from the same dialogue, the small engines read it at \res{pfm-a2x-small}
 and \res{pfm-a2x-opus-large}, level with the gold store; on long histories this matches a frontier
 model reading the whole transcript (\res{pfm-b-opus-reader-large}) at
-\res{ptok-ratio-a2x-b-large}$\times$ fewer prompt tokens. We also find that structured memory adds a
+\res{tok-ratio-a2x-b-large}$\times$ fewer prompt tokens. We also find that structured memory adds a
 failure mode transcripts lack: an engine that over-applies an erasure request deletes true
 memories.
 \keywords{Agent memory \and Portability \and Ontologies \and PROV-O \and MCP \and LLM evaluation}

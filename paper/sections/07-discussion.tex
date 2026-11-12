@@ -15,7 +15,7 @@ one, carries it.
 
 \paragraph{When the transcript is enough.} A frontier reader recovers nearly everything from a
 long transcript, so for a user who only ever moves between frontier engines the ontology's case is
-not accuracy but cost and control: \res{ptok-ratio-a2x-b-large}$\times$ fewer prompt tokens per
+not accuracy but cost and control: \res{tok-ratio-a2x-b-large}$\times$ fewer prompt tokens per
 question, provenance per item, and erasure that removes a value instead of adding a request to
 forget it next to the value.
 
@@ -24,8 +24,6 @@ express. Anything outside \memcore's classes is either forced into a \texttt{Fac
 attribute, where it is portable but weakly typed, or dropped. Our enumerations are closed (eight
 relation types); a user's grandparent or neighbour does not fit. Extending the ontology is a
 SemVer-minor change that the registry checks, but every adapter must then move to the new version.
-LLM-based matching~\cite{qiang2024agentom} could map vendor memory schemas onto \memcore where a
-vendor keeps its own.
 
 \paragraph{Governance.} Who maintains the shared ontology matters more than its first version.
 Publishing it as a versioned package with competency questions as tests, content hashes and a

@@ -116,8 +116,8 @@ derive everything from it.
 \paragraph{Write-in} runs after every session. The engine receives the session, a listing of the
 current store (so it can link supersessions and act on erasure requests), and a field guide built
 from the schema's descriptions. Its reply is constrained by a JSON Schema derived from the
-registry schema: Ollama's structured output turns the schema into a grammar, so the reply is
-syntactically valid by construction. The adapter removes from the model's view the fields the
+registry schema: Ollama's structured output (or a hosted provider's) turns the schema into a
+grammar, so the reply is syntactically valid by construction. The adapter removes from the model's view the fields the
 pipeline owns (identifiers, provenance, validity, consent, portability class), maps names to
 person IRIs, converts enumeration labels to concept IRIs, validates every item against the
 registry schema, and writes it. Supersession and erasure references must point to existing

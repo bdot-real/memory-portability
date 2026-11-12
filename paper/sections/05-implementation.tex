@@ -4,14 +4,15 @@ The prototype, \texttt{ompm}, is about \res{loc} lines of Python and is released
 licence at \repo, together with the dataset generator, the dataset and all prompts; the raw
 outputs of every run are archived at \runsdoi (CC BY 4.0).
 
-\paragraph{Engines.} All engines run locally through Ollama on a single Apple M4 machine with
-32\,GB of memory: \texttt{llama3.1:8b} (Meta), \texttt{mistral:7b} (Mistral AI) and
-\texttt{qwen2.5:14b-instruct} (Alibaba), three families that support tool calling. Decoding is
-greedy (temperature 0, fixed seed) with a 32k-token context window set explicitly on every call.
-Because Ollama silently truncates over-long prompts, the client refuses any prompt estimated at
-more than 85\% of the window; no run in this paper was truncated. Hosted engines (OpenAI,
-Anthropic) sit behind the same interface but were not used, so the benchmark costs nothing to
-reproduce beyond compute time.
+\paragraph{Engines.} The source and target engines run locally through Ollama:
+\texttt{llama3.1:8b} (Meta), \texttt{mistral:7b} (Mistral AI) and \texttt{qwen2.5:14b-instruct}
+(Alibaba), three families that support tool calling, on an Apple M4 with 32\,GB of memory (small
+tier) and an NVIDIA T4 (large tier), with the same model digests. Decoding is greedy
+(temperature 0, fixed seed) with a 32k-token context window set explicitly on every call. Because
+Ollama silently truncates over-long prompts, the client refuses any prompt estimated at more than
+85\% of the window; no run in this paper was truncated. Two further experiments use hosted models
+behind the same interface: Gemma~4 31B (Google, free tier) and Claude Opus~5.5 as strong extractors, and Claude
+Opus~5.5 and Haiku~5.5 as strong readers.
 
 \paragraph{Store and tools.} The store is pyoxigraph, with the ontology in the default graph and
 memory in a named data graph. The MCP server uses the reference Python SDK; in the evaluation the
@@ -20,7 +21,7 @@ calls (unknown tool, bad arguments) are counted.
 
 \paragraph{Ontology artifacts.} \memcore 0.4.0 is pinned by integrity hash
 \texttt{blake3-c9d66511\ldots}; its generated JSON Schema is checked into the repository and
-loaded by the adapter. Enumerations are read from the ontology's \texttt{owl:oneOf} ranges. The
+loaded by the adapter. The
 namespace \memns is registered as a persistent w3id.org identifier.
 
 \paragraph{Reproducibility.} Personas are generated from seeds, and every persona file is listed
