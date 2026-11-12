@@ -180,6 +180,36 @@ def tier_numbers(tier: str, prefix: str, tables: Path) -> tuple[dict, dict, list
         out[f"leak-{c}"] = fmt(mean(r["outcome"] == "leaked" for r in ok))
         out[f"leak-{c}-n"] = str(len(ok))
 
+    # Preference application: phi4's verdict on every preference answer (the judges' strict
+    # reading of the rubric), and the share of answers that name the persona's favourite dish
+    # (the rubric's "Ideally it features X"), a deterministic check of whether the engine used it.
+    verdict = {}
+    jf = ROOT / "runs/judge" / tier / "phi4" / "preference.jsonl"
+    if jf.exists():
+        for j in (json.loads(x) for x in jf.read_text().splitlines() if x):
+            verdict[j["key"]] = j["verdict"] == "pass"
+    dish = {}
+    for pid in personas:
+        pj = json.loads((ROOT / "data/personas" / tier / f"{pid}.json").read_text())
+        for q in pj["probes"]:
+            m = re.search(r"Ideally it features (.+?)\.$", (q.get("rubric") or "").strip())
+            if m:
+                dish[pid, q["id"]] = fold(m.group(1))
+    for c in CONDS:
+        pr = [r for r in rows if r["condition"] == c and r["kind"] == "preference"]
+        judged = defaultdict(list)
+        fav = defaultdict(list)
+        for r in pr:
+            k = "|".join([r["persona"], r["A"], r["B"], c, r["probe"]])
+            if k in verdict:
+                judged[r["persona"]].append(verdict[k])
+            if (r["persona"], r["probe"]) in dish:
+                fav[r["persona"]].append(dish[r["persona"], r["probe"]] in fold(r["text"]))
+        if judged:
+            out[f"pref-{c}"] = fmt(mean(mean(v) for v in judged.values()))
+        if fav:
+            out[f"fav-{c}"] = fmt(mean(mean(v) for v in fav.values()))
+
     out["n-personas"] = str(len(personas))
     out["n-pairs"] = str(len(pairs))
     out["n-probes"] = f"{len({(r['persona'], r['probe']) for r in rows}):,}".replace(",", "{,}")

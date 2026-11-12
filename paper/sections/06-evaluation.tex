@@ -108,10 +108,9 @@ as required, and the human did not: of the \res{n-pref-dis-phi4-human-all} answe
 passed and \texttt{phi4} failed, \res{n-pref-dis-nodish-phi4-human-all} do not name the favourite
 dish. Counting those as failures too, \texttt{phi4} agrees with the human on
 \res{agree-phi4-humanstrict-pref-all} of preference answers ($\kappa$
-\res{kappa-phi4-humanstrict-pref-all}). Preference-application scores therefore measure whether
-an engine \emph{uses} the remembered favourite, not only whether it avoids harm; we report them
-under the judges' strict reading and compare them across conditions rather than in absolute
-terms.
+\res{kappa-phi4-humanstrict-pref-all}). We therefore report preference application under the
+judges' strict reading, next to a deterministic check of the soft clause: whether the menu names
+the favourite dish.
 
 \subsection{Results}
 
@@ -171,38 +170,30 @@ On secondary probes, the gold store attributes items to the right session in nea
 and it never leaks an erased value (\res{leak-oracle-large}), while the transcript leaks
 \res{leak-b-large} of erased values whose control item was recalled: an engine reading a
 transcript sees both the value and the request to forget it, and does not always comply.
+Preference application reverses the \PFM ordering between store and transcript. Menus name the
+user's favourite dish in \res{fav-oracle-large} of answers from the gold store,
+\res{fav-a2-large} from the engine-written store and only \res{fav-b-large} from the transcript
+(\res{fav-c-large} from the summary; small tier \res{fav-oracle-small}, \res{fav-a2-small},
+\res{fav-b-small}, \res{fav-c-small}); \texttt{phi4} passes \res{pref-oracle-large},
+\res{pref-a2-large}, \res{pref-b-large} and \res{pref-c-large}. A preference stored as an item is
+applied when the engine plans; buried in a long transcript, it is mostly not. Under \cond{a1} almost
+no menu uses it (\res{fav-a1-large}): engines do not think to look up preferences before
+suggesting.
 
 \paragraph{Strong readers.} To test whether the transcript's decline is a property of the
 transcript or of the reader, we repeat the large tier with Claude Opus~5.5 and Haiku~5.5 as
 target $B$, on the same cached dialogues, stores and summaries of the three local source engines
-(Table~\ref{tab:strong-readers}). Both read the long transcript almost as well as the gold store
-(Opus \res{pfm-b-opus-reader-large} against \res{pfm-oracle-opus-reader-large}; Haiku
+(36 runs each). Both read the long transcript almost as well as the gold store (Opus
+\res{pfm-b-opus-reader-large} against \res{pfm-oracle-opus-reader-large}; Haiku
 \res{pfm-b-haiku-reader-large} against \res{pfm-oracle-haiku-reader-large}), so the transcript's
-loss on long histories belongs to 7--14B readers. For strong readers the gold store's advantage is
-cost, not accuracy. Neither strong reader lifts the stores written by small engines above
-\res{pfm-a2-opus-reader-large}, which confirms that the ceiling there is extraction. Taken
+loss on long histories belongs to 7--14B readers; for strong readers the gold store's advantage is
+cost, not accuracy. Neither lifts the stores written by small engines
+(\res{pfm-a2-opus-reader-large} and \res{pfm-a2-haiku-reader-large}) or the summaries
+(\res{pfm-c-opus-reader-large}), which confirms that the ceiling there is extraction. Taken
 together, the two experiments separate the roles: a strong model is needed once, at write-in,
 after which a 7--14B reader of the store (\res{pfm-a2x-opus-large}, about
 \res{ptok-a2x-large} prompt tokens per question) matches a frontier model reading the full
 transcript (\res{pfm-b-opus-reader-large}, \res{ptok-b-large} tokens).
-
-\begin{table}[t]
-\centering
-\caption{\PFM with strong target engines, large tier: each of Claude Opus~5.5 and Haiku~5.5
-reads the memory carried from the three local source engines (36 runs each), with 95\% bootstrap
-intervals over personas. The local row averages the six local pairs (Table~\ref{tab:pfm}).}
-\label{tab:strong-readers}
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{@{}lccccc@{}}
-\toprule
-Target $B$ & \cond{oracle} & \cond{b} & \cond{a2} & \cond{c} & \cond{a1} \\
-\midrule
-7--14B (local) & \res{pfm-oracle-large} & \res{pfm-b-large} & \res{pfm-a2-large} & \res{pfm-c-large} & \res{pfm-a1-large} \\
-Haiku~5.5 & \res{pfm-oracle-haiku-reader-large} & \res{pfm-b-haiku-reader-large} & \res{pfm-a2-haiku-reader-large} & \res{pfm-c-haiku-reader-large} & \res{pfm-a1-haiku-reader-large} \\
-Opus~5.5 & \res{pfm-oracle-opus-reader-large} & \res{pfm-b-opus-reader-large} & \res{pfm-a2-opus-reader-large} & \res{pfm-c-opus-reader-large} & \res{pfm-a1-opus-reader-large} \\
-\bottomrule
-\end{tabular}
-\end{table}
 
 \subsection{Where Memory Is Lost}
 

@@ -138,3 +138,40 @@ by the registry schema (Anthropic structured outputs); the two other local engin
   reading the full transcript (0.95) at ~14× fewer prompt tokens.
 - a1x stays low (mistral never calls a tool; llama 0.58, qwen 0.20): the tool-use gap of F6
   remains a reader property.
+
+## F8. Human labels: the scorer holds; preference rubrics have two readings (Nov 11, 2026)
+
+`scripts/label_ui.py`, blind labelling of the 200-answer sheet (`runs/labelling/sheet.csv`; 199
+labelled, item 12 open). Agreement on pass vs. not pass, both tiers pooled:
+
+| rater pair | answers | agreement | κ |
+| --- | --- | --- | --- |
+| scorer–human, deterministic answers | 120 | 0.84 | 0.57 |
+| same, without hedged answers | | 0.95 | 0.85 |
+| phi4–human, preference answers | 79 | 0.56 | 0.24 |
+| gemma–human, preference answers (small) | 39 | 0.44 | 0.00 |
+| phi4–human, preference, strict reading | 79 | 0.81 | 0.56 |
+
+- The deterministic scorer is confirmed; its disagreements are hedged answers, which it fails by
+  design.
+- Preference answers: the human passed 0.65, phi4 0.20, Gemma 0.33. Both judges read the rubric's
+  "Ideally it features X" as required; the labeller read it as optional (on Claude's suggestion
+  during labelling). 20 of the 35 human-pass/phi4-fail answers do not name the dish. Requiring it
+  ("strict reading", computed, not relabelled) lifts phi4–human to 0.81. Rubrics for reuse should
+  say whether the soft clause is required.
+- To recheck: items 35, 57, 116, 187 (labelled pass; judges cite a broken hard constraint).
+- Preference application by condition (`fav-*`: menu names the favourite dish; `pref-*`: phi4
+  pass), small / large: oracle 0.89 / 0.76, a2 0.67 / 0.56, b 0.51 / 0.29, c 0.47 / 0.19,
+  a1 0.00 / 0.01. Unlike PFM, the engine-written store beats the transcript: a stored preference
+  is applied when planning, a buried one is not. Under a1 engines never look preferences up.
+
+Notes on the Claude runs (F6), checked Nov 12 by reproducing single probes (< $0.03):
+
+- Haiku's tool errors (~90, all a1) are calls with empty arguments, e.g. `search_memory({})`
+  without the required `query`. The schemas sent mark it required, so this is the model; the
+  error is returned to it and it carries on. Sonnet's 11 smoke-test errors look the same.
+- Opus's 3 empty answers (a1 multi-hop) come after all 4 tool rounds: the forced final call
+  (`tool_choice: none`) returns only a short thinking block and no text. Scored wrong; < 0.01 PFM.
+- 285 Haiku calls stopped at the 120-token cap. 48 primary answers look cut off, almost all
+  listing several candidates (hedged, distracted) and failing for that reason, not the cut. The
+  cap is the same for every reader.
