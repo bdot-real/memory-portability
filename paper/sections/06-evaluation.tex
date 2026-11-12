@@ -200,7 +200,11 @@ gold store, field by field. An extracted item matches a gold item when its class
 fields agree (for a fact, the same subject and value). \emph{Lenient} recall only requires the
 right subject and value in any class or field; the gap between the two is modelling disagreement
 (an allergy stored as a fact rather than a preference that \texttt{Avoids}) rather than lost
-information.
+information. Opus's lower precision comes mostly from unmarked supersessions:
+\res{opus-unmatched-superseded-large} of its items keep a replaced value current next to the new
+one (small talk \res{opus-unmatched-outside-large}, other modelling
+\res{opus-unmatched-modelling-large}), so its readers give the old value on
+\res{stale-a2x-update-opus-large} of update questions, against none with the gold store.
 
 \begin{table}[t]
 \centering

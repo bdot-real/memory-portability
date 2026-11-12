@@ -139,6 +139,10 @@ by the registry schema (Anthropic structured outputs); the two other local engin
   reading the full transcript (0.95) at ~14× fewer prompt tokens.
 - a1x stays low (mistral never calls a tool; llama 0.58, qwen 0.20): the tool-use gap of F6
   remains a reader property.
+- Precision 0.69 (Nov 12, `scripts/claude_numbers.py`): of all Opus-store items, 0.17 keep a
+  replaced value current next to the new one (no supersedes link), 0.08 are small talk, 0.06 model
+  a gold item differently. Cost: a2x readers give the stale value on 0.08 of update probes
+  (oracle 0.00, a2 0.18).
 
 ## F8. Human labels: the scorer holds; preference rubrics have two readings (Nov 11, 2026)
 
